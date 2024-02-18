@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 * {
     text-decoration: none;
     margin: 0px;
@@ -9,6 +10,62 @@ body {
     padding: 0px;
     font-family: 'Open Sans',sans-serif;
     height: 100vh;
+}
+
+.accordion {
+    margin: 20px auto;
+    width: 600px;
+}
+
+.accordion li {
+    list-style: none;
+    width: 100%;
+    margin: 20px;
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 6px 6px 10px -1px rgba(0, 0, 0, 0.15), -6px -6px 10px -1px rgba(255, 255, 255, 0.7);
+}
+
+.accordion li label {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    font-size: 18px;
+    font-weight: 500;
+    cursor: pointer;
+    user-select: none;
+}
+
+label::before {
+    content: '+';
+    margin-right: 10px;
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.accordion input[type="checkbox"] {
+    display: none;
+}
+
+.accordion .content {
+    display: none;
+    color: #555;
+    padding: 0 10px;
+    line-height: 26px;
+    max-height: 0;
+    overflow: hidden;
+}
+
+        /* Tambahkan kelas "expanded" pada konten yang sedang dibuka */
+.accordion input[type="checkbox"]:checked~.content {
+    max-height: 200px;
+    padding: 10px 10px 20px;
+    transition: max-height 0.5s, padding 0.5s, margin-top 0.5s;
+}
+
+        /* Ubah tanda "+" menjadi "-" saat konten dibuka */
+.accordion input[type="checkbox"]:checked~label::before {
+    content: '-';
 }
 
 .wrapper {

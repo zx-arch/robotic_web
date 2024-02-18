@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\MaterialsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,3 +19,4 @@ use App\Http\Controllers\LoginController;
 
 Route::get('/', [DashboardController::class, 'index'])->name('home_dashboard');
 Route::get('/login', [LoginController::class, 'index'])->name('form_login');
+Route::get('/materials', [MaterialsController::class, 'index'])->name('materials');
