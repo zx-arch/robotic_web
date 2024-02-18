@@ -10,8 +10,10 @@ class DashboardController extends Controller
     public function index()
     {
         // $bookTranslation = BookTranslation::create([
+        //     'book_title' => 'mari menari',
         //     'language_name' => 'English',
         //     'status_id' => 1,
+        //     'file' => 'coba1.jpg'
         // ]);
 
         // // Periksa hasil insert
