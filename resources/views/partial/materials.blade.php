@@ -170,39 +170,38 @@
         });
 
         for (let i = 1; i <= getCountCategory; i++) {
-        document.getElementById('category' + i).addEventListener('change', function() {
-            var selectedVersion = this.value;
+            document.getElementById('category' + i).addEventListener('change', function() {
+                var selectedVersion = this.value;
 
-            // Filter kategori buku sesuai dengan versi yang dipilih
-            var categories = hierarchyCategories.filter(function(category) {
-                return category.parent_id == selectedVersion;
-            });
+                // Filter kategori buku sesuai dengan versi yang dipilih
+                var categories = hierarchyCategories.filter(function(category) {
+                    return category.parent_id == selectedVersion;
+                });
 
-            // Kosongkan opsi kategori buku yang sudah ada sebelumnya
-            for (let j = i + 1; j <= getCountCategory + 1; j++) {
-                document.getElementById('category' + j).innerHTML = '';
-            }
-
-            // Membuat elemen option
-            var option = document.createElement('option');
-            option.value = '';
-            option.text = 'Category ' + i;
-            option.disabled = true;
-            option.selected = true;
-
-            // Menambahkan elemen option ke dalam elemen select
-            var select = document.getElementById('category' + (i + 1));
-            select.appendChild(option);
-
-            // Isi opsi kategori buku
-            categories.forEach(function(category) {
+                // Kosongkan opsi kategori buku yang sudah ada sebelumnya
+                for (let j = i + 1; j <= getCountCategory + 1; j++) {
+                    document.getElementById('category' + j).innerHTML = '';
+                }
+                // Membuat elemen option
                 var option = document.createElement('option');
-                option.value = category.id; // Sesuaikan dengan nilai yang ingin ditampilkan
-                option.textContent = category.name; // Sesuaikan dengan nilai yang ingin ditampilkan
+                option.value = '';
+                option.text = 'Category ' + i;
+                option.disabled = true;
+                option.selected = true;
+
+                // Menambahkan elemen option ke dalam elemen select
+                var select = document.getElementById('category' + (i + 1));
                 select.appendChild(option);
-            });   
-        });
-    }
+
+                // Isi opsi kategori buku
+                categories.forEach(function(category) {
+                    var option = document.createElement('option');
+                    option.value = category.id; // Sesuaikan dengan nilai yang ingin ditampilkan
+                    option.textContent = category.name; // Sesuaikan dengan nilai yang ingin ditampilkan
+                    select.appendChild(option);
+                });   
+            });
+        }
 
 
         // document.getElementById('category2').addEventListener('change', function() {

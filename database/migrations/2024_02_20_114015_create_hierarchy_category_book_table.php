@@ -50,8 +50,11 @@ return new class extends Migration {
             ['name' => 'Programming Advanced 3', 'hierarchy_name' => 'Python Programming > Programming Advanced > Programming Advanced 3', 'parent_id' => 25, 'language_id' => 7],
             ['name' => 'Pemrograman Berbasis Blok', 'hierarchy_name' => 'Pemrograman Berbasis Blok', 'parent_id' => null, 'language_id' => 67],
             ['name' => 'Pemrograman Berbasis Python', 'hierarchy_name' => 'Pemrograman Berbasis Python', 'parent_id' => null, 'language_id' => 67],
-            ['name' => 'Membuat Pertunjukan Cahaya', 'hierarchy_name' => 'Pemrograman Berbasis Blok > Membuat Pertunjukan Cahaya', 'parent_id' => 28, 'language_id' => 67],
-            ['name' => 'Membuat Mobil Robot', 'hierarchy_name' => 'Pemrograman Berbasis Blok > Membuat Mobil Robot', 'parent_id' => 28, 'language_id' => 67],
+            ['name' => 'Dasar', 'hierarchy_name' => 'Pemrograman Berbasis Blok > Dasar', 'parent_id' => 28, 'language_id' => 7],
+            ['name' => 'Menengah', 'hierarchy_name' => 'Pemrograman Berbasis Blok > Menengah', 'parent_id' => 28, 'language_id' => 7],
+            ['name' => 'Lanjutan', 'hierarchy_name' => 'Pemrograman Berbasis Blok > Lanjutan', 'parent_id' => 28, 'language_id' => 7],
+            ['name' => 'Membuat Pertunjukan Cahaya', 'hierarchy_name' => 'Pemrograman Berbasis Blok > Dasar > Membuat Pertunjukan Cahaya', 'parent_id' => 29, 'language_id' => 67],
+            ['name' => 'Membuat Mobil Robot', 'hierarchy_name' => 'Pemrograman Berbasis Blok > Dasar >Membuat Mobil Robot', 'parent_id' => 29, 'language_id' => 67],
         ];
 
         DB::table('hierarchy_category_book')->insert($data);
