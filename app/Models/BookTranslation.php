@@ -13,6 +13,7 @@ class BookTranslation extends Model
         'language_id',
         'language_name',
         'status_id',
+        'hierarchy_id',
         'file'
     ];
 

@@ -16,6 +16,7 @@ return new class extends Migration {
             $table->unsignedBigInteger('language_id');
             $table->string('language_name');
             $table->unsignedBigInteger('status_id');
+            $table->unsignedBigInteger('hierarchy_id');
             $table->string('file');
             $table->timestamps();
             $table->softDeletes(); // Soft delete column

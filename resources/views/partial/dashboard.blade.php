@@ -28,7 +28,7 @@
             <img src="https://img.freepik.com/free-vector/open-automation-architecture-abstract-concept-illustration_335657-3802.jpg?w=740&t=st=1707973461~exp=1707974061~hmac=3eccc82f22f37885ac0b44e82e0e88eddd0afc88865682556e3a821538c3d2c9"
                 style="height: 500px;" />
             <div class="kolom">
-                <p class="deskripsi">Belajar Programming #dirumahaja</p>
+                <p class="deskripsi">Belajar Programming & Robotic</p>
                 <h2>Tetap Sehat, Tetap Semangat</h2>
                 <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nesciunt, nobis.</p>
                 <p><a href="" class="tbl-pink">Pelajari Lebih Lanjut</a></p>
