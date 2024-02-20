@@ -14,12 +14,12 @@ body {
 
 .accordion {
     margin: 20px auto;
-    width: 600px;
+    width: 570px;
 }
 
 .accordion li {
     list-style: none;
-    width: 100%;
+    width: 85%;
     margin: 20px;
     padding: 10px;
     border-radius: 8px;
@@ -67,7 +67,15 @@ label::before {
 .accordion input[type="checkbox"]:checked~label::before {
     content: '-';
 }
+.accordion li {
+    display: flex;
+    align-items: center; /* Mengatur teks secara vertikal di tengah */
+    height: 35px;
+}
 
+.accordion input[type="checkbox"] {
+    margin-right: 10px; /* Jarak antara kotak centang dan teks */
+}
 .wrapper {
     width: 1100px;
     margin: auto;

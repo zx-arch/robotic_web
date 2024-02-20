@@ -12,4 +12,9 @@ class Translations extends Model
         'language_code',
         'language_name',
     ];
+
+    public function hierarchyCategoryBook()
+    {
+        return $this->belongsTo(HierarchyCategoryBook::class);
+    }
 }
