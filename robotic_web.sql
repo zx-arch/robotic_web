@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 18, 2024 at 03:55 PM
+-- Generation Time: Feb 20, 2024 at 12:43 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -21,6 +21,34 @@ SET time_zone = "+00:00";
 -- Database: `robotic_web`
 --
 
+DELIMITER $$
+--
+-- Procedures
+--
+CREATE DEFINER=`root`@`localhost` PROCEDURE `prevent_table_drop` ()   BEGIN
+    IF (SELECT TABLE_NAME FROM information_schema.TABLES WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'translations') THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Cannot drop translations table';
+    END IF;
+    
+    IF (SELECT TABLE_NAME FROM information_schema.TABLES WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'countries') THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Cannot drop countries table';
+    END IF;
+END$$
+
+DELIMITER ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `book_category`
+--
+
+CREATE TABLE `book_category` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 -- --------------------------------------------------------
 
 --
@@ -33,11 +61,39 @@ CREATE TABLE `book_translation` (
   `language_id` bigint(20) UNSIGNED NOT NULL,
   `language_name` varchar(255) NOT NULL,
   `status_id` bigint(20) UNSIGNED NOT NULL,
+  `hierarchy_id` bigint(20) UNSIGNED NOT NULL,
   `file` varchar(255) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `book_translation`
+--
+
+INSERT INTO `book_translation` (`id`, `book_title`, `language_id`, `language_name`, `status_id`, `hierarchy_id`, `file`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 'Stop and Go', 7, 'English', 1, 6, 'Basic 01_Stop and Go.pdf', '2024-02-20 01:25:24', '2024-02-20 01:25:24', NULL),
+(2, 'Making a Light Show', 7, 'English', 1, 7, 'Basic 02_Making a Light Show.pdf', '2024-02-20 01:25:24', '2024-02-20 01:25:24', NULL),
+(3, 'Making a Robot Car', 7, 'English', 1, 8, 'Basic 03_Making a Robot Car.pdf', '2024-02-20 01:25:24', '2024-02-20 01:25:24', NULL),
+(4, 'Automatic Doors', 7, 'English', 1, 9, 'Basic 04_Automatic Doors.pdf', '2024-02-20 01:25:24', '2024-02-20 01:25:24', NULL),
+(5, 'Controlling a Motor Cars', 7, 'English', 1, 10, 'Intermediate 01_Controlling Motor Cars.pdf', '2024-02-20 01:25:24', '2024-02-20 01:25:24', NULL),
+(6, 'Electronic Instrument', 7, 'English', 1, 11, 'Intermediate 02_Electronic Instruments.pdf', '2024-02-20 01:25:24', '2024-02-20 01:25:24', NULL),
+(7, 'Robots at Work', 7, 'English', 1, 12, 'Intermediate 03_Robots at Works.pdf', '2024-02-20 01:25:24', '2024-02-20 01:25:24', NULL),
+(8, 'Machines and Mechanisms', 7, 'English', 1, 13, 'Intermediate 04_Machines and Mechanismss.pdf', '2024-02-20 01:25:24', '2024-02-20 01:25:24', NULL),
+(9, 'The World of Games', 7, 'English', 1, 14, 'Intermediate 05_The World of Gamess.pdf', '2024-02-20 01:25:24', '2024-02-20 01:25:24', NULL),
+(10, 'Playing with Controllers', 7, 'English', 1, 15, 'Advanced 01_Playing with Controllerss.pdf', '2024-02-20 01:25:24', '2024-02-20 01:25:24', NULL),
+(11, 'All About Walkbots', 7, 'English', 1, 16, 'Advanced 02_All About Walkbotss.pdf', '2024-02-20 01:25:24', '2024-02-20 01:25:24', NULL),
+(12, 'The Factory Scanbot', 7, 'English', 1, 17, 'Advanced 03_The Factory Scanbots.pdf', '2024-02-20 01:25:24', '2024-02-20 01:25:24', NULL),
+(13, 'Advanced Game Making', 7, 'English', 1, 18, 'Advanced 04_Advanced Game Makings.pdf', '2024-02-20 01:25:24', '2024-02-20 01:25:24', NULL),
+(14, 'Introduction', 7, 'English', 1, 19, 'Introduction.pdf', '2024-02-20 01:25:24', '2024-02-20 01:25:24', NULL),
+(15, 'Programming Basic 1', 7, 'English', 1, 21, 'Programming Basics_Part 1.pdf', '2024-02-20 01:25:24', '2024-02-20 01:25:24', NULL),
+(16, 'Programming Basic 2', 7, 'English', 1, 22, 'Programming Basics_Part 2.pdf', '2024-02-20 01:25:24', '2024-02-20 01:25:24', NULL),
+(17, 'Programming Hands On part 1', 7, 'English', 1, 24, 'Hands-on Programming_Part 1.pdf', '2024-02-20 01:25:24', '2024-02-20 01:25:24', NULL),
+(18, 'Programming Hands On part 2', 7, 'English', 1, 25, '88381_Python_Programing_Hands-On Part 2.pdf', '2024-02-20 01:25:24', '2024-02-20 01:25:24', NULL),
+(19, 'Programming Advanced 3', 7, 'English', 1, 27, '88387_Python_Programing_Advanced_Programing 3_ETC.pdf', '2024-02-20 01:25:24', '2024-02-20 01:25:24', NULL),
+(20, 'Membuat Pertunjukan Cahaya', 67, 'Indonesian', 1, 33, 'Dasar 02_Membuat Pertunjukan Cahaya.pdf', '2024-02-20 09:16:11', '2024-02-20 09:16:11', NULL),
+(21, 'Membuat Mobil Robot', 67, 'Indonesian', 1, 34, 'Dasar 03_Membuat Mobil Robot.pdf', '2024-02-20 09:16:11', '2024-02-20 09:16:11', NULL);
 
 -- --------------------------------------------------------
 
@@ -364,6 +420,62 @@ CREATE TABLE `failed_jobs` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `hierarchy_category_book`
+--
+
+CREATE TABLE `hierarchy_category_book` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `hierarchy_name` varchar(255) NOT NULL,
+  `parent_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `language_id` bigint(20) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `hierarchy_category_book`
+--
+
+INSERT INTO `hierarchy_category_book` (`id`, `name`, `hierarchy_name`, `parent_id`, `language_id`, `created_at`, `updated_at`) VALUES
+(1, 'Block Programming', 'Block Programming', NULL, 7, '2024-02-20 04:40:31', '2024-02-20 04:40:31'),
+(2, 'Python Programming', 'Python Programming', NULL, 7, '2024-02-20 04:40:31', '2024-02-20 04:40:31'),
+(3, 'Basic', 'Block Programming > Basic', 1, 7, '2024-02-20 04:40:31', '2024-02-20 04:40:31'),
+(4, 'Intermediate', 'Block Programming > Intermediate', 1, 7, '2024-02-20 04:40:31', '2024-02-20 04:40:31'),
+(5, 'Advanced', 'Block Programming > Advanced', 1, 7, '2024-02-20 04:40:31', '2024-02-20 04:40:31'),
+(6, 'Stop and Go', 'Block Programming > Basic > Stop and Go', 3, 7, '2024-02-20 04:40:31', '2024-02-20 04:40:31'),
+(7, 'Making a Light Show', 'Block Programming > Basic > Making a Light Show', 3, 7, '2024-02-20 04:40:31', '2024-02-20 04:40:31'),
+(8, 'Making a Robot Car', 'Block Programming > Basic > Making a Robot Car', 3, 7, '2024-02-20 04:40:31', '2024-02-20 04:40:31'),
+(9, 'Automatic Doors', 'Block Programming > Basic > Automatic Doors', 3, 7, '2024-02-20 04:40:31', '2024-02-20 04:40:31'),
+(10, 'Controlling a Motor Cars', 'Block Programming > Intermediate > Controlling a Motor Cars', 4, 7, '2024-02-20 04:40:31', '2024-02-20 04:40:31'),
+(11, 'Electronic Instrument', 'Block Programming > Intermediate > Electronic Instrument', 4, 7, '2024-02-20 04:40:31', '2024-02-20 04:40:31'),
+(12, 'Robots at Work', 'Block Programming > Intermediate > Robots at Work', 4, 7, '2024-02-20 04:40:31', '2024-02-20 04:40:31'),
+(13, 'Machines and Mechanisms', 'Block Programming > Intermediate > Machines and Mechanisms', 4, 7, '2024-02-20 04:40:31', '2024-02-20 04:40:31'),
+(14, 'The World of Games', 'Block Programming > Intermediate > The World of Games', 4, 7, '2024-02-20 04:40:31', '2024-02-20 04:40:31'),
+(15, 'Playing with Controllers', 'Block Programming > Advanced > Playing with Controllers', 5, 7, '2024-02-20 04:40:31', '2024-02-20 04:40:31'),
+(16, 'All About Walkbots', 'Block Programming > Advanced > All About Walkbots', 5, 7, '2024-02-20 04:40:31', '2024-02-20 04:40:31'),
+(17, 'The Factory Scanbot', 'Block Programming > Advanced > The Factory Scanbot', 5, 7, '2024-02-20 04:40:31', '2024-02-20 04:40:31'),
+(18, 'Advanced Game Making', 'Block Programming > Advanced > Advanced Game Making', 5, 7, '2024-02-20 04:40:31', '2024-02-20 04:40:31'),
+(19, 'Introduction', 'Python Programming > Introduction', 2, 7, '2024-02-20 04:40:31', '2024-02-20 04:40:31'),
+(20, 'Programming Basic', 'Python Programming > Programming Basic', 2, 7, '2024-02-20 04:40:31', '2024-02-20 04:40:31'),
+(21, 'Programming Basic part 1', 'Python Programming > Programming Basic > Programming Basic part 1', 19, 7, '2024-02-20 04:40:31', '2024-02-20 04:40:31'),
+(22, 'Programming Basic part 2', 'Python Programming > Programming Basic > Programming Basic part 2', 19, 7, '2024-02-20 04:40:31', '2024-02-20 04:40:31'),
+(23, 'Programming Intermediate', 'Python Programming > Programming Intermediate', 2, 7, '2024-02-20 04:40:31', '2024-02-20 04:40:31'),
+(24, 'Programming Hands On part 1', 'Python Programming > Programming Advanced > Programming Hands On part 1', 25, 7, '2024-02-20 04:40:31', '2024-02-20 04:40:31'),
+(25, 'Programming Hands On part 2', 'Python Programming > Programming Advanced > Programming Hands On part 2', 25, 7, '2024-02-20 04:40:31', '2024-02-20 04:40:31'),
+(26, 'Programming Advanced', 'Python Programming > Programming Advanced', 2, 7, '2024-02-20 04:40:31', '2024-02-20 04:40:31'),
+(27, 'Programming Advanced 3', 'Python Programming > Programming Advanced > Programming Advanced 3', 25, 7, '2024-02-20 04:40:31', '2024-02-20 04:40:31'),
+(28, 'Pemrograman Berbasis Blok', 'Pemrograman Berbasis Blok', NULL, 67, '2024-02-20 04:40:31', '2024-02-20 04:40:31'),
+(29, 'Pemrograman Berbasis Python', 'Pemrograman Berbasis Python', NULL, 67, '2024-02-20 04:40:31', '2024-02-20 04:40:31'),
+(30, 'Dasar', 'Pemrograman Berbasis Blok > Dasar', 28, 7, '2024-02-20 04:40:31', '2024-02-20 04:40:31'),
+(31, 'Menengah', 'Pemrograman Berbasis Blok > Menengah', 28, 7, '2024-02-20 04:40:31', '2024-02-20 04:40:31'),
+(32, 'Lanjutan', 'Pemrograman Berbasis Blok > Lanjutan', 28, 7, '2024-02-20 04:40:31', '2024-02-20 04:40:31'),
+(33, 'Membuat Pertunjukan Cahaya', 'Pemrograman Berbasis Blok > Dasar > Membuat Pertunjukan Cahaya', 30, 67, '2024-02-20 04:40:31', '2024-02-20 04:40:31'),
+(34, 'Membuat Mobil Robot', 'Pemrograman Berbasis Blok > Dasar >Membuat Mobil Robot', 30, 67, '2024-02-20 04:40:31', '2024-02-20 04:40:31');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `migrations`
 --
 
@@ -390,7 +502,13 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (10, '2024_02_18_131855_create_countries_table', 6),
 (11, '2024_02_18_135601_create_transactions_table', 7),
 (12, '2024_02_18_144618_create_book_translation_table', 8),
-(13, '2024_02_18_144829_create_book_translation_table', 9);
+(13, '2024_02_18_144829_create_book_translation_table', 9),
+(14, '2024_02_19_082741_create_book_category_table', 10),
+(15, '2024_02_20_073222_create_hierarchy_category_book_table', 10),
+(16, '2024_02_20_074100_create_hierarchy_category_book_table', 11),
+(17, '2024_02_20_074704_create_hierarchy_category_book_table', 12),
+(18, '2024_02_20_080625_create_book_translation_table', 13),
+(19, '2024_02_20_114015_create_hierarchy_category_book_table', 14);
 
 -- --------------------------------------------------------
 
@@ -442,161 +560,161 @@ CREATE TABLE `translations` (
 --
 
 INSERT INTO `translations` (`id`, `language_code`, `language_name`, `created_at`, `updated_at`) VALUES
-(1, 'nld', 'Dutch', '2024-02-18 07:23:00', '2024-02-18 07:23:00'),
-(2, 'pap', 'Papiamento', '2024-02-18 07:23:00', '2024-02-18 07:23:00'),
-(3, 'prs', 'Dari', '2024-02-18 07:23:00', '2024-02-18 07:23:00'),
-(4, 'pus', 'Pashto', '2024-02-18 07:23:00', '2024-02-18 07:23:00'),
-(5, 'tuk', 'Turkmen', '2024-02-18 07:23:00', '2024-02-18 07:23:00'),
-(6, 'por', 'Portuguese', '2024-02-18 07:23:00', '2024-02-18 07:23:00'),
-(7, 'eng', 'English', '2024-02-18 07:23:00', '2024-02-18 07:23:00'),
-(8, 'swe', 'Swedish', '2024-02-18 07:23:00', '2024-02-18 07:23:00'),
-(9, 'sqi', 'Albanian', '2024-02-18 07:23:00', '2024-02-18 07:23:00'),
-(10, 'cat', 'Catalan', '2024-02-18 07:23:00', '2024-02-18 07:23:00'),
-(11, 'ara', 'Arabic', '2024-02-18 07:23:00', '2024-02-18 07:23:00'),
-(12, 'grn', 'Guaraní', '2024-02-18 07:23:00', '2024-02-18 07:23:00'),
-(13, 'spa', 'Spanish', '2024-02-18 07:23:00', '2024-02-18 07:23:00'),
-(14, 'hye', 'Armenian', '2024-02-18 07:23:01', '2024-02-18 07:23:01'),
-(15, 'smo', 'Samoan', '2024-02-18 07:23:01', '2024-02-18 07:23:01'),
-(16, 'fra', 'French', '2024-02-18 07:23:01', '2024-02-18 07:23:01'),
-(17, 'bar', 'Austro-Bavarian German', '2024-02-18 07:23:01', '2024-02-18 07:23:01'),
-(18, 'aze', 'Azerbaijani', '2024-02-18 07:23:01', '2024-02-18 07:23:01'),
-(19, 'rus', 'Russian', '2024-02-18 07:23:01', '2024-02-18 07:23:01'),
-(20, 'run', 'Kirundi', '2024-02-18 07:23:01', '2024-02-18 07:23:01'),
-(21, 'deu', 'German', '2024-02-18 07:23:01', '2024-02-18 07:23:01'),
-(22, 'ben', 'Bengali', '2024-02-18 07:23:01', '2024-02-18 07:23:01'),
-(23, 'bul', 'Bulgarian', '2024-02-18 07:23:01', '2024-02-18 07:23:01'),
-(24, 'bos', 'Bosnian', '2024-02-18 07:23:01', '2024-02-18 07:23:01'),
-(25, 'hrv', 'Croatian', '2024-02-18 07:23:01', '2024-02-18 07:23:01'),
-(26, 'srp', 'Serbian', '2024-02-18 07:23:01', '2024-02-18 07:23:01'),
-(27, 'bel', 'Belarusian', '2024-02-18 07:23:01', '2024-02-18 07:23:01'),
-(28, 'bjz', 'Belizean Creole', '2024-02-18 07:23:01', '2024-02-18 07:23:01'),
-(29, 'aym', 'Aymara', '2024-02-18 07:23:01', '2024-02-18 07:23:01'),
-(30, 'que', 'Quechua', '2024-02-18 07:23:01', '2024-02-18 07:23:01'),
-(31, 'msa', 'Malay', '2024-02-18 07:23:01', '2024-02-18 07:23:01'),
-(32, 'dzo', 'Dzongkha', '2024-02-18 07:23:02', '2024-02-18 07:23:02'),
-(33, 'nor', 'Norwegian', '2024-02-18 07:23:02', '2024-02-18 07:23:02'),
-(34, 'tsn', 'Tswana', '2024-02-18 07:23:02', '2024-02-18 07:23:02'),
-(35, 'sag', 'Sango', '2024-02-18 07:23:02', '2024-02-18 07:23:02'),
-(36, 'gsw', 'Swiss German', '2024-02-18 07:23:02', '2024-02-18 07:23:02'),
-(37, 'ita', 'Italian', '2024-02-18 07:23:02', '2024-02-18 07:23:02'),
-(38, 'roh', 'Romansh', '2024-02-18 07:23:02', '2024-02-18 07:23:02'),
-(39, 'zho', 'Chinese', '2024-02-18 07:23:02', '2024-02-18 07:23:02'),
-(40, 'kon', 'Kikongo', '2024-02-18 07:23:02', '2024-02-18 07:23:02'),
-(41, 'lin', 'Lingala', '2024-02-18 07:23:02', '2024-02-18 07:23:02'),
-(42, 'lua', 'Tshiluba', '2024-02-18 07:23:02', '2024-02-18 07:23:02'),
-(43, 'swa', 'Swahili', '2024-02-18 07:23:02', '2024-02-18 07:23:02'),
-(44, 'rar', 'Cook Islands Māori', '2024-02-18 07:23:02', '2024-02-18 07:23:02'),
-(45, 'zdj', 'Comorian', '2024-02-18 07:23:03', '2024-02-18 07:23:03'),
-(46, 'ell', 'Greek', '2024-02-18 07:23:03', '2024-02-18 07:23:03'),
-(47, 'tur', 'Turkish', '2024-02-18 07:23:03', '2024-02-18 07:23:03'),
-(48, 'ces', 'Czech', '2024-02-18 07:23:03', '2024-02-18 07:23:03'),
-(49, 'slk', 'Slovak', '2024-02-18 07:23:03', '2024-02-18 07:23:03'),
-(50, 'dan', 'Danish', '2024-02-18 07:23:03', '2024-02-18 07:23:03'),
-(51, 'tir', 'Tigrinya', '2024-02-18 07:23:03', '2024-02-18 07:23:03'),
-(52, 'ber', 'Berber', '2024-02-18 07:23:03', '2024-02-18 07:23:03'),
-(53, 'mey', 'Hassaniya', '2024-02-18 07:23:03', '2024-02-18 07:23:03'),
-(54, 'est', 'Estonian', '2024-02-18 07:23:03', '2024-02-18 07:23:03'),
-(55, 'amh', 'Amharic', '2024-02-18 07:23:03', '2024-02-18 07:23:03'),
-(56, 'fin', 'Finnish', '2024-02-18 07:23:03', '2024-02-18 07:23:03'),
-(57, 'fij', 'Fijian', '2024-02-18 07:23:03', '2024-02-18 07:23:03'),
-(58, 'hif', 'Fiji Hindi', '2024-02-18 07:23:03', '2024-02-18 07:23:03'),
-(59, 'fao', 'Faroese', '2024-02-18 07:23:03', '2024-02-18 07:23:03'),
-(60, 'kat', 'Georgian', '2024-02-18 07:23:03', '2024-02-18 07:23:03'),
-(61, 'nfr', 'Guernésiais', '2024-02-18 07:23:03', '2024-02-18 07:23:03'),
-(62, 'pov', 'Upper Guinea Creole', '2024-02-18 07:23:03', '2024-02-18 07:23:03'),
-(63, 'kal', 'Greenlandic', '2024-02-18 07:23:03', '2024-02-18 07:23:03'),
-(64, 'cha', 'Chamorro', '2024-02-18 07:23:03', '2024-02-18 07:23:03'),
-(65, 'hat', 'Haitian Creole', '2024-02-18 07:23:03', '2024-02-18 07:23:03'),
-(66, 'hun', 'Hungarian', '2024-02-18 07:23:03', '2024-02-18 07:23:03'),
-(67, 'ind', 'Indonesian', '2024-02-18 07:23:03', '2024-02-18 07:23:03'),
-(68, 'glv', 'Manx', '2024-02-18 07:23:04', '2024-02-18 07:23:04'),
-(69, 'hin', 'Hindi', '2024-02-18 07:23:04', '2024-02-18 07:23:04'),
-(70, 'tam', 'Tamil', '2024-02-18 07:23:04', '2024-02-18 07:23:04'),
-(71, 'gle', 'Irish', '2024-02-18 07:23:04', '2024-02-18 07:23:04'),
-(72, 'fas', 'Persian (Farsi)', '2024-02-18 07:23:04', '2024-02-18 07:23:04'),
-(73, 'arc', 'Aramaic', '2024-02-18 07:23:04', '2024-02-18 07:23:04'),
-(74, 'ckb', 'Sorani', '2024-02-18 07:23:04', '2024-02-18 07:23:04'),
-(75, 'isl', 'Icelandic', '2024-02-18 07:23:04', '2024-02-18 07:23:04'),
-(76, 'heb', 'Hebrew', '2024-02-18 07:23:04', '2024-02-18 07:23:04'),
-(77, 'jam', 'Jamaican Patois', '2024-02-18 07:23:04', '2024-02-18 07:23:04'),
-(78, 'nrf', 'Jèrriais', '2024-02-18 07:23:04', '2024-02-18 07:23:04'),
-(79, 'jpn', 'Japanese', '2024-02-18 07:23:04', '2024-02-18 07:23:04'),
-(80, 'kaz', 'Kazakh', '2024-02-18 07:23:04', '2024-02-18 07:23:04'),
-(81, 'kir', 'Kyrgyz', '2024-02-18 07:23:04', '2024-02-18 07:23:04'),
-(82, 'khm', 'Khmer', '2024-02-18 07:23:04', '2024-02-18 07:23:04'),
-(83, 'gil', 'Gilbertese', '2024-02-18 07:23:04', '2024-02-18 07:23:04'),
-(84, 'kor', 'Korean', '2024-02-18 07:23:04', '2024-02-18 07:23:04'),
-(85, 'lao', 'Lao', '2024-02-18 07:23:04', '2024-02-18 07:23:04'),
-(86, 'sin', 'Sinhala', '2024-02-18 07:23:04', '2024-02-18 07:23:04'),
-(87, 'sot', 'Sotho', '2024-02-18 07:23:04', '2024-02-18 07:23:04'),
-(88, 'lit', 'Lithuanian', '2024-02-18 07:23:04', '2024-02-18 07:23:04'),
-(89, 'ltz', 'Luxembourgish', '2024-02-18 07:23:04', '2024-02-18 07:23:04'),
-(90, 'lav', 'Latvian', '2024-02-18 07:23:04', '2024-02-18 07:23:04'),
-(91, 'ron', 'Moldavian', '2024-02-18 07:23:04', '2024-02-18 07:23:04'),
-(92, 'mlg', 'Malagasy', '2024-02-18 07:23:05', '2024-02-18 07:23:05'),
-(93, 'div', 'Maldivian', '2024-02-18 07:23:05', '2024-02-18 07:23:05'),
-(94, 'mah', 'Marshallese', '2024-02-18 07:23:05', '2024-02-18 07:23:05'),
-(95, 'mkd', 'Macedonian', '2024-02-18 07:23:05', '2024-02-18 07:23:05'),
-(96, 'mlt', 'Maltese', '2024-02-18 07:23:05', '2024-02-18 07:23:05'),
-(97, 'mya', 'Burmese', '2024-02-18 07:23:05', '2024-02-18 07:23:05'),
-(98, 'cnr', 'Montenegrin', '2024-02-18 07:23:05', '2024-02-18 07:23:05'),
-(99, 'mon', 'Mongolian', '2024-02-18 07:23:05', '2024-02-18 07:23:05'),
-(100, 'cal', 'Carolinian', '2024-02-18 07:23:05', '2024-02-18 07:23:05'),
-(101, 'mfe', 'Mauritian Creole', '2024-02-18 07:23:05', '2024-02-18 07:23:05'),
-(102, 'nya', 'Chewa', '2024-02-18 07:23:05', '2024-02-18 07:23:05'),
-(103, 'afr', 'Afrikaans', '2024-02-18 07:23:05', '2024-02-18 07:23:05'),
-(104, 'her', 'Herero', '2024-02-18 07:23:05', '2024-02-18 07:23:05'),
-(105, 'hgm', 'Khoekhoe', '2024-02-18 07:23:05', '2024-02-18 07:23:05'),
-(106, 'kwn', 'Kwangali', '2024-02-18 07:23:05', '2024-02-18 07:23:05'),
-(107, 'loz', 'Lozi', '2024-02-18 07:23:06', '2024-02-18 07:23:06'),
-(108, 'ndo', 'Ndonga', '2024-02-18 07:23:06', '2024-02-18 07:23:06'),
-(109, 'pih', 'Norfuk', '2024-02-18 07:23:06', '2024-02-18 07:23:06'),
-(110, 'niu', 'Niuean', '2024-02-18 07:23:06', '2024-02-18 07:23:06'),
-(111, 'nno', 'Norwegian Nynorsk', '2024-02-18 07:23:06', '2024-02-18 07:23:06'),
-(112, 'nob', 'Norwegian Bokmål', '2024-02-18 07:23:06', '2024-02-18 07:23:06'),
-(113, 'smi', 'Sami', '2024-02-18 07:23:06', '2024-02-18 07:23:06'),
-(114, 'nep', 'Nepali', '2024-02-18 07:23:06', '2024-02-18 07:23:06'),
-(115, 'nau', 'Nauru', '2024-02-18 07:23:06', '2024-02-18 07:23:06'),
-(116, 'mri', 'Māori', '2024-02-18 07:23:07', '2024-02-18 07:23:07'),
-(117, 'nzs', 'New Zealand Sign Language', '2024-02-18 07:23:07', '2024-02-18 07:23:07'),
-(118, 'urd', 'Urdu', '2024-02-18 07:23:07', '2024-02-18 07:23:07'),
-(119, 'fil', 'Filipino', '2024-02-18 07:23:07', '2024-02-18 07:23:07'),
-(120, 'pau', 'Palauan', '2024-02-18 07:23:07', '2024-02-18 07:23:07'),
-(121, 'hmo', 'Hiri Motu', '2024-02-18 07:23:07', '2024-02-18 07:23:07'),
-(122, 'tpi', 'Tok Pisin', '2024-02-18 07:23:07', '2024-02-18 07:23:07'),
-(123, 'pol', 'Polish', '2024-02-18 07:23:07', '2024-02-18 07:23:07'),
-(124, 'ron', 'Romanian', '2024-02-18 07:23:07', '2024-02-18 07:23:07'),
-(125, 'kin', 'Kinyarwanda', '2024-02-18 07:23:07', '2024-02-18 07:23:07'),
-(126, 'som', 'Somali', '2024-02-18 07:23:07', '2024-02-18 07:23:07'),
-(127, 'slv', 'Slovene', '2024-02-18 07:23:07', '2024-02-18 07:23:07'),
-(128, 'ssw', 'Swazi', '2024-02-18 07:23:07', '2024-02-18 07:23:07'),
-(129, 'crs', 'Seychellois Creole', '2024-02-18 07:23:08', '2024-02-18 07:23:08'),
-(130, 'tha', 'Thai', '2024-02-18 07:23:08', '2024-02-18 07:23:08'),
-(131, 'tgk', 'Tajik', '2024-02-18 07:23:08', '2024-02-18 07:23:08'),
-(132, 'tkl', 'Tokelauan', '2024-02-18 07:23:08', '2024-02-18 07:23:08'),
-(133, 'tet', 'Tetum', '2024-02-18 07:23:08', '2024-02-18 07:23:08'),
-(134, 'ton', 'Tongan', '2024-02-18 07:23:08', '2024-02-18 07:23:08'),
-(135, 'tvl', 'Tuvaluan', '2024-02-18 07:23:08', '2024-02-18 07:23:08'),
-(136, 'ukr', 'Ukrainian', '2024-02-18 07:23:08', '2024-02-18 07:23:08'),
-(137, 'uzb', 'Uzbek', '2024-02-18 07:23:08', '2024-02-18 07:23:08'),
-(138, 'lat', 'Latin', '2024-02-18 07:23:08', '2024-02-18 07:23:08'),
-(139, 'vie', 'Vietnamese', '2024-02-18 07:23:08', '2024-02-18 07:23:08'),
-(140, 'bis', 'Bislama', '2024-02-18 07:23:08', '2024-02-18 07:23:08'),
-(141, 'nbl', 'Southern Ndebele', '2024-02-18 07:23:08', '2024-02-18 07:23:08'),
-(142, 'nso', 'Northern Sotho', '2024-02-18 07:23:08', '2024-02-18 07:23:08'),
-(143, 'sot', 'Southern Sotho', '2024-02-18 07:23:08', '2024-02-18 07:23:08'),
-(144, 'tso', 'Tsonga', '2024-02-18 07:23:08', '2024-02-18 07:23:08'),
-(145, 'ven', 'Venda', '2024-02-18 07:23:08', '2024-02-18 07:23:08'),
-(146, 'xho', 'Xhosa', '2024-02-18 07:23:08', '2024-02-18 07:23:08'),
-(147, 'zul', 'Zulu', '2024-02-18 07:23:08', '2024-02-18 07:23:08'),
-(148, 'bwg', 'Chibarwe', '2024-02-18 07:23:08', '2024-02-18 07:23:08'),
-(149, 'kck', 'Kalanga', '2024-02-18 07:23:08', '2024-02-18 07:23:08'),
-(150, 'khi', 'Khoisan', '2024-02-18 07:23:08', '2024-02-18 07:23:08'),
-(151, 'ndc', 'Ndau', '2024-02-18 07:23:08', '2024-02-18 07:23:08'),
-(152, 'nde', 'Northern Ndebele', '2024-02-18 07:23:08', '2024-02-18 07:23:08'),
-(153, 'sna', 'Shona', '2024-02-18 07:23:09', '2024-02-18 07:23:09'),
-(154, 'toi', 'Tonga', '2024-02-18 07:23:09', '2024-02-18 07:23:09'),
-(155, 'zib', 'Zimbabwean Sign Language', '2024-02-18 07:23:09', '2024-02-18 07:23:09');
+(1, 'nld', 'Dutch', '2024-02-18 00:23:00', '2024-02-18 00:23:00'),
+(2, 'pap', 'Papiamento', '2024-02-18 00:23:00', '2024-02-18 00:23:00'),
+(3, 'prs', 'Dari', '2024-02-18 00:23:00', '2024-02-18 00:23:00'),
+(4, 'pus', 'Pashto', '2024-02-18 00:23:00', '2024-02-18 00:23:00'),
+(5, 'tuk', 'Turkmen', '2024-02-18 00:23:00', '2024-02-18 00:23:00'),
+(6, 'por', 'Portuguese', '2024-02-18 00:23:00', '2024-02-18 00:23:00'),
+(7, 'eng', 'English', '2024-02-18 00:23:00', '2024-02-18 00:23:00'),
+(8, 'swe', 'Swedish', '2024-02-18 00:23:00', '2024-02-18 00:23:00'),
+(9, 'sqi', 'Albanian', '2024-02-18 00:23:00', '2024-02-18 00:23:00'),
+(10, 'cat', 'Catalan', '2024-02-18 00:23:00', '2024-02-18 00:23:00'),
+(11, 'ara', 'Arabic', '2024-02-18 00:23:00', '2024-02-18 00:23:00'),
+(12, 'grn', 'Guaraní', '2024-02-18 00:23:00', '2024-02-18 00:23:00'),
+(13, 'spa', 'Spanish', '2024-02-18 00:23:00', '2024-02-18 00:23:00'),
+(14, 'hye', 'Armenian', '2024-02-18 00:23:01', '2024-02-18 00:23:01'),
+(15, 'smo', 'Samoan', '2024-02-18 00:23:01', '2024-02-18 00:23:01'),
+(16, 'fra', 'French', '2024-02-18 00:23:01', '2024-02-18 00:23:01'),
+(17, 'bar', 'Austro-Bavarian German', '2024-02-18 00:23:01', '2024-02-18 00:23:01'),
+(18, 'aze', 'Azerbaijani', '2024-02-18 00:23:01', '2024-02-18 00:23:01'),
+(19, 'rus', 'Russian', '2024-02-18 00:23:01', '2024-02-18 00:23:01'),
+(20, 'run', 'Kirundi', '2024-02-18 00:23:01', '2024-02-18 00:23:01'),
+(21, 'deu', 'German', '2024-02-18 00:23:01', '2024-02-18 00:23:01'),
+(22, 'ben', 'Bengali', '2024-02-18 00:23:01', '2024-02-18 00:23:01'),
+(23, 'bul', 'Bulgarian', '2024-02-18 00:23:01', '2024-02-18 00:23:01'),
+(24, 'bos', 'Bosnian', '2024-02-18 00:23:01', '2024-02-18 00:23:01'),
+(25, 'hrv', 'Croatian', '2024-02-18 00:23:01', '2024-02-18 00:23:01'),
+(26, 'srp', 'Serbian', '2024-02-18 00:23:01', '2024-02-18 00:23:01'),
+(27, 'bel', 'Belarusian', '2024-02-18 00:23:01', '2024-02-18 00:23:01'),
+(28, 'bjz', 'Belizean Creole', '2024-02-18 00:23:01', '2024-02-18 00:23:01'),
+(29, 'aym', 'Aymara', '2024-02-18 00:23:01', '2024-02-18 00:23:01'),
+(30, 'que', 'Quechua', '2024-02-18 00:23:01', '2024-02-18 00:23:01'),
+(31, 'msa', 'Malay', '2024-02-18 00:23:01', '2024-02-18 00:23:01'),
+(32, 'dzo', 'Dzongkha', '2024-02-18 00:23:02', '2024-02-18 00:23:02'),
+(33, 'nor', 'Norwegian', '2024-02-18 00:23:02', '2024-02-18 00:23:02'),
+(34, 'tsn', 'Tswana', '2024-02-18 00:23:02', '2024-02-18 00:23:02'),
+(35, 'sag', 'Sango', '2024-02-18 00:23:02', '2024-02-18 00:23:02'),
+(36, 'gsw', 'Swiss German', '2024-02-18 00:23:02', '2024-02-18 00:23:02'),
+(37, 'ita', 'Italian', '2024-02-18 00:23:02', '2024-02-18 00:23:02'),
+(38, 'roh', 'Romansh', '2024-02-18 00:23:02', '2024-02-18 00:23:02'),
+(39, 'zho', 'Chinese', '2024-02-18 00:23:02', '2024-02-18 00:23:02'),
+(40, 'kon', 'Kikongo', '2024-02-18 00:23:02', '2024-02-18 00:23:02'),
+(41, 'lin', 'Lingala', '2024-02-18 00:23:02', '2024-02-18 00:23:02'),
+(42, 'lua', 'Tshiluba', '2024-02-18 00:23:02', '2024-02-18 00:23:02'),
+(43, 'swa', 'Swahili', '2024-02-18 00:23:02', '2024-02-18 00:23:02'),
+(44, 'rar', 'Cook Islands Māori', '2024-02-18 00:23:02', '2024-02-18 00:23:02'),
+(45, 'zdj', 'Comorian', '2024-02-18 00:23:03', '2024-02-18 00:23:03'),
+(46, 'ell', 'Greek', '2024-02-18 00:23:03', '2024-02-18 00:23:03'),
+(47, 'tur', 'Turkish', '2024-02-18 00:23:03', '2024-02-18 00:23:03'),
+(48, 'ces', 'Czech', '2024-02-18 00:23:03', '2024-02-18 00:23:03'),
+(49, 'slk', 'Slovak', '2024-02-18 00:23:03', '2024-02-18 00:23:03'),
+(50, 'dan', 'Danish', '2024-02-18 00:23:03', '2024-02-18 00:23:03'),
+(51, 'tir', 'Tigrinya', '2024-02-18 00:23:03', '2024-02-18 00:23:03'),
+(52, 'ber', 'Berber', '2024-02-18 00:23:03', '2024-02-18 00:23:03'),
+(53, 'mey', 'Hassaniya', '2024-02-18 00:23:03', '2024-02-18 00:23:03'),
+(54, 'est', 'Estonian', '2024-02-18 00:23:03', '2024-02-18 00:23:03'),
+(55, 'amh', 'Amharic', '2024-02-18 00:23:03', '2024-02-18 00:23:03'),
+(56, 'fin', 'Finnish', '2024-02-18 00:23:03', '2024-02-18 00:23:03'),
+(57, 'fij', 'Fijian', '2024-02-18 00:23:03', '2024-02-18 00:23:03'),
+(58, 'hif', 'Fiji Hindi', '2024-02-18 00:23:03', '2024-02-18 00:23:03'),
+(59, 'fao', 'Faroese', '2024-02-18 00:23:03', '2024-02-18 00:23:03'),
+(60, 'kat', 'Georgian', '2024-02-18 00:23:03', '2024-02-18 00:23:03'),
+(61, 'nfr', 'Guernésiais', '2024-02-18 00:23:03', '2024-02-18 00:23:03'),
+(62, 'pov', 'Upper Guinea Creole', '2024-02-18 00:23:03', '2024-02-18 00:23:03'),
+(63, 'kal', 'Greenlandic', '2024-02-18 00:23:03', '2024-02-18 00:23:03'),
+(64, 'cha', 'Chamorro', '2024-02-18 00:23:03', '2024-02-18 00:23:03'),
+(65, 'hat', 'Haitian Creole', '2024-02-18 00:23:03', '2024-02-18 00:23:03'),
+(66, 'hun', 'Hungarian', '2024-02-18 00:23:03', '2024-02-18 00:23:03'),
+(67, 'ind', 'Indonesian', '2024-02-18 00:23:03', '2024-02-18 00:23:03'),
+(68, 'glv', 'Manx', '2024-02-18 00:23:04', '2024-02-18 00:23:04'),
+(69, 'hin', 'Hindi', '2024-02-18 00:23:04', '2024-02-18 00:23:04'),
+(70, 'tam', 'Tamil', '2024-02-18 00:23:04', '2024-02-18 00:23:04'),
+(71, 'gle', 'Irish', '2024-02-18 00:23:04', '2024-02-18 00:23:04'),
+(72, 'fas', 'Persian (Farsi)', '2024-02-18 00:23:04', '2024-02-18 00:23:04'),
+(73, 'arc', 'Aramaic', '2024-02-18 00:23:04', '2024-02-18 00:23:04'),
+(74, 'ckb', 'Sorani', '2024-02-18 00:23:04', '2024-02-18 00:23:04'),
+(75, 'isl', 'Icelandic', '2024-02-18 00:23:04', '2024-02-18 00:23:04'),
+(76, 'heb', 'Hebrew', '2024-02-18 00:23:04', '2024-02-18 00:23:04'),
+(77, 'jam', 'Jamaican Patois', '2024-02-18 00:23:04', '2024-02-18 00:23:04'),
+(78, 'nrf', 'Jèrriais', '2024-02-18 00:23:04', '2024-02-18 00:23:04'),
+(79, 'jpn', 'Japanese', '2024-02-18 00:23:04', '2024-02-18 00:23:04'),
+(80, 'kaz', 'Kazakh', '2024-02-18 00:23:04', '2024-02-18 00:23:04'),
+(81, 'kir', 'Kyrgyz', '2024-02-18 00:23:04', '2024-02-18 00:23:04'),
+(82, 'khm', 'Khmer', '2024-02-18 00:23:04', '2024-02-18 00:23:04'),
+(83, 'gil', 'Gilbertese', '2024-02-18 00:23:04', '2024-02-18 00:23:04'),
+(84, 'kor', 'Korean', '2024-02-18 00:23:04', '2024-02-18 00:23:04'),
+(85, 'lao', 'Lao', '2024-02-18 00:23:04', '2024-02-18 00:23:04'),
+(86, 'sin', 'Sinhala', '2024-02-18 00:23:04', '2024-02-18 00:23:04'),
+(87, 'sot', 'Sotho', '2024-02-18 00:23:04', '2024-02-18 00:23:04'),
+(88, 'lit', 'Lithuanian', '2024-02-18 00:23:04', '2024-02-18 00:23:04'),
+(89, 'ltz', 'Luxembourgish', '2024-02-18 00:23:04', '2024-02-18 00:23:04'),
+(90, 'lav', 'Latvian', '2024-02-18 00:23:04', '2024-02-18 00:23:04'),
+(91, 'ron', 'Moldavian', '2024-02-18 00:23:04', '2024-02-18 00:23:04'),
+(92, 'mlg', 'Malagasy', '2024-02-18 00:23:05', '2024-02-18 00:23:05'),
+(93, 'div', 'Maldivian', '2024-02-18 00:23:05', '2024-02-18 00:23:05'),
+(94, 'mah', 'Marshallese', '2024-02-18 00:23:05', '2024-02-18 00:23:05'),
+(95, 'mkd', 'Macedonian', '2024-02-18 00:23:05', '2024-02-18 00:23:05'),
+(96, 'mlt', 'Maltese', '2024-02-18 00:23:05', '2024-02-18 00:23:05'),
+(97, 'mya', 'Burmese', '2024-02-18 00:23:05', '2024-02-18 00:23:05'),
+(98, 'cnr', 'Montenegrin', '2024-02-18 00:23:05', '2024-02-18 00:23:05'),
+(99, 'mon', 'Mongolian', '2024-02-18 00:23:05', '2024-02-18 00:23:05'),
+(100, 'cal', 'Carolinian', '2024-02-18 00:23:05', '2024-02-18 00:23:05'),
+(101, 'mfe', 'Mauritian Creole', '2024-02-18 00:23:05', '2024-02-18 00:23:05'),
+(102, 'nya', 'Chewa', '2024-02-18 00:23:05', '2024-02-18 00:23:05'),
+(103, 'afr', 'Afrikaans', '2024-02-18 00:23:05', '2024-02-18 00:23:05'),
+(104, 'her', 'Herero', '2024-02-18 00:23:05', '2024-02-18 00:23:05'),
+(105, 'hgm', 'Khoekhoe', '2024-02-18 00:23:05', '2024-02-18 00:23:05'),
+(106, 'kwn', 'Kwangali', '2024-02-18 00:23:05', '2024-02-18 00:23:05'),
+(107, 'loz', 'Lozi', '2024-02-18 00:23:06', '2024-02-18 00:23:06'),
+(108, 'ndo', 'Ndonga', '2024-02-18 00:23:06', '2024-02-18 00:23:06'),
+(109, 'pih', 'Norfuk', '2024-02-18 00:23:06', '2024-02-18 00:23:06'),
+(110, 'niu', 'Niuean', '2024-02-18 00:23:06', '2024-02-18 00:23:06'),
+(111, 'nno', 'Norwegian Nynorsk', '2024-02-18 00:23:06', '2024-02-18 00:23:06'),
+(112, 'nob', 'Norwegian Bokmål', '2024-02-18 00:23:06', '2024-02-18 00:23:06'),
+(113, 'smi', 'Sami', '2024-02-18 00:23:06', '2024-02-18 00:23:06'),
+(114, 'nep', 'Nepali', '2024-02-18 00:23:06', '2024-02-18 00:23:06'),
+(115, 'nau', 'Nauru', '2024-02-18 00:23:06', '2024-02-18 00:23:06'),
+(116, 'mri', 'Māori', '2024-02-18 00:23:07', '2024-02-18 00:23:07'),
+(117, 'nzs', 'New Zealand Sign Language', '2024-02-18 00:23:07', '2024-02-18 00:23:07'),
+(118, 'urd', 'Urdu', '2024-02-18 00:23:07', '2024-02-18 00:23:07'),
+(119, 'fil', 'Filipino', '2024-02-18 00:23:07', '2024-02-18 00:23:07'),
+(120, 'pau', 'Palauan', '2024-02-18 00:23:07', '2024-02-18 00:23:07'),
+(121, 'hmo', 'Hiri Motu', '2024-02-18 00:23:07', '2024-02-18 00:23:07'),
+(122, 'tpi', 'Tok Pisin', '2024-02-18 00:23:07', '2024-02-18 00:23:07'),
+(123, 'pol', 'Polish', '2024-02-18 00:23:07', '2024-02-18 00:23:07'),
+(124, 'ron', 'Romanian', '2024-02-18 00:23:07', '2024-02-18 00:23:07'),
+(125, 'kin', 'Kinyarwanda', '2024-02-18 00:23:07', '2024-02-18 00:23:07'),
+(126, 'som', 'Somali', '2024-02-18 00:23:07', '2024-02-18 00:23:07'),
+(127, 'slv', 'Slovene', '2024-02-18 00:23:07', '2024-02-18 00:23:07'),
+(128, 'ssw', 'Swazi', '2024-02-18 00:23:07', '2024-02-18 00:23:07'),
+(129, 'crs', 'Seychellois Creole', '2024-02-18 00:23:08', '2024-02-18 00:23:08'),
+(130, 'tha', 'Thai', '2024-02-18 00:23:08', '2024-02-18 00:23:08'),
+(131, 'tgk', 'Tajik', '2024-02-18 00:23:08', '2024-02-18 00:23:08'),
+(132, 'tkl', 'Tokelauan', '2024-02-18 00:23:08', '2024-02-18 00:23:08'),
+(133, 'tet', 'Tetum', '2024-02-18 00:23:08', '2024-02-18 00:23:08'),
+(134, 'ton', 'Tongan', '2024-02-18 00:23:08', '2024-02-18 00:23:08'),
+(135, 'tvl', 'Tuvaluan', '2024-02-18 00:23:08', '2024-02-18 00:23:08'),
+(136, 'ukr', 'Ukrainian', '2024-02-18 00:23:08', '2024-02-18 00:23:08'),
+(137, 'uzb', 'Uzbek', '2024-02-18 00:23:08', '2024-02-18 00:23:08'),
+(138, 'lat', 'Latin', '2024-02-18 00:23:08', '2024-02-18 00:23:08'),
+(139, 'vie', 'Vietnamese', '2024-02-18 00:23:08', '2024-02-18 00:23:08'),
+(140, 'bis', 'Bislama', '2024-02-18 00:23:08', '2024-02-18 00:23:08'),
+(141, 'nbl', 'Southern Ndebele', '2024-02-18 00:23:08', '2024-02-18 00:23:08'),
+(142, 'nso', 'Northern Sotho', '2024-02-18 00:23:08', '2024-02-18 00:23:08'),
+(143, 'sot', 'Southern Sotho', '2024-02-18 00:23:08', '2024-02-18 00:23:08'),
+(144, 'tso', 'Tsonga', '2024-02-18 00:23:08', '2024-02-18 00:23:08'),
+(145, 'ven', 'Venda', '2024-02-18 00:23:08', '2024-02-18 00:23:08'),
+(146, 'xho', 'Xhosa', '2024-02-18 00:23:08', '2024-02-18 00:23:08'),
+(147, 'zul', 'Zulu', '2024-02-18 00:23:08', '2024-02-18 00:23:08'),
+(148, 'bwg', 'Chibarwe', '2024-02-18 00:23:08', '2024-02-18 00:23:08'),
+(149, 'kck', 'Kalanga', '2024-02-18 00:23:08', '2024-02-18 00:23:08'),
+(150, 'khi', 'Khoisan', '2024-02-18 00:23:08', '2024-02-18 00:23:08'),
+(151, 'ndc', 'Ndau', '2024-02-18 00:23:08', '2024-02-18 00:23:08'),
+(152, 'nde', 'Northern Ndebele', '2024-02-18 00:23:08', '2024-02-18 00:23:08'),
+(153, 'sna', 'Shona', '2024-02-18 00:23:09', '2024-02-18 00:23:09'),
+(154, 'toi', 'Tonga', '2024-02-18 00:23:09', '2024-02-18 00:23:09'),
+(155, 'zib', 'Zimbabwean Sign Language', '2024-02-18 00:23:09', '2024-02-18 00:23:09');
 
 -- --------------------------------------------------------
 
@@ -620,6 +738,12 @@ CREATE TABLE `users` (
 --
 
 --
+-- Indexes for table `book_category`
+--
+ALTER TABLE `book_category`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `book_translation`
 --
 ALTER TABLE `book_translation`
@@ -637,6 +761,12 @@ ALTER TABLE `countries`
 ALTER TABLE `failed_jobs`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `failed_jobs_uuid_unique` (`uuid`);
+
+--
+-- Indexes for table `hierarchy_category_book`
+--
+ALTER TABLE `hierarchy_category_book`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `migrations`
@@ -659,12 +789,6 @@ ALTER TABLE `personal_access_tokens`
   ADD KEY `personal_access_tokens_tokenable_type_tokenable_id_index` (`tokenable_type`,`tokenable_id`);
 
 --
--- Indexes for table `translations`
---
-ALTER TABLE `translations`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -676,10 +800,16 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT for table `book_category`
+--
+ALTER TABLE `book_category`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `book_translation`
 --
 ALTER TABLE `book_translation`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `countries`
@@ -694,22 +824,22 @@ ALTER TABLE `failed_jobs`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `hierarchy_category_book`
+--
+ALTER TABLE `hierarchy_category_book`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+
+--
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
 --
 ALTER TABLE `personal_access_tokens`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `translations`
---
-ALTER TABLE `translations`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=156;
 
 --
 -- AUTO_INCREMENT for table `users`
