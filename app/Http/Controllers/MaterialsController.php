@@ -44,4 +44,12 @@ class MaterialsController extends Controller
         //dd($versionBook);
         return view('partial.materials', compact('versionBook', 'hierarchyCategories', 'maxCategory'));
     }
+
+    public function find(Request $request)
+    {
+        //dd($request->all());
+        $getBook = BookTranslation::where('hierarchy_id', $request->Category['category3'])->first()->file;
+        session(['input_category' => $request->Category]);
+        return view('partials.materials_saved', compact('getBook'));
+    }
 }

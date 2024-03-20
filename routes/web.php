@@ -18,5 +18,6 @@ use App\Http\Controllers\MaterialsController;
 */
 
 Route::get('/', [DashboardController::class, 'index'])->name('home_dashboard');
-Route::get('/login', [LoginController::class, 'index'])->name('form_login');
+Route::get('/login', [LoginController::class, 'index'])->name('form.login');
 Route::get('/materials', [MaterialsController::class, 'index'])->name('materials');
+Route::post('/materials/find', [MaterialsController::class, 'find'])->name('materials.find');
