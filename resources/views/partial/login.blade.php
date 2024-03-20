@@ -230,8 +230,8 @@
 
                     <div class="phone">
                         <i class="bi bi-phone"></i>
-                        <h4>Call:</h4>
-                        <p>+ 62857-2532-0311</p>
+                        <h4>Whatsapp:</h4>
+                        <p><a href="https://web.whatsapp.com/send/?phone=6285725320311&text&type=phone_number&app_absent=0">+ 62857-2532-0311</a></p>
                     </div>
 
                     <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15815.688362498151!2d110.60464108715819!3d-7.6915104999999855!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7a412c170759ef%3A0x79d5480bd9d57ce6!2sPT.%20Intan%20Pariwara!5e0!3m2!1sen!2sid!4v1710927203173!5m2!1sen!2sid" style="border:0; width: 100%; height: 290px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>                    </div>
