@@ -1824,3 +1824,25 @@ section {
     padding-top: 4px;
   }
 }
+
+/* Style for invalid inputs */
+.is-invalid {
+    border-color: #dc3545 !important; /* Border color red */
+}
+
+/* Style for valid inputs */
+.is-valid {
+    border-color: #28a745 !important; /* Border color green */
+}
+
+/* Style for invalid feedback */
+.invalid-feedback {
+    color: #dc3545; /* Text color red */
+    font-size: 80%; /* Font size smaller */
+}
+
+/* Style for valid feedback */
+.valid-feedback {
+    color: #28a745; /* Text color green */
+    font-size: 80%; /* Font size smaller */
+}

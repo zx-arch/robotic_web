@@ -35,7 +35,7 @@ class BookTranslation extends Model
     }
 
     // Relasi dengan model Translation
-    public function translation()
+    public function translations()
     {
         return $this->belongsTo(Translations::class, 'language_id');
     }

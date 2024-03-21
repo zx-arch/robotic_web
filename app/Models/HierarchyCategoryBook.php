@@ -45,4 +45,9 @@ class HierarchyCategoryBook extends Model
     {
         return $this->hasMany(Translations::class);
     }
+
+    public function bookTranslations()
+    {
+        return $this->hasMany(BookTranslation::class, 'hierarchy_id');
+    }
 }

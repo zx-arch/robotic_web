@@ -48,6 +48,79 @@
     <div id="preloader"></div>
     <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Cek apakah ada session 'valid'
+            if ("{{ session()->has('valid') }}") {
+                // Dapatkan elemen col-xl-4 pertama
+                var firstCol = document.getElementById('courses');
+                
+                // Arahkan pengguna ke posisi elemen pertama tersebut
+                if (firstCol) {
+                    firstCol.scrollIntoView({ behavior: 'smooth' });
+                }
+            }
+
+            if ("{{ session()->has('error_submit_chat') }}") {
+                // Dapatkan elemen col-xl-4 pertama
+                var firstCol = document.getElementById('contact');
+                
+                // Arahkan pengguna ke posisi elemen pertama tersebut
+                if (firstCol) {
+                    firstCol.scrollIntoView({ behavior: 'smooth' });
+                }
+            }
+
+            
+            if ("{{ session()->has('success_submit_chat') }}") {
+                // Dapatkan elemen col-xl-4 pertama
+                var firstCol = document.getElementById('contact');
+                
+                // Arahkan pengguna ke posisi elemen pertama tersebut
+                if (firstCol) {
+                    firstCol.scrollIntoView({ behavior: 'smooth' });
+                }
+            }
+
+            if ("{{ session()->has('error_access') }}") {
+                // Dapatkan elemen col-xl-4 pertama
+                var firstCol = document.getElementById('courses');
+                
+                // Arahkan pengguna ke posisi elemen pertama tersebut
+                if (firstCol) {
+                    firstCol.scrollIntoView({ behavior: 'smooth' });
+                }
+            }
+
+            // Dapatkan elemen-elemen yang diperlukan
+            var levelSelect = document.getElementById('levelSelect');
+            var translationSelect = document.getElementById('translationSelect');
+            var courseForm = document.getElementById('courseForm');
+
+            // Tambahkan event listener untuk setiap perubahan pada input
+            levelSelect.addEventListener('change', checkAllInputsSelected);
+            translationSelect.addEventListener('change', checkAllInputsSelected);
+
+            // Fungsi untuk memeriksa apakah semua input telah dipilih
+            function checkAllInputsSelected() {
+                // Periksa apakah kedua input telah dipilih
+                if (levelSelect.value !== '' && translationSelect.value !== '') {
+                    // Jika ya, kirim formulir secara otomatis
+                    courseForm.submit();
+                }
+            }
+        });
+    </script>
+
+    @php
+        session()->forget('valid');
+        session()->forget('getBook');
+        session()->forget('error_access');
+        session()->forget('request');
+        session()->forget('error_submit_chat');
+        session()->forget('success_submit_chat');
+    @endphp
+    
     <!-- Vendor JS Files -->
     <script src="{{asset('assets/vendor/aos/aos.js')}}"></script>
     <script src="{{asset('assets/vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
