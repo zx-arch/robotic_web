@@ -3,7 +3,7 @@
 
         <div class="section-title">
             <h2>Courses</h2>
-                    {{-- @if (session()->has('valid'))
+                    {{-- @if (session()->has('valid_book'))
                         <img src="{{asset('assets/content_pembelajaran/struktur_pengajaran.png')}}" class="img-fluid mb-4" style="width: 400px;" alt="">
                         <p>
                             Struktur kurikulum pada tiap materi dibagi menjadi 3 kategori yaitu basic, hands-on dan advanced. 
@@ -12,48 +12,29 @@
                         </p>
                     @endif --}}
         </div>
-        @if (session()->has('error_access'))
+        @if (session()->has('error_access_book'))
             <div class="card">
                 <form id="courseForm" action="{{ route('courses.submit') }}" method="post">
                     @csrf
                     <div class="card-header">
                         <div class="row w-75">
                             <div class="col-md-4 mb-2">
-                                <select id="levelSelect" name="level" class="form-control" required>
-                                    <option value="" disabled selected>Pilih Level ..</option>
-                                    <option value="3">Begginer</option>
-                                    <option value="4">Intermediate</option>
-                                    <option value="5">Advanced</option>
-                                </select>
-                            </div>
-                            <div class="col-md-4">
                                 <select id="translationSelect" name="terjemahan" class="form-control" required>
-                                    <option value="" disabled selected>Pilih Terjemahan ..</option>
-                                    <option value="7">English</option>
-                                    <option value="67">Indonesian</option>
+                                    <option value="" disabled selected>Select Version ..</option>
+                                    @foreach (session('getLanguages') as $language)
+                                        <option value="{{$language->language_id}}" {{session()->has('request_input_book') && session('request_input_book')['terjemahan'] == $language->language_id ? 'selected' : ''}}>{{$language->language_name}}</option>
+                                    @endforeach
                                 </select>
                             </div>
                         </div>
+                        <p class="text-danger">{{session('error_access_book')}}</p>
                     </div>
                 </form>
-
-                <div id="w0" class="gridview table-responsive" style="overflow-x: auto;">
-                    <table class="table text-nowrap table-striped table-bordered mb-0">
-                        <tr class="for_pc_tr w-100">
-                            <td class="text-center align-middle th-number">No</td>
-                            <td class="text-center align-middle font-weight-bold td-name">Nama Materi</td>
-                            <td class="text-center align-middle font-weight-bold td-link">Jenis File</td>
-                            <td class="text-center align-middle font-weight-bold td-name">Terjemahan</td>
-                            <td class="text-center align-middle font-weight-bold td-link">Tutorial</td>
-                            <td class="text-center align-middle font-weight-bold td-link">Downloads</td>
-                        </tr>
-                    </table>
-                </div>
 
             </div>
         @endif
 
-        @if (session()->has('valid'))
+        @if (session()->has('valid_book'))
             <div class="row content">
 
                 <div class="card mt-3">
@@ -62,51 +43,56 @@
                         <div class="card-header">
                             <div class="row w-75">
                                 <div class="col-md-4 mb-2">
-                                    <select id="levelSelect" name="level" class="form-control" required>
-                                        <option value="" disabled selected>Pilih Level ..</option>
-                                        <option value="3" {{session()->has('request') && session('request')['level'] == 3 ? 'selected' : ''}}>Begginer</option>
-                                        <option value="4" {{session()->has('request') && session('request')['level'] == 4 ? 'selected' : ''}}>Intermediate</option>
-                                        <option value="5" {{session()->has('request') && session('request')['level'] == 5 ? 'selected' : ''}}>Advanced</option>
-                                    </select>
-                                </div>
-                                <div class="col-md-4">
                                     <select id="translationSelect" name="terjemahan" class="form-control" required>
-                                        <option value="" disabled selected>Pilih Terjemahan ..</option>
-                                        @foreach (session('getLanguage') as $language)
-                                            <option value="{{$language->language_id}}" {{session()->has('request') && session('request')['terjemahan'] == $language->language_id ? 'selected' : ''}}>{{$language->language_name}}</option>
+                                        <option value="" disabled selected>Select Version ..</option>
+                                        @foreach (session('getLanguages') as $language)
+                                            <option value="{{$language->language_id}}">{{$language->language_name}}</option>
                                         @endforeach
                                     </select>
+
                                 </div>
                             </div>
+{{-- @php
+                                            var_dump(session('getLevels'));
+                                        @endphp --}}
                         </div>
                     </form>
 
                     <div id="w0" class="gridview table-responsive" style="overflow-x: auto;">
-                        
+
                         @if (session()->has('getBook'))
                             <table class="table text-nowrap table-striped table-bordered mb-0">
                                 
                                 <tr class="for_pc_tr w-100">
                                     <td class="text-center align-middle th-number">No</td>
                                     <td class="text-center align-middle font-weight-bold td-name">Nama Materi</td>
-                                    <td class="text-center align-middle font-weight-bold td-name">Terjemahan</td>
-                                    <td class="text-center align-middle font-weight-bold td-link">Tutorial</td>
-                                    <td class="text-center align-middle font-weight-bold td-link">Downloads</td>
+                                    <td class="text-center align-middle font-weight-bold td-name">Halaman</td>
+                                    <td class="text-center align-middle font-weight-bold td-link">Download</td>
+                                    <td class="text-center align-middle font-weight-bold td-link">Tutorial Lainnya</td>
                                 </tr>
 
-                                @foreach (json_decode(session('getBook')) as $book)
+                                <p>Version: {{\App\Models\Translations::where('id', session('getBook')[0]->language_id)->first()->language_name}}</p>
+                                <p>Level: {{\App\Models\Levels::where('hierarchy_id', session('request_input_book')['level'])->first()->level_name}}</p>
+
+                                @foreach (session('getBook') as $book)
                                     <tr class="for_pc_tr w-100">
                                         <td>{{$loop->index + 1}}</td>
                                         <td>{{$book->book_title}}</td>
-                                        <td>{{\App\Models\Translations::where('id',$book->language_id)->first()->language_name}}</td>
-                                        <td>youtube</td>
-                                        <td><a href="{{ asset('book/English/'.$book->file) }}">{{$book->file}}</a></td>
+                                        <td>{{$book->pages}}</td>
+                                        <td><a href="{{ asset('book/'.\App\Models\Translations::where('id',$book->language_id)->first()->language_name.'/'.$book->file) }}" download>{{$book->file}}</a></td>
+                                        <td>
+                                            <img src="{{asset('/assets/youtube/icon-youtube-27.jpg')}}" width="65" height="45" class="img-icon" alt="">
+                                            <span><a href="" class="glightbox ms-2">membuat mobil</a></span>
+                                        </td>
                                     </tr>
                                 @endforeach
 
                             </table>
                         @endif
-
+                        
+                        @if (session()->has('not_available_book'))
+                            <p class="text-warning">{{session('not_available_book')}}</p>
+                        @endif
                     </div>
                 </div>
             </div>

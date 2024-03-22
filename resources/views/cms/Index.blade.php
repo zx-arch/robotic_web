@@ -51,7 +51,7 @@
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             // Cek apakah ada session 'valid'
-            if ("{{ session()->has('valid') }}") {
+            if ("{{ session()->has('valid_book') }}") {
                 // Dapatkan elemen col-xl-4 pertama
                 var firstCol = document.getElementById('courses');
                 
@@ -82,7 +82,7 @@
                 }
             }
 
-            if ("{{ session()->has('error_access') }}") {
+            if ("{{ session()->has('error_access_book') }}") {
                 // Dapatkan elemen col-xl-4 pertama
                 var firstCol = document.getElementById('courses');
                 
@@ -98,27 +98,85 @@
             var courseForm = document.getElementById('courseForm');
 
             // Tambahkan event listener untuk setiap perubahan pada input
-            levelSelect.addEventListener('change', checkAllInputsSelected);
-            translationSelect.addEventListener('change', checkAllInputsSelected);
+            // levelSelect.addEventListener('change', checkAllInputsSelected);
+            translationSelect.addEventListener('input', checkAllInputsSelected);
 
             // Fungsi untuk memeriksa apakah semua input telah dipilih
             function checkAllInputsSelected() {
-                // Periksa apakah kedua input telah dipilih
-                if (levelSelect.value !== '' && translationSelect.value !== '') {
-                    // Jika ya, kirim formulir secara otomatis
-                    courseForm.submit();
+
+                if (translationSelect.value != '') {
+                    // Menghapus elemen <select> dengan id 'levelSelect' dan parentnya dengan kelas 'col-md-4'
+                    var existingLevelSelect = document.getElementById('levelSelect');
+
+                    if (existingLevelSelect) {
+                        var colDiv = existingLevelSelect.closest('.col-md-4');
+                        if (colDiv) {
+                            colDiv.parentNode.removeChild(colDiv);
+                        }
+                    }
+
+                    var selectedLanguageId = this.value; // Mengambil nilai id yang dipilih dari translationSelect
+
+                    var levelSelect = document.createElement("select");
+                    levelSelect.id = "levelSelect";
+                    levelSelect.name = "level";
+                    levelSelect.className = "form-control";
+                    levelSelect.required = true;
+
+                    // Buat opsi pertama (disabled dan selected)
+                    var optionDefault = document.createElement("option");
+                    optionDefault.value = "";
+                    optionDefault.text = "Pilih Level ..";
+                    optionDefault.disabled = true;
+                    optionDefault.selected = true;
+                    levelSelect.appendChild(optionDefault);
+                    
+
+                    var getLevels = {!! session('getLevels') !!};
+                    //console.log(getLevels);
+                    getLevels.forEach(function(level) {
+                        // Jika id bahasa dari level ini sama dengan yang dipilih
+                        if (level.language_id == selectedLanguageId) {
+                            // Buat elemen option untuk levelSelect
+                            var option = document.createElement('option');
+                            option.value = level.hierarchy_id;
+                            option.text = level.level_name; // Sesuaikan dengan struktur data Anda
+                            levelSelect.appendChild(option); // Tambahkan opsi ke levelSelect
+                        }
+                    });
+
+                    // Sisipkan elemen select ke dalam elemen div dengan kelas "col-md-4"
+                    var colDiv = document.createElement("div");
+                    colDiv.className = "col-md-4";
+                    colDiv.appendChild(levelSelect);
+
+                    // Sisipkan elemen div dengan kelas "col-md-4" ke dalam elemen div dengan kelas "row w-75"
+                    var rowDiv = document.querySelector('.row.w-75');
+                    rowDiv.appendChild(colDiv);
+
+                    levelSelect.addEventListener('change', function() {
+                        if (this.value !== '') { // Jika levelSelect memiliki nilai yang valid
+                            courseForm.submit(); // Submit formulir
+                        }
+                    });
+
+                    // levelSelect.style.display = 'block';
                 }
+                
             }
+
+
         });
     </script>
 
     @php
-        session()->forget('valid');
+        session()->forget('valid_book');
         session()->forget('getBook');
-        session()->forget('error_access');
-        session()->forget('request');
+        session()->forget('error_access_book');
+        session()->forget('request_input_book');
         session()->forget('error_submit_chat');
         session()->forget('success_submit_chat');
+        session()->forget('not_available_book');
     @endphp
     
     <!-- Vendor JS Files -->

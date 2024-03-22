@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\HierarchyCategoryBook;
 use App\Models\BookTranslation;
+use App\Models\Levels;
 
 class CoursesController extends Controller
 {
@@ -18,16 +19,27 @@ class CoursesController extends Controller
     {
         //dd($jenis_materi);
         if ($jenis_materi == 'block_programming' || $jenis_materi == 'ai_programming' || $jenis_materi == 'python_programming') {
-            $getLanguage = BookTranslation::select('book_translation.language_id', 'translations.language_name')
-                ->leftJoin('translations', 'translations.id', '=', 'book_translation.language_id')
+            // $getLanguage = BookTranslation::select('book_translation.language_id', 'translations.language_name')
+            //     ->leftJoin('translations', 'translations.id', '=', 'book_translation.language_id')
+            //     ->with('translations')
+            //     ->groupBy('book_translation.language_id', 'translations.language_name')
+            //     ->get();
+            $getLevels = Levels::select('levels.*', 'translations.language_name')
+                ->leftJoin('translations', 'translations.id', '=', 'levels.language_id')
                 ->with('translations')
-                ->groupBy('book_translation.language_id', 'translations.language_name')
                 ->get();
-            session(['getLanguage' => $getLanguage]);
-            return redirect()->back()->with('valid', true);
+
+            $getLanguages = Levels::select('levels.language_id', 'translations.language_name')
+                ->leftJoin('translations', 'translations.id', '=', 'levels.language_id')
+                ->with('translations')
+                ->groupBy('levels.language_id', 'translations.language_name')
+                ->get();
+            //dd($getLevels);
+            session(['getLevels' => $getLevels, 'getLanguages' => $getLanguages]);
+            return redirect()->back()->with('valid_book', true);
 
         } else {
-            return redirect()->back()->with('error_access', 'Materi tidak tersedia!');
+            return redirect()->back()->with('error_access_book', 'Materi tidak tersedia!');
         }
     }
 
@@ -36,25 +48,30 @@ class CoursesController extends Controller
         try {
             if ($request->isMethod('POST')) {
                 //dd($request->all());
-                $getBook = HierarchyCategoryBook::select('book_translation.*')
-                    ->leftJoin('book_translation', 'book_translation.hierarchy_id', '=', 'hierarchy_category_book.id')
+                $getIDHierarchy = HierarchyCategoryBook::select('id')
                     ->where('hierarchy_category_book.parent_id', $request->level)
-                    ->where('hierarchy_category_book.language_id', $request->terjemahan)
-                    ->with('bookTranslations') // Menggunakan with() untuk memuat relasi
-                    ->distinct() // Menggunakan distinct() untuk menghindari duplikasi
-                    ->get();
-                //dd($getBook);
-                session(['getBook' => $getBook, 'request' => $request->all()]);
+                    ->where('hierarchy_category_book.language_id', $request->terjemahan)->get()->pluck('id');
 
-                return redirect()->back()->with('valid', true);
+                $getBook = BookTranslation::whereIn('hierarchy_id', $getIDHierarchy)->where('status_id', true)
+                    ->get();
+                //dd($request->all(), $getIDHierarchy, $getBook);
+                if (count($getIDHierarchy) == 0) {
+                    session(['not_available_book' => 'Versi buku saat ini belum tersedia', 'request' => $request->all()]);
+
+                } else {
+                    session(['getBook' => $getBook, 'request_input_book' => $request->all()]);
+                }
+
+                return redirect()->back()->with('valid_book', true);
 
             } else {
-                return redirect()->back()->with('error_access', 'Request data tidak valid!');
+                return redirect()->back()->with('error_access_book', 'Request data tidak valid!');
             }
 
         } catch (\Throwable $e) {
+            session()->forget('valid');
             //dd($e->getMessage());
-            return redirect()->back()->with('error_access', 'Request data tidak valid. ' . $e->getMessage());
+            return redirect()->back()->with('error_access_book', 'Request data tidak valid. ' . $e->getMessage());
         }
     }
 }
