@@ -103,7 +103,7 @@ return new class extends Migration {
                 'language_id' => 7,
                 'status_id' => 1,
                 'hierarchy_id' => 14,
-                'file' => 'Intermediate 05_The World of Gamess.pdf',
+                'file' => 'Intermediate 05_The World of Games.pdf',
                 'pages' => 48,
             ],
             [

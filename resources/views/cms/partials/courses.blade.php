@@ -106,19 +106,30 @@
                                     @endif
                                     
                                 @endif
+                                @php
+    $booksCount = count(session('getBook'));
+    $randomVideos = \App\Models\Tutorials::randomVideo($booksCount);
+@endphp
 
-                                @foreach (session('getBook') as $book)
-                                    <tr class="for_pc_tr w-100">
-                                        <td>{{$loop->index + 1}}</td>
-                                        <td>{{$book->book_title}}</td>
-                                        <td>{{$book->pages}}</td>
-                                        <td><a href="{{ asset('book/'.\App\Models\Translations::where('id',$book->language_id)->first()->language_name.'/'.$book->file) }}" download>{{$book->file}}</a></td>
-                                        <td>
-                                            <img src="{{asset('/assets/youtube/icon-youtube-27.jpg')}}" width="65" height="45" class="img-icon" alt="">
-                                            <span><a href="" class="glightbox ms-2">membuat mobil</a></span>
-                                        </td>
-                                    </tr>
-                                @endforeach
+@foreach (session('getBook') as $key => $book)
+    <tr class="for_pc_tr w-100">
+        <td>{{$loop->index + 1}}</td>
+        <td>{{$book->book_title}}</td>
+        <td>{{$book->pages}}</td>
+        <td><a href="{{ asset('book/'.\App\Models\Translations::where('id',$book->language_id)->first()->language_name.'/'.$book->file) }}" download>{{$book->file}}</a></td>
+        <td>
+            @if ($loop->index < count($randomVideos))
+                <img src="{{$randomVideos[$loop->index]->thumbnail}}" width="65" height="45" class="img-icon" alt="">
+                <span><a href="{{$randomVideos[$loop->index]->url ?? $randomVideos[$loop->index]->path_video }}" class="glightbox ms-2">{{$randomVideos[$loop->index]->video_name}}</a></span>
+            @else
+            <span style="text-align: center;">-</span>
+                <!-- Handle the case where the number of videos is less than the number of books -->
+                <!-- You can display a default image or message -->
+            @endif
+        </td>
+    </tr>
+@endforeach
+
 
                             </table>
                         @endif
