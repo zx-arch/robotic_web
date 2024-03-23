@@ -52,6 +52,70 @@ class Tutorials extends Model
                     'url' => 'https://youtu.be/ExJNoBxY23M?si=1H-s3o2SGKRM0BWI',
                     'status_id' => 5
                 ],
+                [
+                    'video_name' => 'Instalasi Studuino Software #1',
+                    'category' => 'software requirement',
+                    'thumbnail' => url('/assets/youtube/software requirement/Instalasi Studuino Software 1.png'),
+                    'path_video' => url('/assets/youtube/software requirement/Instalasi Studuino Software 1.mp4'),
+                    'url' => 'https://youtu.be/fddwkD2b7FE',
+                    'status_id' => 5
+                ],
+                [
+                    'video_name' => 'Instalasi USB Driver For Windows #2',
+                    'category' => 'software requirement',
+                    'thumbnail' => url('/assets/youtube/software requirement/Instalasi USB Driver For Windows 2.png'),
+                    'path_video' => url('/assets/youtube/software requirement/Installing USB Device Driver _ Windows.mp4'),
+                    'url' => 'https://youtu.be/Re_kEa4Mm6c',
+                    'status_id' => 5
+                ],
+                [
+                    'video_name' => 'Pengenalan Komponen Sensors, LEDs & Buzzers Studuino #3',
+                    'category' => 'software requirement',
+                    'thumbnail' => url('/assets/youtube/software requirement/Pengenalan Komponen Perangkat Studuino 3.png'),
+                    'path_video' => url('/assets/youtube/software requirement/Pengenalan Komponen Perangkat Studuino 3.mp4'),
+                    'url' => 'https://youtu.be/4E3y13Wwvr8',
+                    'status_id' => 5
+                ],
+                [
+                    'video_name' => 'Pengenalan Komponen DCMotors & ServoMotors Studuino #4',
+                    'category' => 'software requirement',
+                    'thumbnail' => url('/assets/youtube/software requirement/Pengenalan Komponen Perangkat Studuino 4.png'),
+                    'path_video' => url('/assets/youtube/software requirement/Pengenalan Komponen Perangkat Studuino 4.mp4'),
+                    'url' => 'https://youtu.be/Ek7VpSqRi3E',
+                    'status_id' => 5
+                ],
+                [
+                    'video_name' => 'Pengenalan Komponen Perangkat Studuino #5',
+                    'category' => 'software requirement',
+                    'thumbnail' => url('/assets/youtube/software requirement/Pengenalan Komponen Perangkat Studuino 5.png'),
+                    'path_video' => url('/assets/youtube/software requirement/Pengenalan Komponen Perangkat Studuino 5.mp4'),
+                    'url' => 'https://youtu.be/qOFV7Nf8w4Y',
+                    'status_id' => 5
+                ],
+                [
+                    'video_name' => 'Pengenalan Komponen Perangkat Studuino #6',
+                    'category' => 'software requirement',
+                    'thumbnail' => url('/assets/youtube/software requirement/Pengenalan Komponen Perangkat LED Studuino 6.png'),
+                    'path_video' => url('/assets/youtube/software requirement/Pengenalan Komponen Perangkat LED Studuino 6.mp4'),
+                    'url' => 'https://youtu.be/qECp7LMA4LU',
+                    'status_id' => 5
+                ],
+                [
+                    'video_name' => 'Mengatur Komponen ON OFF LED #7',
+                    'category' => 'software requirement',
+                    'thumbnail' => url('/assets/youtube/software requirement/Mengatur Komponen ON OFF LED 7.png'),
+                    'path_video' => url('/assets/youtube/software requirement/Mengatur Komponen ON OFF LED 7.mp4'),
+                    'url' => 'https://youtu.be/_JsCFu5hpBw',
+                    'status_id' => 5
+                ],
+                [
+                    'video_name' => 'Mengatur Waktu ON-OFF LED #8',
+                    'category' => 'software requirement',
+                    'thumbnail' => url('/assets/youtube/software requirement/Mengatur Waktu ON-OFF LED 8.png'),
+                    'path_video' => url('/assets/youtube/software requirement/Mengatur Waktu ON-OFF LED 8.mp4'),
+                    'url' => 'https://youtu.be/whuyI3eIz14',
+                    'status_id' => 5
+                ]
             ];
 
             DB::table('tutorials')->insert($data);
@@ -72,6 +136,70 @@ class Tutorials extends Model
                     'url' => 'https://youtu.be/ExJNoBxY23M?si=1H-s3o2SGKRM0BWI',
                     'status_id' => 5
                 ],
+                [
+                    'video_name' => 'Instalasi Studuino Software #1',
+                    'category' => 'software requirement',
+                    'thumbnail' => url('/assets/youtube/software requirement/Instalasi Studuino Software 1.png'),
+                    'path_video' => url('/assets/youtube/software requirement/Instalasi Studuino Software 1.mp4'),
+                    'url' => 'https://youtu.be/fddwkD2b7FE',
+                    'status_id' => 5
+                ],
+                [
+                    'video_name' => 'Instalasi USB Driver For Windows #2',
+                    'category' => 'software requirement',
+                    'thumbnail' => url('/assets/youtube/software requirement/Instalasi USB Driver For Windows 2.png'),
+                    'path_video' => url('/assets/youtube/software requirement/Installing USB Device Driver _ Windows.mp4'),
+                    'url' => 'https://youtu.be/Re_kEa4Mm6c',
+                    'status_id' => 5
+                ],
+                [
+                    'video_name' => 'Pengenalan Komponen Sensors, LEDs & Buzzers Studuino #3',
+                    'category' => 'software requirement',
+                    'thumbnail' => url('/assets/youtube/software requirement/Pengenalan Komponen Perangkat Studuino 3.png'),
+                    'path_video' => url('/assets/youtube/software requirement/Pengenalan Komponen Perangkat Studuino 3.mp4'),
+                    'url' => 'https://youtu.be/4E3y13Wwvr8',
+                    'status_id' => 5
+                ],
+                [
+                    'video_name' => 'Pengenalan Komponen DCMotors & ServoMotors Studuino #4',
+                    'category' => 'software requirement',
+                    'thumbnail' => url('/assets/youtube/software requirement/Pengenalan Komponen Perangkat Studuino 4.png'),
+                    'path_video' => url('/assets/youtube/software requirement/Pengenalan Komponen Perangkat Studuino 4.mp4'),
+                    'url' => 'https://youtu.be/Ek7VpSqRi3E',
+                    'status_id' => 5
+                ],
+                [
+                    'video_name' => 'Pengenalan Komponen Perangkat Studuino #5',
+                    'category' => 'software requirement',
+                    'thumbnail' => url('/assets/youtube/software requirement/Pengenalan Komponen Perangkat Studuino 5.png'),
+                    'path_video' => url('/assets/youtube/software requirement/Pengenalan Komponen Perangkat Studuino 5.mp4'),
+                    'url' => 'https://youtu.be/qOFV7Nf8w4Y',
+                    'status_id' => 5
+                ],
+                [
+                    'video_name' => 'Pengenalan Komponen Perangkat Studuino #6',
+                    'category' => 'software requirement',
+                    'thumbnail' => url('/assets/youtube/software requirement/Pengenalan Komponen Perangkat LED Studuino 6.png'),
+                    'path_video' => url('/assets/youtube/software requirement/Pengenalan Komponen Perangkat LED Studuino 6.mp4'),
+                    'url' => 'https://youtu.be/qECp7LMA4LU',
+                    'status_id' => 5
+                ],
+                [
+                    'video_name' => 'Mengatur Komponen ON OFF LED #7',
+                    'category' => 'software requirement',
+                    'thumbnail' => url('/assets/youtube/software requirement/Mengatur Komponen ON OFF LED 7.png'),
+                    'path_video' => url('/assets/youtube/software requirement/Mengatur Komponen ON OFF LED 7.mp4'),
+                    'url' => 'https://youtu.be/_JsCFu5hpBw',
+                    'status_id' => 5
+                ],
+                [
+                    'video_name' => 'Mengatur Waktu ON-OFF LED #8',
+                    'category' => 'software requirement',
+                    'thumbnail' => url('/assets/youtube/software requirement/Mengatur Waktu ON-OFF LED 8.png'),
+                    'path_video' => url('/assets/youtube/software requirement/Mengatur Waktu ON-OFF LED 8.mp4'),
+                    'url' => 'https://youtu.be/whuyI3eIz14',
+                    'status_id' => 5
+                ]
             ];
 
             Tutorials::insert($data);
