@@ -206,7 +206,7 @@ return new class extends Migration {
                 'pages' => 35,
             ],
             [
-                'book_title' => 'Getting Started With AI_JE',
+                'book_title' => 'Talking to Robots_JE',
                 'language_name' => 'English',
                 'language_id' => 7,
                 'status_id' => 1,

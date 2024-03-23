@@ -12,6 +12,7 @@
                         </p>
                     @endif --}}
         </div>
+
         @if (session()->has('error_access_book'))
             <div class="card">
                 <form id="courseForm" action="{{ route('courses.submit') }}" method="post">
@@ -33,7 +34,9 @@
 
             </div>
         @endif
-
+        {{-- @php
+            var_dump(session('jenis_materi'));
+        @endphp --}}
         @if (session()->has('valid_book'))
             <div class="row content">
 
@@ -41,20 +44,37 @@
                     <form id="courseForm" action="{{ route('courses.submit') }}" method="post">
                         @csrf
                         <div class="card-header">
-                            <div class="row w-75">
-                                <div class="col-md-4 mb-2">
-                                    <select id="translationSelect" name="terjemahan" class="form-control" required>
-                                        <option value="" disabled selected>Select Version ..</option>
-                                        @foreach (session('getLanguages') as $language)
-                                            <option value="{{$language->language_id}}">{{$language->language_name}}</option>
-                                        @endforeach
-                                    </select>
 
+                            @if (!session()->has('getChapter'))
+                                <div class="row w-75">
+                                    <div class="col-md-4 mb-2">
+                                        <select id="translationSelect" name="terjemahan" class="form-control" required>
+                                            <option value="" disabled selected>Select Version ..</option>
+                                            @foreach (session('getLanguages') as $language)
+                                                <option value="{{$language->language_id}}">{{$language->language_name}}</option>
+                                            @endforeach
+                                        </select>
+
+                                    </div>
                                 </div>
-                            </div>
-{{-- @php
-                                            var_dump(session('getLevels'));
-                                        @endphp --}}
+                            
+                            @else
+                                {{-- @php
+                                    var_dump(session('getChapter'));
+                                @endphp --}}
+                                <div class="row w-75">
+                                    <div class="col-md-4 mb-2">
+                                        <select id="translationSelect" name="terjemahan" class="form-control" required>
+                                            <option value="" disabled selected>Select Version ..</option>
+                                            @foreach (session('getLanguages') as $language)
+                                                <option value="{{$language->language_id}}">{{$language->language_name}}</option>
+                                            @endforeach
+                                        </select>
+                                        <input type="hidden" name="jenis_materi" value="{{session('jenis_materi')}}">
+                                    </div>
+                                </div>
+
+                            @endif
                         </div>
                     </form>
 
@@ -71,8 +91,21 @@
                                     <td class="text-center align-middle font-weight-bold td-link">Tutorial Lainnya</td>
                                 </tr>
 
-                                <p>Version: {{\App\Models\Translations::where('id', session('getBook')[0]->language_id)->first()->language_name}}</p>
-                                <p>Level: {{\App\Models\Levels::where('hierarchy_id', session('request_input_book')['level'])->first()->level_name}}</p>
+                                @if ((session()->has('request_input_book')))
+                                    <p>Version: {{ \App\Models\Translations::where('id', session('getBook')[0]->language_id)->first()->language_name }}</p>
+                                    
+                                    @php
+                                        $level = session('request_input_book')['level'] ?? null;
+                                        $chapter = session('request_input_book')['chapter'] ?? null;
+                                    @endphp
+
+                                    @if ($level != null)
+                                        <p>Level: {{ \App\Models\HierarchyCategoryBook::where('id', $level)->first()->name }}</p>
+                                    @elseif ($chapter != null)
+                                        <p>Chapter: {{ \App\Models\HierarchyCategoryBook::where('id', $chapter)->first()->name }}</p>
+                                    @endif
+                                    
+                                @endif
 
                                 @foreach (session('getBook') as $book)
                                     <tr class="for_pc_tr w-100">
@@ -89,7 +122,7 @@
 
                             </table>
                         @endif
-                        
+
                         @if (session()->has('not_available_book'))
                             <p class="text-warning">{{session('not_available_book')}}</p>
                         @endif
@@ -134,4 +167,5 @@
 
     </div>
 </section>
+
 

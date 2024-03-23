@@ -96,6 +96,7 @@
             var levelSelect = document.getElementById('levelSelect');
             var translationSelect = document.getElementById('translationSelect');
             var courseForm = document.getElementById('courseForm');
+            var chapterSelect = document.getElementById('chapterSelect');
 
             // Tambahkan event listener untuk setiap perubahan pada input
             // levelSelect.addEventListener('change', checkAllInputsSelected);
@@ -105,66 +106,128 @@
             function checkAllInputsSelected() {
 
                 if (translationSelect.value != '') {
-                    // Menghapus elemen <select> dengan id 'levelSelect' dan parentnya dengan kelas 'col-md-4'
-                    var existingLevelSelect = document.getElementById('levelSelect');
 
-                    if (existingLevelSelect) {
-                        var colDiv = existingLevelSelect.closest('.col-md-4');
-                        if (colDiv) {
-                            colDiv.parentNode.removeChild(colDiv);
+                    if ("{{ !session()->has('getChapter') || session()->has('jenis_materi') != null && session('jenis_materi') != 'ai_programming' }}") {
+                        // Menghapus elemen <select> dengan id 'levelSelect' dan parentnya dengan kelas 'col-md-4'
+                        var existingLevelSelect = document.getElementById('levelSelect');
+
+                        if (existingLevelSelect) {
+                            var colDiv = existingLevelSelect.closest('.col-md-4');
+                            if (colDiv) {
+                                colDiv.parentNode.removeChild(colDiv);
+                            }
                         }
+
+                        var selectedLanguageId = this.value; // Mengambil nilai id yang dipilih dari translationSelect
+
+                        var levelSelect = document.createElement("select");
+                        levelSelect.id = "levelSelect";
+                        levelSelect.name = "level";
+                        levelSelect.className = "form-control";
+                        levelSelect.required = true;
+
+                        // Buat opsi pertama (disabled dan selected)
+                        var optionDefault = document.createElement("option");
+                        optionDefault.value = "";
+                        optionDefault.text = "Pilih Level ..";
+                        optionDefault.disabled = true;
+                        optionDefault.selected = true;
+                        levelSelect.appendChild(optionDefault);
+                        
+
+                        var getLevels = {!! session('getLevels') !!};
+                        var count = 0;
+                        //console.log(getLevels);
+                        getLevels.forEach(function(level) {
+                            // Jika id bahasa dari level ini sama dengan yang dipilih
+                            if (level.language_id == selectedLanguageId) {
+                                // Buat elemen option untuk levelSelect
+                                var option = document.createElement('option');
+                                option.value = level.id;
+                                option.text = level.name; // Sesuaikan dengan struktur data Anda
+                                levelSelect.appendChild(option); // Tambahkan opsi ke levelSelect
+                            }
+                            count++;
+                        });
+
+                        // Sisipkan elemen select ke dalam elemen div dengan kelas "col-md-4"
+                        var colDiv = document.createElement("div");
+                        colDiv.className = "col-md-4";
+                        colDiv.appendChild(levelSelect);
+
+                        // Sisipkan elemen div dengan kelas "col-md-4" ke dalam elemen div dengan kelas "row w-75"
+                        var rowDiv = document.querySelector('.row.w-75');
+                        rowDiv.appendChild(colDiv);
+
+                        levelSelect.addEventListener('change', function() {
+                            if (this.value !== '') { // Jika levelSelect memiliki nilai yang valid
+                                courseForm.submit(); // Submit formulir
+                            }
+                        });
+                    } else {
+                                                    courseForm.submit();
+
+                        // // Menghapus elemen <select> dengan id 'CevelSelect' dan parentnya dengan kelas 'col-md-4'
+                        // var existingChapterSelect = document.getElementById('chapterSelect');
+
+                        // if (existingChapterSelect) {
+                        //     var colDiv = existingChapterSelect.closest('.col-md-4');
+                        //     if (colDiv) {
+                        //         colDiv.parentNode.removeChild(colDiv);
+                        //     }
+                        // }
+
+                        // var selectedLanguageId = this.value; // Mengambil nilai id yang dipilih dari translationSelect
+                        // console.log(selectedLanguageId);
+                        // var chapterSelect = document.createElement("select");
+                        // chapterSelect.id = "chapterSelect";
+                        // chapterSelect.name = "chapter";
+                        // chapterSelect.className = "form-control";
+                        // chapterSelect.required = true;
+
+                        // // Buat opsi pertama (disabled dan selected)
+                        // var optionDefault = document.createElement("option");
+                        // optionDefault.value = "";
+                        // optionDefault.text = "Select Chapter ..";
+                        // optionDefault.disabled = true;
+                        // optionDefault.selected = true;
+                        // chapterSelect.appendChild(optionDefault);
+                        
+                        // var getChapter = {!! session('getChapter') !!};
+                        // console.log(getChapter);
+                        // getChapter.forEach(function(chapter) {
+                        //     // Jika id bahasa dari chapter ini sama dengan yang dipilih
+                        //     if (chapter.language_id == selectedLanguageId) {
+                        //         // Buat elemen option untuk ChapterSelect
+                        //         var option = document.createElement('option');
+                        //         option.value = chapter.hierarchy_id;
+                        //         option.text = chapter.name; // Sesuaikan dengan struktur data Anda
+                        //         chapterSelect.appendChild(option); // Tambahkan opsi ke chapterSelect
+                        //     }
+                        // });
+
+                        // // Sisipkan elemen select ke dalam elemen div dengan kelas "col-md-4"
+                        // var colDiv = document.createElement("div");
+                        // colDiv.className = "col-md-4";
+                        // colDiv.appendChild(chapterSelect);
+
+                        // // Sisipkan elemen div dengan kelas "col-md-4" ke dalam elemen div dengan kelas "row w-75"
+                        // var rowDiv = document.querySelector('.row.w-75');
+                        // rowDiv.appendChild(colDiv);
+
+                        // chapterSelect.addEventListener('change', function() {
+                        //     if (this.value !== '') { // Jika chapterSelect memiliki nilai yang valid
+                        //         courseForm.submit(); // Submit formulir
+                        //     }
+                        // });
                     }
 
-                    var selectedLanguageId = this.value; // Mengambil nilai id yang dipilih dari translationSelect
-
-                    var levelSelect = document.createElement("select");
-                    levelSelect.id = "levelSelect";
-                    levelSelect.name = "level";
-                    levelSelect.className = "form-control";
-                    levelSelect.required = true;
-
-                    // Buat opsi pertama (disabled dan selected)
-                    var optionDefault = document.createElement("option");
-                    optionDefault.value = "";
-                    optionDefault.text = "Pilih Level ..";
-                    optionDefault.disabled = true;
-                    optionDefault.selected = true;
-                    levelSelect.appendChild(optionDefault);
-                    
-
-                    var getLevels = {!! session('getLevels') !!};
-                    //console.log(getLevels);
-                    getLevels.forEach(function(level) {
-                        // Jika id bahasa dari level ini sama dengan yang dipilih
-                        if (level.language_id == selectedLanguageId) {
-                            // Buat elemen option untuk levelSelect
-                            var option = document.createElement('option');
-                            option.value = level.hierarchy_id;
-                            option.text = level.level_name; // Sesuaikan dengan struktur data Anda
-                            levelSelect.appendChild(option); // Tambahkan opsi ke levelSelect
-                        }
-                    });
-
-                    // Sisipkan elemen select ke dalam elemen div dengan kelas "col-md-4"
-                    var colDiv = document.createElement("div");
-                    colDiv.className = "col-md-4";
-                    colDiv.appendChild(levelSelect);
-
-                    // Sisipkan elemen div dengan kelas "col-md-4" ke dalam elemen div dengan kelas "row w-75"
-                    var rowDiv = document.querySelector('.row.w-75');
-                    rowDiv.appendChild(colDiv);
-
-                    levelSelect.addEventListener('change', function() {
-                        if (this.value !== '') { // Jika levelSelect memiliki nilai yang valid
-                            courseForm.submit(); // Submit formulir
-                        }
-                    });
 
                     // levelSelect.style.display = 'block';
-                }
+                } 
+                
                 
             }
-
 
         });
     </script>
