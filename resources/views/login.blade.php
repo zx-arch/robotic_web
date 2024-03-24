@@ -26,16 +26,30 @@
 
                     <div class="card">
                         <div class="card-body">
-                            <form action="#" method="POST">
+
+                            <form action="{{route('submit_form.login')}}" method="POST">
                                 @csrf
+
                                 <div class="mb-3">
-                                    <label for="nama" class="form-label">Email</label>
-                                    <input type="email" name="email" class="form-control" placeholder="Email" required>
+                                    <label for="nama" class="form-label">Username atau Email</label>
+                                    <input id="username_or_email" type="text" name="username_or_email" value="{{ old('username_or_email') }}" required autofocus>
+                                    @error('username_or_email')
+                                        <span role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
                                 </div>
+
                                 <div class="mb-3">
                                     <label for="password" class="form-label">Password</label>
                                     <input type="password" name="password" class="form-control" placeholder="Password" required>
+                                    @error('password')
+                                        <span role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
                                 </div>
+
                                 <button type="submit" name="login" class="btn btn-primary">Login</button>
                                 <button type="submit" name="register" class="btn btn-success ms-1">Register</button>
                             </form>

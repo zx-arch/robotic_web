@@ -26,6 +26,9 @@ return new class extends Migration {
             ['name' => 'Disable Tutorial', 'description' => 'Disabled tutorial'],
             ['name' => 'Draft', 'description' => 'Draft'],
             ['name' => 'Enable Static Pages', 'description' => 'Khusus memperbarui komponen web'],
+            ['name' => 'Enable', 'description' => 'Authentikasi Login active'],
+            ['name' => 'Disable', 'description' => 'Non-active Authentikasi User Login'],
+            ['name' => 'Pending', 'description' => 'Status user baru mendaftar'],
         ];
 
         DB::table('master_status')->insert($data);
