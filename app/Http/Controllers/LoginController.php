@@ -16,7 +16,11 @@ class LoginController extends Controller
 
     public function index()
     {
-        return view('login', $this->data);
+        if (Auth::check()) {
+            return redirect()->route('home_dashboard');
+        } else {
+            return view('login', $this->data);
+        }
     }
 
     public function login(Request $request)

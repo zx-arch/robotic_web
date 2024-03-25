@@ -18,11 +18,17 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
+        'username',
         'email',
         'password',
+        'status',
     ];
+    // protected static function boot()
+    // {
+    //     parent::boot();
 
+    //     static::addGlobalScope(new ExcludeAdminScope);
+    // }
     /**
      * The attributes that should be hidden for serialization.
      *

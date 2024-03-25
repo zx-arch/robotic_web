@@ -7,6 +7,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MaterialsController;
 use App\Http\Controllers\CoursesController;
 use App\Http\Controllers\Admin\DashboardAdmin;
+use App\Http\Controllers\Admin\DaftarPengguna;
 use App\Http\Controllers\Pengurus\DashboardPengurus;
 use App\Http\Controllers\user\Dashboarduser;
 
@@ -32,19 +33,23 @@ Route::post('/dashboard/chat/submit', [DashboardController::class, 'submitChat']
 
 Route::post('/login', [LoginController::class, 'login'])->name('submit_form.login');
 
+// Tambahkan rute lain untuk admin di sini
 Route::middleware(['auth.login', 'admin.auth'])->group(function () {
     Route::get('/admin', [DashboardAdmin::class, 'index'])->name('admin.dashboard');
-    // Tambahkan rute lain untuk admin di sini
+    Route::get('/admin/daftar_pengguna', [DaftarPengguna::class, 'index'])->name('daftar_pengguna.index');
+    Route::get('/admin/daftar_pengguna/delete/{user_id}', [DaftarPengguna::class, 'delete'])->name('daftar_pengguna.delete');
 });
 
+
+// Tambahkan rute lain untuk admin di sini
 Route::middleware(['auth.login', 'pengurus.auth'])->group(function () {
     Route::get('/pengurus', [DashboardPengurus::class, 'index'])->name('pengurus.dashboard');
-    // Tambahkan rute lain untuk admin di sini
 });
 
+
+// Tambahkan rute lain untuk admin di sini
 Route::middleware(['auth.login', 'user.auth'])->group(function () {
     Route::get('/user', [DashboardUser::class, 'index'])->name('user.dashboard');
-    // Tambahkan rute lain untuk admin di sini
 });
 
-Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
+Route::post('/logout', [LoginController::class, 'logout'])->name('logout');

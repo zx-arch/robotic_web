@@ -38,6 +38,11 @@
                         <i class="nav-icon fas fa-tachometer-alt {{isset($currentAdminMenu) && $currentAdminMenu == 'dashboard' ? 'text-white' : ''}}"></i>&nbsp;<p>Dashboard</p>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="{{route('daftar_pengguna.index')}}" class="nav-link {{isset($currentAdminMenu) && $currentAdminMenu == 'users' ? 'active' : ''}}">
+                        <i class="nav-icon fas fa-users {{isset($currentAdminMenu) && $currentAdminMenu == 'users' ? 'text-white' : ''}}"></i>&nbsp;<p>Users</p>
+                    </a>
+                </li>
             </ul>
             {{-- <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                 data-accordion="false">
