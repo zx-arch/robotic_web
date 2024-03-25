@@ -50,4 +50,15 @@ class LoginController extends Controller
         // Jika autentikasi gagal, kembalikan pengguna ke halaman login dengan pesan error
         return redirect()->route('form.login')->withErrors(['message' => 'Username atau password salah']);
     }
+
+    public function logout()
+    {
+        Auth::logout();
+
+        session()->invalidate();
+
+        session()->regenerateToken();
+
+        return redirect('/');
+    }
 }

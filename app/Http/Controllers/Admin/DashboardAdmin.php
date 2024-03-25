@@ -7,8 +7,13 @@ use Illuminate\Http\Request;
 
 class DashboardAdmin extends Controller
 {
+    private $data;
+    public function __construct()
+    {
+        $this->data['currentAdminMenu'] = 'dashboard';
+    }
     public function index()
     {
-        dd('OK!');
+        return view('admin.dashboard', $this->data);
     }
 }

@@ -46,3 +46,5 @@ Route::middleware(['auth.login', 'user.auth'])->group(function () {
     Route::get('/user', [DashboardUser::class, 'index'])->name('user.dashboard');
     // Tambahkan rute lain untuk admin di sini
 });
+
+Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
