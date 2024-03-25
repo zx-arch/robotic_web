@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>{{isset($currentAdminMenu) ? $currentAdminMenu . ' Admin' : 'Admin'}}</title>
+    <title>{{isset($currentTitle) ? $currentTitle : 'Admin'}}</title>
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
@@ -20,7 +20,30 @@
     <link rel="stylesheet" href="{{ asset('plugins/daterangepicker/daterangepicker.css') }}">
     <link rel="stylesheet" href="{{ asset('plugins/summernote/summernote-bs4.css') }}">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-    
+    <style>
+        /* Style for invalid inputs */
+.is-invalid {
+    border-color: #dc3545 !important; /* Border color red */
+}
+
+/* Style for valid inputs */
+.is-valid {
+    border-color: #28a745 !important; /* Border color green */
+}
+
+/* Style for invalid feedback */
+.invalid-feedback {
+    color: #dc3545; /* Text color red */
+    font-size: 80%; /* Font size smaller */
+}
+
+/* Style for valid feedback */
+.valid-feedback {
+    color: #28a745; /* Text color green */
+    font-size: 80%; /* Font size smaller */
+}
+
+    </style>
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 </head>
 

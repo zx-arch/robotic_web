@@ -53,6 +53,10 @@
                         
             <div class="card mt-3">
 
+                <div class="card-header">
+                    <a href="{{route('daftar_pengguna.add')}}" class="btn btn-success">Add User</a>
+                </div>
+
                 <div class="card-body p-0">
                     <div id="w0" class="gridview table-responsive">
                         <table class="table text-nowrap table-striped table-bordered mb-0">
@@ -93,7 +97,7 @@
                                     <td><input type="text" class="form-control" name="UserSearch[email]" value=""></td>
                                     <td>
                                         <select id="usersearch-status" class="form-control" name="UserSearch[status]">
-                                            <option value="" disabled></option>
+                                            <option value="" disabled selected></option>
                                             <option value="active">Active</option>
                                             <option value="inactive">Not Active</option>
                                         </select>
@@ -114,7 +118,7 @@
                             <tbody>
                                 @forelse ($users as $user)
                                     <tr data-key="33542">
-                                        <td>{{$user->id}}</td>
+                                        <td>{{$loop->index += 1;}}</td>
                                         <td>{{$user->username}}</td>
                                         <td><a href="mailto:{{$user->email}}">{{$user->email}}</a></td>
                                         <td>{{$user->status}}</td>

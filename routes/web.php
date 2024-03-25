@@ -37,7 +37,11 @@ Route::post('/login', [LoginController::class, 'login'])->name('submit_form.logi
 Route::middleware(['auth.login', 'admin.auth'])->group(function () {
     Route::get('/admin', [DashboardAdmin::class, 'index'])->name('admin.dashboard');
     Route::get('/admin/daftar_pengguna', [DaftarPengguna::class, 'index'])->name('daftar_pengguna.index');
+    Route::get('/admin/daftar_pengguna/add', [DaftarPengguna::class, 'add'])->name('daftar_pengguna.add');
     Route::get('/admin/daftar_pengguna/delete/{user_id}', [DaftarPengguna::class, 'delete'])->name('daftar_pengguna.delete');
+    Route::post('/admin/save-add-user', [DaftarPengguna::class, 'save'])->name('daftar_pengguna.save_add_user');
+
+
 });
 
 

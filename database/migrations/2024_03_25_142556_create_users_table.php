@@ -18,10 +18,11 @@ return new class extends Migration {
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->enum('role', ['pengurus', 'admin', 'user'])->default('user')->nullable();
-            $table->enum('status', ['active', 'inactive'])->default('inactive')->nullable();
+            $table->enum('status', ['active', 'inactive', 'deleted'])->default('inactive')->nullable();
             $table->rememberToken();
             $table->dateTime('last_login')->nullable();
             $table->timestamps();
+            $table->softDeletes(); // Soft delete column
         });
     }
 

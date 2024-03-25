@@ -12,6 +12,7 @@ class DashboardAdmin extends Controller
     public function __construct()
     {
         $this->data['currentAdminMenu'] = 'dashboard';
+        $this->data['currentTitle'] = 'Dashboard';
     }
     public function index()
     {
