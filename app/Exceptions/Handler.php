@@ -17,7 +17,15 @@ class Handler extends ExceptionHandler
         'password',
         'password_confirmation',
     ];
+    public function render($request, Throwable $exception)
+    {
+        // Mengarahkan semua jenis Throwable ke halaman error kustom
+        return response()->view('errors.error', ['error' => $exception]);
 
+        // Anda juga bisa menyesuaikan kode di atas sesuai kebutuhan,
+        // misalnya menentukan kode status response tertentu seperti 404,
+        // atau menambahkan penanganan khusus untuk beberapa jenis Throwable.
+    }
     /**
      * Register the exception handling callbacks for the application.
      */

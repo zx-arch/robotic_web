@@ -32,12 +32,7 @@
 
                                 <div class="mb-3">
                                     <label for="nama" class="form-label">Username atau Email</label>
-                                    <input id="username_or_email" type="text" name="username_or_email" value="{{ old('username_or_email') }}" required autofocus>
-                                    @error('username_or_email')
-                                        <span role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
+                                    <input id="username_or_email" type="text" class="form-control" name="username_or_email" value="{{ old('username_or_email') }}" required autofocus>
                                 </div>
 
                                 <div class="mb-3">
@@ -53,6 +48,11 @@
                                 <button type="submit" name="login" class="btn btn-primary">Login</button>
                                 <button type="submit" name="register" class="btn btn-success ms-1">Register</button>
                             </form>
+                            @error('message')
+                                <span role="alert">
+                                    <strong class="text-warning">{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
                     </div>
                     

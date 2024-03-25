@@ -29,10 +29,11 @@ class Kernel extends HttpKernel
      * @var array<string, array<int, class-string|string>>
      */
     protected $routeMiddleware = [
-        // lainnya
-        'admin' => \App\Http\Middleware\AdminMiddleware::class,
-        'pengurus' => \App\Http\Middleware\PengurusMiddleware::class,
-        'user' => \App\Http\Middleware\UserMiddleware::class,
+        // lainnya...
+        'auth.login' => \App\Http\Middleware\AuthLogin::class,
+        'admin.auth' => \App\Http\Middleware\AdminAuthentication::class,
+        'pengurus.auth' => \App\Http\Middleware\PengurusAuthentication::class,
+        'user.auth' => \App\Http\Middleware\UserAuthentication::class,
     ];
 
     protected $middlewareGroups = [
