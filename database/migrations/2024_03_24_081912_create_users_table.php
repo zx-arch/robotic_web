@@ -20,6 +20,7 @@ return new class extends Migration {
             $table->enum('role', ['pengurus', 'admin', 'user'])->default('user')->nullable();
             $table->enum('status', ['active', 'inactive'])->default('inactive')->nullable();
             $table->rememberToken();
+            $table->dateTime('last_login')->nullable();
             $table->timestamps();
         });
     }

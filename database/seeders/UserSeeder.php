@@ -30,6 +30,14 @@ class UserSeeder extends Seeder
             'status' => 'active',
         ]);
 
+        DB::table('users')->insert([
+            'username' => 'TestUserIP',
+            'email' => 'testinguser@gmail.com',
+            'password' => Hash::make('@IP_testing_user'),
+            'role' => 'user',
+            'status' => 'active',
+        ]);
+
         DB::table('users')->update([
             'created_at' => now(),
             'updated_at' => now(),

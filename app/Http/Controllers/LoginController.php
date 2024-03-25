@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 
 class LoginController extends Controller
 {
@@ -38,12 +39,27 @@ class LoginController extends Controller
         ) {
             // Jika autentikasi berhasil, arahkan pengguna sesuai peran
             if (Auth::user()->role == 'admin') {
+
+                User::where('id', Auth::user()->id)->update([
+                    'last_login' => now(),
+                ]);
+
                 return redirect()->route('admin.dashboard');
 
             } elseif (Auth::user()->role == 'pengurus') {
+
+                User::where('id', Auth::user()->id)->update([
+                    'last_login' => now(),
+                ]);
+
                 return redirect()->route('pengurus.dashboard');
 
             } elseif (Auth::user()->role == 'user') {
+
+                User::where('id', Auth::user()->id)->update([
+                    'last_login' => now(),
+                ]);
+
                 return redirect()->route('user.dashboard');
 
             } else {
