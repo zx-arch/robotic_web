@@ -46,6 +46,94 @@ class DaftarPengguna extends Controller
         }
         return view('Admin.DaftarPengguna.index', $this->data, compact('users', 'itemsPerPage'));
     }
+    public function search(Request $request)
+    {
+        // Mendapatkan data pencarian dari request
+        $searchData = $request->input('search');
+        // Lakukan sesuatu dengan data pencarian, contoh: mencari data di database
+        $username = $searchData['username'] ?? null;
+        $email = $searchData['email'] ?? null;
+        $status = $searchData['status'] ?? null;
+        $created_at = $searchData['created_at'] ?? null;
+        $last_login = $searchData['last_login'] ?? null;
+
+        // Misalnya, Anda ingin mencari data user berdasarkan username, email, status, created_at, atau last_login
+        $users = User::query()->where('role', '!=', 'admin')->withTrashed();
+
+        if ($status !== null || $last_login !== null && ($username !== null || $email !== null || $created_at !== null)) {
+            // Menggunakan where untuk menambahkan kondisi pencarian tambahan
+            $users->where('status', $status);
+
+            if ($username !== null) {
+                $users->where('username', 'like', "$username%");
+            }
+
+            if ($email !== null) {
+                $users->where('email', 'like', "$email%");
+            }
+
+            if ($created_at !== null) {
+                $users->where('created_at', 'like', "$created_at%");
+            }
+
+            if ($last_login !== null) {
+                $users->where('last_login', 'like', "$last_login%");
+            }
+
+        } elseif ($username !== null || $status !== null || $email !== null || $created_at !== null || $last_login !== null) {
+            $users->where(function ($query) use ($username, $status, $email, $created_at, $last_login) {
+                if ($username !== null) {
+                    $query->where('username', 'like', "$username%");
+                }
+
+                if ($status !== null) {
+                    $query->orWhere('status', $status);
+                }
+
+                if ($email !== null) {
+                    $query->orWhere('email', 'like', "$email%");
+                }
+
+                if ($created_at !== null) {
+                    $query->orWhere('created_at', 'like', "$created_at%");
+                }
+
+                if ($last_login !== null) {
+                    $query->orWhere('last_login', 'like', "$last_login%");
+                }
+            });
+        }
+
+
+
+        $totalUsers = $users->count();
+
+        // Menentukan jumlah item per halaman
+        $itemsPerPage = 15;
+
+        // Menentukan jumlah halaman maksimum untuk semua data
+        $totalPagesAll = ceil($totalUsers / $itemsPerPage);
+        $users = $users->paginate($itemsPerPage);
+
+        // Mendapatkan URI lengkap dari request
+        $fullUri = $request->getRequestUri();
+
+        if ($totalPagesAll >= 15) {
+            $totalPages = 15;
+        }
+
+        $users->setPath($fullUri);
+
+        if ($users->count() > 15) {
+            $users = $users->paginate($itemsPerPage);
+            //dd($users);
+            if ($users->currentPage() > $users->lastPage()) {
+                return redirect($users->url($users->lastPage()));
+            }
+        }
+        return view('Admin.DaftarPengguna.index', $this->data, compact('users', 'searchData', 'itemsPerPage'));
+
+    }
 
     public function add()
     {

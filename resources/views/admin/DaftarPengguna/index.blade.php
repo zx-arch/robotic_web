@@ -138,29 +138,32 @@
                                     </th>
                                     <th class="action-column">&nbsp;</th>
                                 </tr>
-                                <tr id="w0-filters" class="filters">
-                                    <td><input type="text" class="form-control" name="UserSearch[id]" value=""></td>
-                                    <td><input type="text" class="form-control" name="UserSearch[username]" value=""></td>
-                                    <td><input type="text" class="form-control" name="UserSearch[email]" value=""></td>
-                                    <td>
-                                        <select id="usersearch-status" class="form-control" name="UserSearch[status]">
-                                            <option value="" disabled selected></option>
-                                            <option value="active">Active</option>
-                                            <option value="inactive">Not Active</option>
-                                        </select>
-                                    </td>
-                                    <td>
-                                        <div id="usersearch-created_at-kvdate" class="input-group date">
-                                            <input type="date" id="usersearch-created_at" class="form-control" name="UserSearch[created_at]" max="<?php echo date('Y-m-d'); ?>">
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div id="usersearch-logged_at-kvdate" class="input-group date">
-                                            <input type="date" id="usersearch-logged_at" class="form-control" name="UserSearch[logged_at]" max="<?php echo date('Y-m-d'); ?>">
-                                        </div>
-                                    </td>
-                                    <td>&nbsp;</td>
-                                </tr>
+                                <form action="{{route('daftar_pengguna.search')}}" id="searchForm" method="get">
+                                    @csrf
+                                    <tr id="w0-filters" class="filters">
+                                        <td><input type="text" class="form-control" name="search[id]" value=""></td>
+                                        <td><input type="text" class="form-control" name="search[username]" onkeypress="handleKeyPress(event)" value="{{(isset($searchData['username'])) ? $searchData['username'] : ''}}"></td>
+                                        <td><input type="text" class="form-control" name="search[email]" onkeypress="handleKeyPress(event)" value="{{(isset($searchData['email'])) ? $searchData['email'] : ''}}"></td>
+                                        <td>
+                                            <select id="search-status" class="form-control" name="search[status]" oninput="this.form.submit()">
+                                                <option value="" disabled {{(!isset($searchData['status']) ? 'selected' : '')}}></option>
+                                                <option value="active" {{(isset($searchData['status']) && $searchData['status'] == 'active') ? 'selected' : ''}}>Active</option>
+                                                <option value="inactive" {{(isset($searchData['status']) && $searchData['status'] == 'inactive') ? 'selected' : ''}}>InActive</option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <div id="search-created_at-kvdate" class="input-group date">
+                                                <input type="date" id="search-created_at" class="form-control" oninput="this.form.submit()" name="search[created_at]" max="<?php echo date('Y-m-d'); ?>" value="{{(isset($searchData['created_at'])) ? $searchData['created_at'] : ''}}">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div id="search-logged_at-kvdate" class="input-group date">
+                                                <input type="date" id="search-logged_at" class="form-control" oninput="this.form.submit()" name="search[last_login]" max="<?php echo date('Y-m-d'); ?>" value="{{(isset($searchData['last_login'])) ? $searchData['last_login'] : ''}}">
+                                            </div>
+                                        </td>
+                                        <td>&nbsp;</td>
+                                    </tr>
+                                </form>
                             </thead>
                             <tbody>
                                 @forelse ($users as $user)
@@ -185,7 +188,7 @@
                                         
                                     </tr>
                                 @empty
-                                    <p>No records found!</p>
+                                    <p class="ml-2 mt-3 text-danger">Pengguna belum tersedia</p>
                                 @endforelse
                             </tbody>
                         </table>
@@ -357,6 +360,16 @@
             timer: 3000,
             showConfirmButton: false
         });
+    }
+
+    function handleKeyPress(event) {
+        // Periksa apakah tombol yang ditekan adalah tombol "Enter" (kode 13)
+        if (event.keyCode === 13) {
+            // Hentikan perilaku bawaan dari tombol "Enter" (yang akan mengirimkan formulir)
+            event.preventDefault();
+            // Submit formulir secara manual
+            document.getElementById('searchForm').submit();
+        }
     }
 
     let successMessage = '{{ session('success') }}';
