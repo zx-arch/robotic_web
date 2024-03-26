@@ -40,8 +40,11 @@ Route::middleware(['auth.login', 'admin.auth'])->group(function () {
     Route::get('/admin/daftar_pengguna/add', [DaftarPengguna::class, 'add'])->name('daftar_pengguna.add');
     Route::get('/admin/daftar_pengguna/delete/{user_id}', [DaftarPengguna::class, 'delete'])->name('daftar_pengguna.delete');
     Route::post('/admin/save-add-user', [DaftarPengguna::class, 'save'])->name('daftar_pengguna.save_add_user');
-
-
+    Route::get('/admin/daftar_pengguna/update/{user_id}', [DaftarPengguna::class, 'update'])->name('daftar_pengguna.update');
+    Route::put('/admin/save-update-pengguna/user_id/{user_id}', [DaftarPengguna::class, 'saveUpdate'])->name('daftar_pengguna.save_update');
+    Route::get('/admin/update-password/user_id/{user_id}', [DaftarPengguna::class, 'updatePassword'])->name('daftar_pengguna.update_password');
+    Route::get('/admin/daftar_pengguna/view/{user_id}', [DaftarPengguna::class, 'view'])->name('daftar_pengguna.view');
+    Route::get('/admin/daftar_pengguna/restore/{user_id}', [DaftarPengguna::class, 'restore'])->name('daftar_pengguna.restore');
 });
 
 

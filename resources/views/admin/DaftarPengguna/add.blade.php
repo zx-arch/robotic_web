@@ -62,13 +62,14 @@
                             <button type="submit" id="buttonSubmit" class="btn btn-primary">Submit</button>
 
                         </form>
+                        
                         @if (session()->has('success_submit_save'))
-                                <p class="text-success">{{session('success_submit_save')}}</p>
-                            @endif
+                            <p class="text-success">{{session('success_submit_save')}}</p>
+                        @endif
 
-                            @if (session()->has('error_submit_save'))
-                                <p class="text-danger">{{session('error_submit_save')}}</p>
-                            @endif
+                        @if (session()->has('error_submit_save'))
+                            <p class="text-danger">{{session('error_submit_save')}}</p>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -79,6 +80,7 @@
 @endsection
 
 <script>
+    
     document.addEventListener("DOMContentLoaded", function() {
         const form = document.getElementById('addDaftarPenggunaForm');
         const username = document.getElementById('username');
@@ -126,12 +128,13 @@
             } else if (input === password && !validatePassword(input.value)) {
                 input.classList.add('is-invalid');
                 input.classList.remove('is-valid');
-                input.nextElementSibling.textContent = 'Password should have at least one uppercase letter, one lowercase letter, one number, one special character, and be at least 8 characters long';
+                input.nextElementSibling.textContent = 'Password should have at least 8 characters with number combination';
             
             } else if (input === email && !isValidEmail(input.value)) {
                 input.classList.remove('is-valid');
                 input.classList.add('is-invalid');
                 input.nextElementSibling.textContent = 'Please enter a valid email address.';
+
             } else {
                 input.classList.remove('is-invalid');
                 input.classList.add('is-valid');
@@ -147,9 +150,11 @@
         }
 
         function validatePassword(password) {
-            const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+            const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
             return regex.test(password);
         }
+
+
 
         function checkFormValidity() {
             const inputs = [username, email, password, status, role];
@@ -168,6 +173,5 @@
             checkFormValidity();
         });
     });
-
 
 </script>

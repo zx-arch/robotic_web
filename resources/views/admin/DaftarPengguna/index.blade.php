@@ -45,7 +45,7 @@
                         <span class="info-box-icon"><i class="fas fa-times"></i></span>
                         <div class="info-box-content">
                             <span class="info-box-text">Total User Dihapus</span>
-                            <span class="info-box-number">{{\App\Models\Users::where('status', 'deleted')->get()->count()}}</span>
+                            <span class="info-box-number">{{\App\Models\Users::onlyTrashed()->get()->count()}}</span>
                         </div>
                     </div>
                 </div>
@@ -55,6 +55,55 @@
 
                 <div class="card-header">
                     <a href="{{route('daftar_pengguna.add')}}" class="btn btn-success">Add User</a>
+                    
+                    @if (session('success_deleted'))
+                        <div id="w6" class="alert-warning alert alert-dismissible mt-3 w-75" role="alert">
+                            {{session('success_deleted')}}
+                            <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span></button>
+                        </div>
+                    @endif
+
+                    @if (session('error_deleted'))
+                        <div id="w6" class="alert-warning alert alert-dismissible mt-3 w-75" role="alert">
+                            {{session('error_deleted')}}
+                            <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span></button>
+                        </div>
+                    @endif
+
+                    @if (session()->has('success_submit_save'))
+                        <div id="w6" class="alert-success alert alert-dismissible mt-3 w-75" role="alert">
+                            {{session('success_submit_save')}}
+                            <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span></button>
+                        </div>
+                    @endif
+
+                    @if (session()->has('error_submit_save'))
+                        <div id="w6" class="alert-danger alert alert-dismissible mt-3 w-75" role="alert">
+                            {{session('error_submit_save')}}
+                            <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span></button>
+                        </div>
+                    @endif
+
+                    @if (session()->has('error_view'))
+                        <div id="w6" class="alert-danger alert alert-dismissible mt-3 w-75" role="alert">
+                            {{session('error_view')}}
+                            <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span></button>
+                        </div>
+                    @endif
+                    
+                    @if (session()->has('success_restore'))
+                        <div id="w6" class="alert-primary alert alert-dismissible mt-3 w-75" role="alert">
+                            {{session('success_restore')}}
+                            <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span></button>
+                        </div>
+                    @endif
+
+                    @if (session()->has('error_restore'))
+                        <div id="w6" class="alert-danger alert alert-dismissible mt-3 w-75" role="alert">
+                            {{session('error_restore')}}
+                            <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span></button>
+                        </div>
+                    @endif
                 </div>
 
                 <div class="card-body p-0">
@@ -123,12 +172,19 @@
                                         <td><a href="mailto:{{$user->email}}">{{$user->email}}</a></td>
                                         <td>{{$user->status}}</td>
                                         <td>{{ \Carbon\Carbon::parse($user->created_at)->format('M d, Y, h:i:s A') }}</td>
-                                        <td>{!! $user->logged_at ? $user->logged_at : '<span class="not-set">(not set)</span>' !!}</td>
-                                        <td>
-                                            <a class="btn btn-info btn-sm" href="#" title="View" aria-label="View" data-pjax="0"><i class="fa-fw fas fa-eye" aria-hidden></i></a>
-                                            <a class="btn btn-warning btn-sm" href="#" title="Update" aria-label="Update" data-pjax="0"><i class="fa-fw fas fa-edit" aria-hidden></i></a>
-                                            <a class="btn btn-danger btn-sm" id="buttonDelete" href="{{ route('daftar_pengguna.delete', $user->id) }}" title="Delete" aria-label="Delete" data-pjax="0" onclick="confirmDelete(event)"><i class="fa-fw fas fa-trash" aria-hidden></i></a>
-                                        </td>
+                                        <td>{!! $user->last_login ? $user->last_login : '<span class="not-set">(not set)</span>' !!}</td>
+                                        @if ($user->status != 'deleted')
+                                            <td>
+                                                <a class="btn btn-info btn-sm" href="{{route('daftar_pengguna.view', ['user_id' => encrypt($user->id)])}}" title="View" aria-label="View" data-pjax="0"><i class="fa-fw fas fa-eye" aria-hidden></i></a>
+                                                <a class="btn btn-warning btn-sm" href="{{ route('daftar_pengguna.update', ['user_id' => encrypt($user->id)]) }}" title="Update" aria-label="Update" data-pjax="0"><i class="fa-fw fas fa-edit" aria-hidden></i></a>
+                                                <a class="btn btn-danger btn-sm" id="buttonDelete" href="{{ route('daftar_pengguna.delete', ['user_id' => encrypt($user->id)]) }}" title="Delete" aria-label="Delete" data-pjax="0" onclick="confirmDelete(event)"><i class="fa-fw fas fa-trash" aria-hidden></i></a>
+                                            </td>
+                                        @else
+                                            <td>
+                                                <a class="btn btn-warning btn-sm" href="{{route('daftar_pengguna.restore', ['user_id' => encrypt($user->id)])}}" title="View" aria-label="View" data-pjax="0">Restore</a>
+                                            </td>
+                                        @endif
+                                        
                                     </tr>
                                 @empty
                                     <p>No records found!</p>
@@ -250,13 +306,13 @@
             // Tampilkan SweetAlert konfirmasi
             Swal.fire({
                 title: 'Apakah Anda yakin?',
-        text: 'Gambar akan dihapus permanen!',
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Ya, hapus!',
-        cancelButtonText: 'Batal'
+                text: 'Gambar akan dihapus permanen!',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Ya, hapus!',
+                cancelButtonText: 'Batal'
             }).then((result) => {
                 // Jika konfirmasi diterima, submit form
                 if (result.isConfirmed) {
