@@ -10,7 +10,7 @@ use App\Http\Controllers\Admin\DashboardAdmin;
 use App\Http\Controllers\Admin\DaftarPengguna;
 use App\Http\Controllers\Pengurus\DashboardPengurus;
 use App\Http\Controllers\user\Dashboarduser;
-
+use App\Http\Controllers\Admin\LanguageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,16 +35,29 @@ Route::post('/login', [LoginController::class, 'login'])->name('submit_form.logi
 
 // Tambahkan rute lain untuk admin di sini
 Route::middleware(['auth.login', 'admin.auth'])->group(function () {
+
     Route::get('/admin', [DashboardAdmin::class, 'index'])->name('admin.dashboard');
     Route::get('/admin/daftar_pengguna', [DaftarPengguna::class, 'index'])->name('daftar_pengguna.index');
-    Route::get('/admin/daftar_pengguna/add', [DaftarPengguna::class, 'add'])->name('daftar_pengguna.add');
-    Route::get('/admin/daftar_pengguna/delete/{user_id}', [DaftarPengguna::class, 'delete'])->name('daftar_pengguna.delete');
-    Route::post('/admin/save-add-user', [DaftarPengguna::class, 'save'])->name('daftar_pengguna.save_add_user');
-    Route::get('/admin/daftar_pengguna/update/{user_id}', [DaftarPengguna::class, 'update'])->name('daftar_pengguna.update');
-    Route::put('/admin/save-update-pengguna/user_id/{user_id}', [DaftarPengguna::class, 'saveUpdate'])->name('daftar_pengguna.save_update');
-    Route::get('/admin/update-password/user_id/{user_id}', [DaftarPengguna::class, 'updatePassword'])->name('daftar_pengguna.update_password');
-    Route::get('/admin/daftar_pengguna/view/{user_id}', [DaftarPengguna::class, 'view'])->name('daftar_pengguna.view');
-    Route::get('/admin/daftar_pengguna/restore/{user_id}', [DaftarPengguna::class, 'restore'])->name('daftar_pengguna.restore');
+
+    Route::prefix('/admin/daftar_pengguna')->group(function () {
+        Route::get('/add', [DaftarPengguna::class, 'add'])->name('daftar_pengguna.add');
+        Route::get('/delete/{user_id}', [DaftarPengguna::class, 'delete'])->name('daftar_pengguna.delete');
+        Route::post('/save-add-user', [DaftarPengguna::class, 'save'])->name('daftar_pengguna.save_add_user');
+        Route::get('/update/{user_id}', [DaftarPengguna::class, 'update'])->name('daftar_pengguna.update');
+        Route::put('/save-update-pengguna/user_id/{user_id}', [DaftarPengguna::class, 'saveUpdate'])->name('daftar_pengguna.save_update');
+        Route::get('/update-password/user_id/{user_id}', [DaftarPengguna::class, 'updatePassword'])->name('daftar_pengguna.update_password');
+        Route::get('/view/{user_id}', [DaftarPengguna::class, 'view'])->name('daftar_pengguna.view');
+        Route::get('/restore/{user_id}', [DaftarPengguna::class, 'restore'])->name('daftar_pengguna.restore');
+    });
+
+    Route::get('/admin/language_translate', [LanguageController::class, 'index'])->name('language.index');
+
+    Route::prefix('/admin/language_translate')->group(function () {
+        Route::get('/add', [LanguageController::class, 'add'])->name('language.add');
+        Route::get('/search', [LanguageController::class, 'search'])->name('language.search');
+        Route::post('/save-language', [LanguageController::class, 'saveLanguage'])->name('language.saveLanguage');
+    });
+
 });
 
 

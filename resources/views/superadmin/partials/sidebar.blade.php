@@ -43,6 +43,11 @@
                         <i class="nav-icon fas fa-users {{isset($currentAdminMenu) && $currentAdminMenu == 'daftar_pengguna' ? 'text-white' : ''}}"></i>&nbsp;<p>Daftar Pengguna</p>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="{{route('language.index')}}" class="nav-link {{isset($currentAdminMenu) && $currentAdminMenu == 'language' ? 'active' : ''}}">
+                        <i class="nav-icon fa fa-globe {{isset($currentAdminMenu) && $currentAdminMenu == 'language' ? 'text-white' : ''}}"></i>&nbsp;<p>Language</p>
+                    </a>
+                </li>
             </ul>
             {{-- <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                 data-accordion="false">

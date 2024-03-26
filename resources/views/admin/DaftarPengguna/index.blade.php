@@ -114,8 +114,6 @@
                                 <col>
                                 <col>
                                 <col>
-                                <col>
-                                <col>
                                 <col style="width: 140px">
                             </colgroup>
                             <thead>
@@ -274,12 +272,15 @@
                     </nav>
                 @endif
 
+            </div>
+            
+            @if (isset($users) && $users->count() > 0)
                 <div>
                     Showing <b>{{ $users->firstItem() }}</b> 
                     to <b>{{ $users->lastItem() }}</b>
                     of <b>{{ $users->total() }}</b> items.
                 </div>
-            </div>
+            @endif
         </div>
     </div>
 </div>
