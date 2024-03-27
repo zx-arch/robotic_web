@@ -61,52 +61,30 @@ class TutorialsAdminController extends Controller
         // Misalnya, Anda ingin mencari data user berdasarkan video_name, category, status_id, created_at, atau updated_at
         $tutorials = Tutorials::query()->withTrashed();
 
-        if ($status_id !== null || $created_at !== null || $updated_at !== null && ($video_name !== null || $category !== null || $created_at !== null)) {
-            // Menggunakan where untuk menambahkan kondisi pencarian tambahan
-            $tutorials->where('status_id', $status_id);
-
+        $tutorials->where(function ($query) use ($video_name, $status_id, $category, $created_at, $updated_at) {
             if ($video_name !== null) {
-                $tutorials->where('video_name', 'like', "$video_name%");
+                $query->where('video_name', 'like', "$video_name%");
+            }
+
+            if ($status_id !== null) {
+                $query->where('status_id', $status_id);
             }
 
             if ($category !== null) {
-                $tutorials->where('category', $category);
+                $query->where('category', $category);
             }
 
             if ($created_at !== null) {
-                $tutorials->where('created_at', 'like', "$created_at%");
+                $query->where('created_at', 'like', "$created_at%");
             }
 
             if ($updated_at !== null) {
-                $tutorials->where('updated_at', 'like', "$updated_at%");
+                $query->where('updated_at', 'like', "$updated_at%");
             }
-
-        } elseif ($video_name !== null || $status_id !== null || $category !== null || $created_at !== null || $updated_at !== null) {
-            $tutorials->where(function ($query) use ($video_name, $status_id, $category, $created_at, $updated_at) {
-                if ($video_name !== null) {
-                    $query->where('video_name', 'like', "$video_name%");
-                }
-
-                if ($status_id !== null) {
-                    $query->orWhere('status_id', $status_id);
-                }
-
-                if ($category !== null) {
-                    $query->orWhere('category', $category);
-                }
-
-                if ($created_at !== null) {
-                    $query->orWhere('created_at', 'like', "$created_at%");
-                }
-
-                if ($updated_at !== null) {
-                    $query->orWhere('updated_at', 'like', "$updated_at%");
-                }
-            });
-        }
+        });
 
         $totaltutorials = $tutorials->count();
-
+        //dd($searchData);
         // Menentukan jumlah item per halaman
         $itemsPerPage = 15;
 

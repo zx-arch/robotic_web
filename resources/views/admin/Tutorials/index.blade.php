@@ -90,21 +90,20 @@
                                             <td><input type="text" class="form-control" name="search[video_name]" onkeypress="handleKeyPress(event)" value="{{(isset($searchData['video_name'])) ? $searchData['video_name'] : ''}}"></td>
                                             <td></td>
                                             <td>
-                                                <select name="search[category]" id="category" class="form-control">
-                                                    <option value="" disabled selected></option>
+                                                <select name="search[category]" id="category" class="form-control" oninput="this.form.submit()">
+                                                    <option value="" disabled {{(!isset($searchData['category'])) ? 'selected' : ''}}></option>
                                                     @foreach ($getCategory as $category)
-                                                        <option value="{{$category}}">{{$category}}</option>
+                                                        <option value="{{$category}}" {{(isset($searchData['category']) && $searchData['category'] == $category) ? 'selected' : ''}}>{{$category}}</option>
                                                     @endforeach
                                                 </select>
                                             </td>
                                             <td>
-                                                <select name="search[status]" id="status" class="form-control" oninput="this.form.submit()">
-                                                    <option value="" disabled selected></option>
-                                                    <option value="enable">Enable</option>
-                                                    <option value="disable">Disable</option>
-                                                    <option value="draft">Draft</option>
+                                                <select name="search[status_id]" id="status" class="form-control" required oninput="this.form.submit()">
+                                                    <option value="" disabled {{(!isset($searchData['status_id'])) ? 'selected' : ''}}></option>
+                                                    <option value="4" {{(isset($searchData['status_id']) && $searchData['status_id'] == 4) ? 'selected' : ''}}>Enable</option>
+                                                    <option value="5" {{(isset($searchData['status_id']) && $searchData['status_id'] == 5) ? 'selected' : ''}}>Disable</option>
+                                                    <option value="6" {{(isset($searchData['status_id']) && $searchData['status_id'] == 6) ? 'selected' : ''}}>Draft</option>
                                                 </select>
-                                            </td>
                                             <td>
                                                 <div id="search-created_at-kvdate" class="input-group date">
                                                     <input type="date" id="search-created_at" class="form-control" oninput="this.form.submit()" name="search[created_at]" max="<?php echo date('Y-m-d'); ?>" value="{{(isset($searchData['created_at'])) ? $searchData['created_at'] : ''}}">
