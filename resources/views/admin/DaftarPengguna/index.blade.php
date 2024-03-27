@@ -141,7 +141,7 @@
                                 <form action="{{route('daftar_pengguna.search')}}" id="searchForm" method="get">
                                     @csrf
                                     <tr id="w0-filters" class="filters">
-                                        <td><input type="text" class="form-control" name="search[id]" value=""></td>
+                                        <td></td>
                                         <td><input type="text" class="form-control" name="search[username]" onkeypress="handleKeyPress(event)" value="{{(isset($searchData['username'])) ? $searchData['username'] : ''}}"></td>
                                         <td><input type="text" class="form-control" name="search[email]" onkeypress="handleKeyPress(event)" value="{{(isset($searchData['email'])) ? $searchData['email'] : ''}}"></td>
                                         <td>
