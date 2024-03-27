@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Models\Users;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
+use App\Models\Activity;
 
 class DaftarPengguna extends Controller
 {
@@ -145,7 +147,13 @@ class DaftarPengguna extends Controller
             User::where('id', decrypt($user_id))->update([
                 'status' => 'deleted'
             ]);
+
             User::where('id', decrypt($user_id))->delete();
+
+            Activity::create(array_merge(session('myActivity'), [
+                'user_id' => Auth::user()->id,
+                'action' => Auth::user()->username . ' Deleted Account User ID ' . decrypt($user_id),
+            ]));
 
             return redirect()->route('daftar_pengguna.index')->with('success_deleted', 'Data berhasil dihapus!');
 
@@ -187,13 +195,18 @@ class DaftarPengguna extends Controller
                 'password' => ['required', 'string', 'min:8', 'regex:/^(?=.*[a-zA-Z])(?=.*\d).{8,}$/'],
             ]);
             //dd($request->all());
-            User::create([
+            $newUser = User::create([
                 'username' => $request->username,
                 'password' => Hash::make($request->password),
                 'email' => $request->email,
                 'status' => $request->status,
                 'role' => $request->role
             ]);
+
+            Activity::create(array_merge(session('myActivity'), [
+                'user_id' => Auth::user()->id,
+                'action' => Auth::user()->username . ' Add New Account User ID ' . $newUser,
+            ]));
 
             return redirect()->route('daftar_pengguna.index')->with('success_submit_save', 'User Berhasil Dibuat!');
 

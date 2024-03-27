@@ -70,7 +70,6 @@
                     firstCol.scrollIntoView({ behavior: 'smooth' });
                 }
             }
-
             
             if ("{{ session()->has('success_submit_chat') }}") {
                 // Dapatkan elemen col-xl-4 pertama
@@ -165,7 +164,7 @@
                             }
                         });
                     } else {
-                                                    courseForm.submit();
+                        courseForm.submit();
 
                         // // Menghapus elemen <select> dengan id 'CevelSelect' dan parentnya dengan kelas 'col-md-4'
                         // var existingChapterSelect = document.getElementById('chapterSelect');
@@ -238,7 +237,6 @@
         session()->forget('error_access_book');
         session()->forget('request_input_book');
         session()->forget('error_submit_chat');
-        session()->forget('success_submit_chat');
         session()->forget('not_available_book');
     @endphp
     

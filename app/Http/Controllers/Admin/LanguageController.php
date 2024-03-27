@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Translations;
+use App\Models\Activity;
+use Illuminate\Support\Facades\Auth;
 
 class LanguageController extends Controller
 {
@@ -97,6 +99,12 @@ class LanguageController extends Controller
                     'language_code' => $request->language_code,
                     'language_name' => $request->language_name,
                 ]);
+
+                Activity::create(array_merge(session('myActivity'), [
+                    'user_id' => Auth::user()->id,
+                    'action' => 'Admin Created a New Translation Language',
+                ]));
+
                 return redirect()->route('language.index')->with('success_add_language', 'Terjemahan berhasil ditambah!');
 
             } else {

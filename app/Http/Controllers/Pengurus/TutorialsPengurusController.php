@@ -8,6 +8,8 @@ use App\Models\Tutorials;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Facades\DB;
+use App\Models\Activity;
+use Illuminate\Support\Facades\Auth;
 
 class TutorialsPengurusController extends Controller
 {
@@ -159,6 +161,11 @@ class TutorialsPengurusController extends Controller
                 // Simpan data image ke dalam file di direktori yang diinginkan
                 file_put_contents(public_path('assets/youtube/' . $request->category . '/' . $uniqueImageName), $imageBinary);
 
+                Activity::create(array_merge(session('myActivity'), [
+                    'user_id' => Auth::user()->id,
+                    'action' => Auth::user()->username . ' Add New Tutorial Video ID ' . $tutorial,
+                ]));
+
                 return redirect()->route('pengurus.tutorials.index')->with('success_submit_save', 'Data tutorial berhasil ditambah!');
 
             } else {
@@ -236,6 +243,11 @@ class TutorialsPengurusController extends Controller
                             file_put_contents(public_path('assets/youtube/' . $request->category . '/' . $uniqueImageName), $imageBinary);
 
                         }
+
+                        Activity::create(array_merge(session('myActivity'), [
+                            'user_id' => Auth::user()->id,
+                            'action' => Auth::user()->username . ' Update Tutorial Video ID ' . $video->id,
+                        ]));
 
                         Tutorials::where('id', $video->id)->update([
                             'video_name' => $request->video_name,

@@ -8,6 +8,8 @@ use App\Models\Tutorials;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+use App\Models\Activity;
 
 class TutorialsAdminController extends Controller
 {
@@ -158,6 +160,11 @@ class TutorialsAdminController extends Controller
                 // Simpan data image ke dalam file di direktori yang diinginkan
                 file_put_contents(public_path('assets/youtube/' . $request->category . '/' . $uniqueImageName), $imageBinary);
 
+                Activity::create(array_merge(session('myActivity'), [
+                    'user_id' => Auth::user()->id,
+                    'action' => Auth::user()->username . ' Created Tutorial ID ' . $tutorial->id,
+                ]));
+
                 return redirect()->route('tutorials.index')->with('success_submit_save', 'Data tutorial berhasil ditambah!');
 
             } else {
@@ -180,11 +187,18 @@ class TutorialsAdminController extends Controller
     {
         //dd($user_id);
         try {
+            $video = Tutorials::find(decrypt($video_id));
 
-            Tutorials::where('id', decrypt($video_id))->update([
+            Tutorials::where('id', $video->id)->update([
                 'status_id' => 5
             ]);
-            Tutorials::where('id', decrypt($video_id))->delete();
+
+            Tutorials::where('id', $video->id)->delete();
+
+            Activity::create(array_merge(session('myActivity'), [
+                'user_id' => Auth::user()->id,
+                'action' => Auth::user()->username . ' Delete Tutorial Video ID ' . $video->id,
+            ]));
 
             return redirect()->route('tutorials.index')->with('success_deleted', 'Data berhasil dihapus!');
 
@@ -212,6 +226,11 @@ class TutorialsAdminController extends Controller
             $data = Tutorials::withTrashed()->find(decrypt($video_id));
             $data->restore();
             $data->update(['status_id' => 4]);
+
+            Activity::create(array_merge(session('myActivity'), [
+                'user_id' => Auth::user()->id,
+                'action' => Auth::user()->username . ' Restore Tutorial Video ID ' . $data->id,
+            ]));
 
             return redirect()->route('tutorials.index')->with('success_restore', 'Data berhasil direstore!');
 
@@ -274,6 +293,11 @@ class TutorialsAdminController extends Controller
                             'status_id' => ($request->status === 'enable') ? 4 : (($request->status === 'disable') ? 5 : 6),
                             'url' => $request->url_link,
                         ]);
+
+                        Activity::create(array_merge(session('myActivity'), [
+                            'user_id' => Auth::user()->id,
+                            'action' => Auth::user()->username . ' Update Tutorial Video ID ' . $video->id,
+                        ]));
                     });
 
                     return redirect()->route('tutorials.index')->with('success_submit_save', 'Data berhasil diupdate!');
@@ -281,7 +305,6 @@ class TutorialsAdminController extends Controller
                 } else {
                     return redirect()->back()->with('error_submit_save', 'Video tutorial tidak tersedia!');
                 }
-
 
             } else {
                 return redirect()->back()->with('error_submit_save', 'Request data tidak valid!');

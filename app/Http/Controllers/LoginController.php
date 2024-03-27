@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use App\Models\Activity;
+use Illuminate\Support\Facades\Session;
+use GeoIp2\Database\Reader;
 
 class LoginController extends Controller
 {
@@ -15,12 +18,55 @@ class LoginController extends Controller
         $this->data['currentActive'] = 'login';
     }
 
-    public function index()
+    public function index(Request $request)
     {
         if (Auth::check()) {
             return redirect()->route('home_dashboard');
         } else {
+
+            if (!session()->has('myActivity')) {
+                $databasePath = public_path('GeoLite2-City.mmdb');
+                $reader = new Reader($databasePath);
+
+                try {
+                    //dd($getToken);
+                    $ch = curl_init('https://api.ipify.org');
+                    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                    $publicIpAddress = curl_exec($ch);
+                    curl_close($ch);
+                    $userAgent = $request->header('User-Agent');
+
+                    // Mendapatkan informasi lokasi dari IP publik
+                    $record = $reader->city($publicIpAddress);
+
+                    // Dapatkan informasi yang Anda butuhkan, seperti nama kota, negara, koordinat, dsb.
+                    $cityName = $record->city->name;
+                    $countryName = $record->country->name;
+                    $latitude = $record->location->latitude;
+                    $longitude = $record->location->longitude;
+
+                    //dd($cityName, $latitude, $longitude, $userAgent);
+
+                    session([
+                        'myActivity' => [
+                            'ip_address' => $publicIpAddress,
+                            'user_agent' => $userAgent,
+                            'latitude' => $latitude,
+                            'longitude' => $longitude,
+                            'country' => $countryName,
+                            'city' => $cityName,
+                        ]
+                    ]);
+
+                } catch (\Throwable $e) {
+                    //dd($e->getMessage());
+                    return view('login', $this->data);
+                }
+
+            }
+
             return view('login', $this->data);
+
         }
     }
 
@@ -44,6 +90,12 @@ class LoginController extends Controller
                     'last_login' => now(),
                 ]);
 
+                //dd(session('myActivity'), Session::get('csrf_token'));
+                Activity::create(array_merge(session('myActivity'), [
+                    'user_id' => Auth::user()->id,
+                    'action' => Auth::user()->username . ' Access Login Role ' . Auth::user()->role
+                ]));
+
                 return redirect()->route('admin.dashboard');
 
             } elseif (Auth::user()->role == 'pengurus') {
@@ -52,6 +104,11 @@ class LoginController extends Controller
                     'last_login' => now(),
                 ]);
 
+                Activity::create(array_merge(session('myActivity'), [
+                    'user_id' => Auth::user()->id,
+                    'action' => Auth::user()->username . ' Access Login Role ' . Auth::user()->role
+                ]));
+
                 return redirect()->route('pengurus.dashboard');
 
             } elseif (Auth::user()->role == 'user') {
@@ -59,6 +116,11 @@ class LoginController extends Controller
                 User::where('id', Auth::user()->id)->update([
                     'last_login' => now(),
                 ]);
+
+                Activity::create(array_merge(session('myActivity'), [
+                    'user_id' => Auth::user()->id,
+                    'action' => Auth::user()->username . ' Access Login Role ' . Auth::user()->role
+                ]));
 
                 return redirect()->route('user.dashboard');
 
