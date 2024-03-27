@@ -9,9 +9,10 @@ use App\Http\Controllers\CoursesController;
 use App\Http\Controllers\Admin\DashboardAdmin;
 use App\Http\Controllers\Admin\TutorialsAdminController;
 use App\Http\Controllers\Admin\DaftarPengguna;
-use App\Http\Controllers\Pengurus\DashboardPengurus;
 use App\Http\Controllers\user\Dashboarduser;
 use App\Http\Controllers\Admin\LanguageController;
+use App\Http\Controllers\Pengurus\DashboardPengurus;
+use App\Http\Controllers\Pengurus\TutorialsPengurusController;
 
 /*
 |--------------------------------------------------------------------------
@@ -77,13 +78,18 @@ Route::middleware(['auth.login', 'admin.auth'])->group(function () {
 });
 
 
-// Tambahkan rute lain untuk admin di sini
+// Tambahkan rute lain untuk pengurus di sini
 Route::middleware(['auth.login', 'pengurus.auth'])->group(function () {
     Route::get('/pengurus', [DashboardPengurus::class, 'index'])->name('pengurus.dashboard');
+    Route::get('/pengurus/tutorials', [TutorialsPengurusController::class, 'index'])->name('pengurus.tutorials.index');
+    Route::get('/add', [TutorialsPengurusController::class, 'add'])->name('pengurus.tutorials.add');
+    Route::get('/search', [TutorialsPengurusController::class, 'search'])->name('pengurus.tutorials.search');
+    Route::get('/update/{video_id}', [TutorialsPengurusController::class, 'update'])->name('pengurus.tutorials.update');
+    Route::put('/save-update-tutorial/video_id/{video_id}', [TutorialsPengurusController::class, 'saveUpdate'])->name('pengurus.tutorials.save_update');
 });
 
 
-// Tambahkan rute lain untuk admin di sini
+// Tambahkan rute lain untuk user di sini
 Route::middleware(['auth.login', 'user.auth'])->group(function () {
     Route::get('/user', [DashboardUser::class, 'index'])->name('user.dashboard');
 });
