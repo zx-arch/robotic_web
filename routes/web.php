@@ -9,6 +9,7 @@ use App\Http\Controllers\CoursesController;
 use App\Http\Controllers\Admin\DashboardAdmin;
 use App\Http\Controllers\Admin\TutorialsAdminController;
 use App\Http\Controllers\Admin\DaftarPengguna;
+use App\Http\Controllers\Admin\AktivitasPenggunaController;
 use App\Http\Controllers\user\Dashboarduser;
 use App\Http\Controllers\Admin\LanguageController;
 use App\Http\Controllers\Pengurus\DashboardPengurus;
@@ -74,6 +75,8 @@ Route::middleware(['auth.login', 'admin.auth'])->group(function () {
         Route::get('/search', [LanguageController::class, 'search'])->name('language.search');
         Route::post('/save-language', [LanguageController::class, 'saveLanguage'])->name('language.saveLanguage');
     });
+
+    Route::get('/admin/aktivitas_pengguna', [AktivitasPenggunaController::class, 'index'])->name('aktivitas_pengguna.index');
 
 });
 

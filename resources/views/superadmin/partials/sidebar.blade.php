@@ -53,6 +53,11 @@
                         <i class="nav-icon fa fa-globe {{isset($currentAdminMenu) && $currentAdminMenu == 'language' ? 'text-white' : ''}}"></i>&nbsp;<p>Language</p>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="{{route('aktivitas_pengguna.index')}}" class="nav-link {{isset($currentAdminMenu) && $currentAdminMenu == 'aktivitas_pengguna' ? 'active' : ''}}">
+                        <i class="nav-icon fas fa-history {{isset($currentAdminMenu) && $currentAdminMenu == 'aktivitas_pengguna' ? 'text-white' : ''}}"></i>&nbsp;<p>Aktivitas Pengguna</p>
+                    </a>
+                </li>
             </ul>
             {{-- <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                 data-accordion="false">
