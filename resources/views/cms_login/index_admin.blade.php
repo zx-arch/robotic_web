@@ -19,31 +19,38 @@
     <link rel="stylesheet" href="{{ asset('plugins/overlayScrollbars/css/OverlayScrollbars.min.css') }}">
     <link rel="stylesheet" href="{{ asset('plugins/daterangepicker/daterangepicker.css') }}">
     <link rel="stylesheet" href="{{ asset('plugins/summernote/summernote-bs4.css') }}">
+    <link href="{{asset('assets/vendor/aos/aos.css')}}" rel="stylesheet">
+    <link href="{{asset('assets/vendor/boxicons/css/boxicons.min.css')}}" rel="stylesheet">
+    <link href="{{asset('assets/vendor/glightbox/css/glightbox.min.css')}}" rel="stylesheet">
+    <link href="{{asset('assets/vendor/remixicon/remixicon.css')}}" rel="stylesheet">
+    <link href="{{asset('assets/vendor/swiper/swiper-bundle.min.css')}}" rel="stylesheet">
+
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <style>
         /* Style for invalid inputs */
-.is-invalid {
-    border-color: #dc3545 !important; /* Border color red */
-}
+        .is-invalid {
+            border-color: #dc3545 !important; /* Border color red */
+        }
 
-/* Style for valid inputs */
-.is-valid {
-    border-color: #28a745 !important; /* Border color green */
-}
+        /* Style for valid inputs */
+        .is-valid {
+            border-color: #28a745 !important; /* Border color green */
+        }
 
-/* Style for invalid feedback */
-.invalid-feedback {
-    color: #dc3545; /* Text color red */
-    font-size: 80%; /* Font size smaller */
-}
+        /* Style for invalid feedback */
+        .invalid-feedback {
+            color: #dc3545; /* Text color red */
+            font-size: 80%; /* Font size smaller */
+        }
 
-/* Style for valid feedback */
-.valid-feedback {
-    color: #28a745; /* Text color green */
-    font-size: 80%; /* Font size smaller */
-}
+        /* Style for valid feedback */
+        .valid-feedback {
+            color: #28a745; /* Text color green */
+            font-size: 80%; /* Font size smaller */
+        }
 
     </style>
+
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 </head>
 
@@ -66,6 +73,8 @@
     <script>
         $.widget.bridge('uibutton', $.ui.button)
     </script>
+    <script src="{{asset('assets/vendor/glightbox/js/glightbox.min.js')}}"></script>
+
     <script src="{{ asset('plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('plugins/chart.js/Chart.min.js') }}"></script>
     <script src="{{ asset('plugins/sparklines/sparkline.js') }}"></script>
@@ -81,35 +90,15 @@
     <script src="{{ asset('dist/js/pages/dashboard.js') }}"></script>
     <script src="{{ asset('dist/js/demo.js') }}"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
-        $(document).ready(function() {
-            $('.has-treeview > a').on('click', function(e) {
-                e.preventDefault();
-                $('.has-treeview.menu-open').not($(this).parent()).removeClass('menu-open');
-                $(this).parent().toggleClass('menu-open');
-            });
-        });
-    </script>
-    <script>
-        const pajakMenu = document.getElementById("pajak-menu");
-        pajakMenu.addEventListener("click", function(e) {
-            if (pajakMenu.classList.contains("menu-open")) {
-                pajakMenu.classList.remove("menu-open");
-            } else {
-                pajakMenu.classList.add("menu-open");
-            }
-        });
-    </script>
-    <script>
-        const pembayaranMenu = document.getElementById("pembayaran-menu");
-        pembayaranMenu.addEventListener("click", function(e) {
-            if (pembayaranMenu.classList.contains("menu-open")) {
-                pembayaranMenu.classList.remove("menu-open");
-            } else {
-                pembayaranMenu.classList.add("menu-open");
-            }
-        });
-    </script>
+    <script src="{{asset('assets/vendor/aos/aos.js')}}"></script>
+    <script src="{{asset('assets/vendor/glightbox/js/glightbox.min.js')}}"></script>
+    <script src="{{asset('assets/vendor/isotope-layout/isotope.pkgd.min.js')}}"></script>
+    <script src="{{asset('assets/vendor/swiper/swiper-bundle.min.js')}}"></script>
+    <script src="{{asset('assets/vendor/waypoints/noframework.waypoints.js')}}"></script>
+    <script src="{{asset('assets/vendor/php-email-form/validate.js')}}"></script>
+
+    <!-- Template Main JS File -->
+    <script src="{{asset('assets/js/main.js')}}"></script>
 
 </body>
 

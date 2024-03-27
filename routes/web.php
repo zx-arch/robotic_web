@@ -7,6 +7,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MaterialsController;
 use App\Http\Controllers\CoursesController;
 use App\Http\Controllers\Admin\DashboardAdmin;
+use App\Http\Controllers\Admin\TutorialsAdminController;
 use App\Http\Controllers\Admin\DaftarPengguna;
 use App\Http\Controllers\Pengurus\DashboardPengurus;
 use App\Http\Controllers\user\Dashboarduser;
@@ -37,6 +38,20 @@ Route::post('/login', [LoginController::class, 'login'])->name('submit_form.logi
 Route::middleware(['auth.login', 'admin.auth'])->group(function () {
 
     Route::get('/admin', [DashboardAdmin::class, 'index'])->name('admin.dashboard');
+    Route::get('/admin/tutorials', [TutorialsAdminController::class, 'index'])->name('tutorials.index');
+
+    Route::prefix('/admin/tutorials')->group(function () {
+        Route::get('/add', [TutorialsAdminController::class, 'add'])->name('tutorials.add');
+        Route::get('/search', [TutorialsAdminController::class, 'search'])->name('tutorials.search');
+        Route::get('/delete/{video_id}', [TutorialsAdminController::class, 'delete'])->name('tutorials.delete');
+        Route::post('/save-add-tutorial', [TutorialsAdminController::class, 'saveTutorial'])->name('tutorials.saveTutorial');
+        Route::get('/update/{video_id}', [TutorialsAdminController::class, 'update'])->name('tutorials.update');
+        Route::put('/save-update-tutorial/video_id/{video_id}', [TutorialsAdminController::class, 'saveUpdate'])->name('tutorials.save_update');
+        Route::get('/update-password/video_id/{video_id}', [TutorialsAdminController::class, 'updatePassword'])->name('tutorials.update_password');
+        Route::get('/view/{video_id}', [TutorialsAdminController::class, 'view'])->name('tutorials.view');
+        Route::get('/restore/{video_id}', [TutorialsAdminController::class, 'restore'])->name('tutorials.restore');
+
+    });
     Route::get('/admin/daftar_pengguna', [DaftarPengguna::class, 'index'])->name('daftar_pengguna.index');
 
     Route::prefix('/admin/daftar_pengguna')->group(function () {

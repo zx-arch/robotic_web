@@ -39,6 +39,11 @@
                     </a>
                 </li>
                 <li class="nav-item">
+                    <a href="{{route('tutorials.index')}}" class="nav-link {{isset($currentAdminMenu) && $currentAdminMenu == 'tutorials' ? 'active' : ''}}">
+                        <i class="nav-icon fa fa-play {{isset($currentAdminMenu) && $currentAdminMenu == 'tutorials' ? 'text-white' : ''}}"></i>&nbsp;<p>Tutorials</p>
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a href="{{route('daftar_pengguna.index')}}" class="nav-link {{isset($currentAdminMenu) && $currentAdminMenu == 'daftar_pengguna' ? 'active' : ''}}">
                         <i class="nav-icon fas fa-users {{isset($currentAdminMenu) && $currentAdminMenu == 'daftar_pengguna' ? 'text-white' : ''}}"></i>&nbsp;<p>Daftar Pengguna</p>
                     </a>

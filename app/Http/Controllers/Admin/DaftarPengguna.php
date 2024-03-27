@@ -104,8 +104,6 @@ class DaftarPengguna extends Controller
             });
         }
 
-
-
         $totalUsers = $users->count();
 
         // Menentukan jumlah item per halaman
