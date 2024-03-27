@@ -11,7 +11,7 @@
                 <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
 
                 @if (Auth::check())
-                    <li><a class="nav-link scrollto" href="{{route('admin.dashboard')}}">{{Auth::user()->username}}</a></li>
+                    <li><a class="nav-link scrollto" href="{{route(Auth::user()->role.'.dashboard')}}">{{Auth::user()->username}}</a></li>
                 @else
                     <li><a class="getstarted scrollto {{isset($currentActive) && $currentActive == 'login' ? 'active' : ''}}" href="{{isset($currentActive) && $currentActive == 'dashboard' ? route('form.login') : '#hero'}}">Login</a></li>
                 @endif
