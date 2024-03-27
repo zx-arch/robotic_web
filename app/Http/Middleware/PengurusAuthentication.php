@@ -21,7 +21,7 @@ class PengurusAuthentication
             return redirect()->route('form.login')->withErrors(['message' => 'Silakan login terlebih dahulu']);
         }
 
-        // Cek apakah pengguna adalah admin
+        // Cek apakah pengguna adalah pengurus
         if (Auth::user()->role !== 'pengurus') {
             return redirect()->route('form.login')->withErrors(['message' => 'Anda tidak memiliki izin untuk mengakses halaman ini']);
         }
