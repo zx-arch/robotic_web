@@ -145,15 +145,17 @@ class DaftarPengguna extends Controller
     {
         //dd($user_id);
         try {
-            User::where('id', decrypt($user_id))->update([
+            $user = User::find(decrypt($user_id));
+
+            $user->update([
                 'status' => 'deleted'
             ]);
 
-            User::where('id', decrypt($user_id))->delete();
+            $user->delete();
 
             Activity::create(array_merge(session('myActivity'), [
                 'user_id' => Auth::user()->id,
-                'action' => Auth::user()->username . ' Deleted Account User ID ' . decrypt($user_id),
+                'action' => Auth::user()->username . ' Deleted Account User ' . $user->username . ' ID ' . decrypt($user_id),
             ]));
 
             return redirect()->route('daftar_pengguna.index')->with('success_deleted', 'Data berhasil dihapus!');
@@ -212,7 +214,7 @@ class DaftarPengguna extends Controller
 
             Activity::create(array_merge(session('myActivity'), [
                 'user_id' => Auth::user()->id,
-                'action' => Auth::user()->username . ' Add New Account User ID ' . $newUser,
+                'action' => Auth::user()->username . ' Add New Account User ' . $newUser->username . ' ID ' . $newUser,
             ]));
 
             return redirect()->route('daftar_pengguna.index')->with('success_submit_save', 'User Berhasil Dibuat!');
@@ -271,6 +273,11 @@ class DaftarPengguna extends Controller
                     'password' => $hashedPassword,
                 ]);
 
+                Activity::create(array_merge(session('myActivity'), [
+                    'user_id' => Auth::user()->id,
+                    'action' => Auth::user()->username . ' Update User Account ' . $user->username . ' ID ' . $user->id,
+                ]));
+
                 return redirect()->route('daftar_pengguna.index')->with('success_submit_save', 'Data berhasil diupdate!');
 
             } else {
@@ -291,9 +298,14 @@ class DaftarPengguna extends Controller
     public function restore($user_id)
     {
         try {
-            $data = User::withTrashed()->find(decrypt($user_id));
-            $data->restore();
-            $data->update(['status' => 'active']);
+            $user = User::withTrashed()->find(decrypt($user_id));
+            $user->restore();
+            $user->update(['status' => 'active']);
+
+            Activity::create(array_merge(session('myActivity'), [
+                'user_id' => Auth::user()->id,
+                'action' => Auth::user()->username . ' Restore Data User Account ' . $user->username . ' ID ' . $user->id,
+            ]));
 
             return redirect()->route('daftar_pengguna.index')->with('success_restore', 'Data berhasil direstore!');
 
