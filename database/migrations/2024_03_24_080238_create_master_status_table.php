@@ -17,26 +17,6 @@ return new class extends Migration {
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->nullable();
         });
-
-        $data = [
-            ['name' => 'Enable Materi', 'description' => 'Status publikasi materi'],
-            ['name' => 'Disable Materi', 'description' => 'Menonaktifkan materi yang ditampilkan untuk user'],
-            ['name' => 'Draft', 'description' => 'Menyimpan sementara materi yang diupload'],
-            ['name' => 'Active Tutorial', 'description' => 'Enable publikasi video tutorial'],
-            ['name' => 'Disable Tutorial', 'description' => 'Disabled tutorial'],
-            ['name' => 'Draft', 'description' => 'Draft'],
-            ['name' => 'Enable Static Pages', 'description' => 'Khusus memperbarui komponen web'],
-            ['name' => 'Enable', 'description' => 'Authentikasi Login active'],
-            ['name' => 'Disable', 'description' => 'Non-active Authentikasi User Login'],
-            ['name' => 'Pending', 'description' => 'Status user baru mendaftar'],
-        ];
-
-        DB::table('master_status')->insert($data);
-
-        DB::table('master_status')->update([
-            'created_at' => now(),
-            'updated_at' => now(),
-        ]);
     }
 
     /**

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\CategoryTutorialController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\RegisterController;
@@ -53,8 +54,8 @@ Route::middleware(['auth.login', 'admin.auth'])->group(function () {
         Route::get('/update-password/video_id/{video_id}', [TutorialsAdminController::class, 'updatePassword'])->name('tutorials.update_password');
         Route::get('/view/{video_id}', [TutorialsAdminController::class, 'view'])->name('tutorials.view');
         Route::get('/restore/{video_id}', [TutorialsAdminController::class, 'restore'])->name('tutorials.restore');
-
     });
+
     Route::get('/admin/daftar_pengguna', [DaftarPengguna::class, 'index'])->name('daftar_pengguna.index');
 
     Route::prefix('/admin/daftar_pengguna')->group(function () {
@@ -67,6 +68,13 @@ Route::middleware(['auth.login', 'admin.auth'])->group(function () {
         Route::get('/update-password/user_id/{user_id}', [DaftarPengguna::class, 'updatePassword'])->name('daftar_pengguna.update_password');
         Route::get('/view/{user_id}', [DaftarPengguna::class, 'view'])->name('daftar_pengguna.view');
         Route::get('/restore/{user_id}', [DaftarPengguna::class, 'restore'])->name('daftar_pengguna.restore');
+    });
+
+    Route::get('/admin/category_tutorial', [CategoryTutorialController::class, 'index'])->name('category_tutorial.index');
+
+    Route::prefix('/admin/category_tutorial')->group(function () {
+        Route::post('/add-submit', [CategoryTutorialController::class, 'addSubmit'])->name('category_tutorial.addSubmit');
+        Route::get('/search', [CategoryTutorialController::class, 'search'])->name('category_tutorial.search');
     });
 
     Route::get('/admin/language_translate', [LanguageController::class, 'index'])->name('language.index');

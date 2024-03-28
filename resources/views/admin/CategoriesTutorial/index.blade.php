@@ -11,13 +11,35 @@
     <div class="content">
         <div class="row">
             <div class="col-lg-12">
-                <h5 class="p-2">Tutorials</h5>
+                <h5 class="p-2">Category Tutorial</h5>
+                <button id="addCategory" class="btn btn-success mb-3" style="width: 6%;"><i class="fa fa-plus mr-1" aria-hidden="true"></i> Add</button>
 
                 <div class="card card-default">
 
-                    <div class="card-header">
-                        <a href="{{route('tutorials.add')}}" class="btn btn-success"><i class="fa fa-plus mr-1" aria-hidden="true"></i> Add</a>
-                        
+                    <div class="card-header" id="formAddCat" style="{{ session('success_submit_save') ? '' : 'display: none;' }}">
+
+                        <form action="{{route('category_tutorial.addSubmit')}}" method="post" id="submitAddCat">
+                            @csrf
+                            <div class="row w-75" id="inputComponent" style="{{ session('success_submit_save') ? 'display: none;' : '' }}">
+                                
+                                <div class="col-md-4">
+                                    <input type="text" name="category_name" id="category_name" class="form-control" placeholder="Input Category ..">
+                                </div>
+
+                                <div class="col-md-4">
+                                    <select name="status" required class="form-control" id="status">
+                                        <option value="" disabled selected>Select Status ..</option>
+                                        <option value="11">Enable</option>
+                                        <option value="12">Disable</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                </div>
+                            </div>
+                        </form>
+
                         @if (session()->has('success_deleted'))
                             <div id="w6" class="alert-warning alert alert-dismissible mt-3 w-75" role="alert">
                                 {{session('success_deleted')}}
@@ -74,8 +96,6 @@
                                 <thead>
                                     <tr>
                                         <td>#</td>
-                                        <td>Video Name</td>
-                                        <td >Link</td>
                                         <td>Category</td>
                                         <td>Status</td>
                                         <td>Created At</td>
@@ -83,14 +103,12 @@
                                         <td></td>
                                     </tr>
 
-                                    <form action="{{route('tutorials.search')}}" id="searchForm" method="get">
+                                    <form action="{{route('category_tutorial.search')}}" id="searchForm" method="get">
                                         @csrf
                                         <tr id="w0-filters" class="filters">
                                             <td></td>
-                                            <td><input type="text" class="form-control" name="search[video_name]" onkeypress="handleKeyPress(event)" value="{{(isset($searchData['video_name'])) ? $searchData['video_name'] : ''}}"></td>
-                                            <td></td>
                                             <td>
-                                                <select name="search[category]" id="category" class="form-control" onchange="this.form.submit()">
+                                                <select name="search[category]" id="category" class="form-control" oninput="this.form.submit()">
                                                     <option value="" disabled {{(!isset($searchData['category'])) ? 'selected' : ''}}></option>
                                                     @foreach ($getCategory as $tutorial_cat)
                                                         <option value="{{$tutorial_cat->id}}" {{(isset($searchData['category']) && $searchData['category'] == $tutorial_cat->id) ? 'selected' : ''}}>{{$tutorial_cat->category}}</option>
@@ -98,12 +116,12 @@
                                                 </select>
                                             </td>
                                             <td>
-                                                <select name="search[status_id]" id="status" class="form-control" required onchange="this.form.submit()">
-                                                    <option value="" disabled {{(!isset($searchData['status_id'])) ? 'selected' : ''}}></option>
-                                                    <option value="4" {{(isset($searchData['status_id']) && $searchData['status_id'] == 4) ? 'selected' : ''}}>Enable</option>
-                                                    <option value="5" {{(isset($searchData['status_id']) && $searchData['status_id'] == 5) ? 'selected' : ''}}>Disable</option>
-                                                    <option value="6" {{(isset($searchData['status_id']) && $searchData['status_id'] == 6) ? 'selected' : ''}}>Draft</option>
+                                                <select id="search-status" class="form-control" name="search[status]" oninput="this.form.submit()">
+                                                    <option value="" disabled {{(!isset($searchData['status']) ? 'selected' : '')}}></option>
+                                                    <option value="11" {{(isset($searchData['status']) && $searchData['status'] == '11') ? 'selected' : ''}}>Enable</option>
+                                                    <option value="12" {{(isset($searchData['status']) && $searchData['status'] == '12') ? 'selected' : ''}}>Disable</option>
                                                 </select>
+                                            </td>
                                             <td>
                                                 <div id="search-created_at-kvdate" class="input-group date">
                                                     <input type="date" id="search-created_at" class="form-control" onchange="this.form.submit()" name="search[created_at]" max="<?php echo date('Y-m-d'); ?>" value="{{(isset($searchData['created_at'])) ? $searchData['created_at'] : ''}}">
@@ -121,41 +139,21 @@
                                 </thead>
 
                                 <tbody>
-                                    @forelse ($tutorials as $tutorial)
+                                    @forelse ($categoryTutorial as $category)
                                         <tr>
                                             <td>{{$loop->index += 1}}</td>
-                                            <td>{{$tutorial->video_name}}</td>
-
+                                            <td>{{$category->category}}</td>
+                                            <td>{{isset(\App\Models\MasterStatus::where('id', $category->status_id)->first()->name) ? \App\Models\MasterStatus::where('id', $category->status_id)->first()->name : "Not Valid"}}</td>
+                                            <td>{{$category->created_at}}</td>
+                                            <td>{{$category->updated_at}}</td>
                                             <td>
-                                                <img src="{{$tutorial->thumbnail}}" width="65" height="45" class="img-icon" alt="">
-                                                <a href="{{$tutorial->url ?? $tutorial->path_video }}" class="glightbox ml-2">{{$tutorial->video_name}}</a>
+                                                <a class="btn btn-warning btn-sm" href="#" title="Update" aria-label="Update" data-pjax="0"><i class="fa-fw fas fa-edit" aria-hidden></i></a>
+                                                <a class="btn btn-danger btn-sm" id="buttonDelete" href="#" title="Delete" aria-label="Delete" data-pjax="0" onclick="confirmDelete(event)"><i class="fa-fw fas fa-trash" aria-hidden></i></a>
                                             </td>
-                                            
-                                            <td>{{$tutorial->category}}</td>
-                                            
-                                            @if ($tutorial->deleted_at == null)
-                                                <td>{{App\Models\MasterStatus::where('id',$tutorial->status_id)->first()->name}}</td>
-                                            @else
-                                                <td class="text-danger">Deleted by admin</td>
-                                            @endif
-
-                                            <td>{{$tutorial->created_at}}</td>
-                                            <td>{{$tutorial->updated_at ?? '-'}}</td>
-
-                                            @if ($tutorial->deleted_at == null)
-                                                <td>
-                                                    <a class="btn btn-warning btn-sm" href="{{ route('tutorials.update', ['video_id' => encrypt($tutorial->id)]) }}" title="Update" aria-label="Update" data-pjax="0"><i class="fa-fw fas fa-edit" aria-hidden></i></a>
-                                                    <a class="btn btn-danger btn-sm" id="buttonDelete" href="{{ route('tutorials.delete', ['video_id' => encrypt($tutorial->id)]) }}" title="Delete" aria-label="Delete" data-pjax="0" onclick="confirmDelete(event)"><i class="fa-fw fas fa-trash" aria-hidden></i></a>
-                                                </td>
-                                            @else
-                                                <td>
-                                                    <a href="{{ route('tutorials.restore', ['video_id' => encrypt($tutorial->id)]) }}" class="btn btn-warning btn-sm">Restore</a>
-                                                </td>
-                                            @endif
                                             
                                         </tr>
                                     @empty
-                                        <p class="ml-2 mt-3 text-danger">Tutorials belum tersedia</p>
+                                        <p class="ml-2 mt-3 text-danger">Category tutorial belum tersedia</p>
                                     @endforelse
                                 </tbody>
 
@@ -164,77 +162,77 @@
 
                     </div>
 
-                    @if ($tutorials->lastPage() > 1)
+                    @if ($categoryTutorial->lastPage() > 1)
                         <nav aria-label="Page navigation example">
                             <ul class="pagination mt-2">
                                 {{-- Tombol Sebelumnya --}}
-                                @if ($tutorials->currentPage() > 1)
+                                @if ($categoryTutorial->currentPage() > 1)
                                     <li class="page-item">
-                                        <a class="page-link" href="{{ $tutorials->previousPageUrl() }}" aria-label="Previous">
+                                        <a class="page-link" href="{{ $categoryTutorial->previousPageUrl() }}" aria-label="Previous">
                                             <span aria-hidden="true">&laquo;</span>
                                         </a>
                                     </li>
                                 @endif
-                                            {{-- Tampilkan 4 halaman sebelumnya jika halaman saat ini tidak terlalu dekat dengan halaman pertama --}}
-                                @if ($tutorials->currentPage() > 6)
-                                    @for ($i = $tutorials->currentPage() - 3; $i < $tutorials->currentPage(); $i++)
+                                {{-- Tampilkan 4 halaman sebelumnya jika halaman saat ini tidak terlalu dekat dengan halaman pertama --}}
+                                @if ($categoryTutorial->currentPage() > 6)
+                                    @for ($i = $categoryTutorial->currentPage() - 3; $i < $categoryTutorial->currentPage(); $i++)
                                         @if ($i == 1)
                                             <li class="page-item">
-                                                <a class="page-link" href="/admin/tutorials">{{ $i }}</a>
+                                                <a class="page-link" href="/admin/category_tutorial">{{ $i }}</a>
                                             </li>
                                         @else
                                             <li class="page-item">
-                                                <a class="page-link" href="{{ $tutorials->url($i) }}">{{ $i }}</a>
+                                                <a class="page-link" href="{{ $categoryTutorial->url($i) }}">{{ $i }}</a>
                                             </li>
                                         @endif
                                     @endfor
                                 @else
-                                    @for ($i = 1; $i < $tutorials->currentPage(); $i++)
+                                    @for ($i = 1; $i < $categoryTutorial->currentPage(); $i++)
                                         @if ($i == 1)
                                             <li class="page-item">
-                                                <a class="page-link" href="/admin/tutorials">{{ $i }}</a>
+                                                <a class="page-link" href="/admin/category_tutorial">{{ $i }}</a>
                                             </li>
                                         @else
                                             <li class="page-item">
-                                                <a class="page-link" href="{{ $tutorials->url($i) }}">{{ $i }}</a>
+                                                <a class="page-link" href="{{ $categoryTutorial->url($i) }}">{{ $i }}</a>
                                             </li>
                                         @endif
                                     @endfor
                                 @endif
                                             {{-- Halaman saat ini --}}
                                 <li class="page-item active">
-                                    <span class="page-link">{{ $tutorials->currentPage() }}</span>
+                                    <span class="page-link">{{ $categoryTutorial->currentPage() }}</span>
                                 </li>
                                             {{-- Tampilkan 4 halaman setelahnya jika halaman saat ini tidak terlalu dekat dengan halaman terakhir --}}
-                                @if ($tutorials->currentPage() < $tutorials->lastPage() - 5)
-                                    @for ($i = $tutorials->currentPage() + 1; $i <= $tutorials->currentPage() + 3; $i++)
+                                @if ($categoryTutorial->currentPage() < $categoryTutorial->lastPage() - 5)
+                                    @for ($i = $categoryTutorial->currentPage() + 1; $i <= $categoryTutorial->currentPage() + 3; $i++)
                                         @if ($i == 1)
                                             <li class="page-item">
-                                                <a class="page-link" href="/admin/tutorials">{{ $i }}</a>
+                                                <a class="page-link" href="/admin/category_tutorial">{{ $i }}</a>
                                             </li>
                                         @else
                                             <li class="page-item">
-                                                <a class="page-link" href="{{ $tutorials->url($i) }}">{{ $i }}</a>
+                                                <a class="page-link" href="{{ $categoryTutorial->url($i) }}">{{ $i }}</a>
                                             </li>
                                         @endif
                                     @endfor
                                 @else
-                                    @for ($i = $tutorials->currentPage() + 1; $i <= $tutorials->lastPage(); $i++)
+                                    @for ($i = $categoryTutorial->currentPage() + 1; $i <= $categoryTutorial->lastPage(); $i++)
                                         @if ($i == 1)
                                             <li class="page-item">
-                                                <a class="page-link" href="/admin/tutorials">{{ $i }}</a>
+                                                <a class="page-link" href="/admin/category_tutorial">{{ $i }}</a>
                                             </li>
                                         @else
                                             <li class="page-item">
-                                                <a class="page-link" href="{{ $tutorials->url($i) }}">{{ $i }}</a>
+                                                <a class="page-link" href="{{ $categoryTutorial->url($i) }}">{{ $i }}</a>
                                             </li>
                                         @endif
                                     @endfor
                                 @endif
-                                            {{-- Tombol Selanjutnya --}}
-                                @if ($tutorials->hasMorePages())
+                                {{-- Tombol Selanjutnya --}}
+                                @if ($categoryTutorial->hasMorePages())
                                     <li class="page-item">
-                                        <a class="page-link" href="{{ $tutorials->nextPageUrl() }}" aria-label="Next">
+                                        <a class="page-link" href="{{ $categoryTutorial->nextPageUrl() }}" aria-label="Next">
                                             <span aria-hidden="true">&raquo;</span>
                                         </a>
                                     </li>
@@ -252,6 +250,43 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', function () {
+
+        // Tambahkan event listener untuk tombol addCategory
+        document.getElementById('addCategory').addEventListener('click', function () {
+            // Tampilkan formAddCat
+            document.getElementById('formAddCat').style.display = 'block';
+        });
+        // Dapatkan elemen input nama kategori
+        var categoryNameInput = document.getElementById('category_name');
+
+        // Dapatkan elemen dropdown status
+        var statusDropdown = document.getElementsByName('status')[0];
+
+        // Dapatkan elemen form berdasarkan ID
+        var formAddCat = document.getElementById('submitAddCat');
+
+        // Tambahkan event listener untuk input nama kategori
+        categoryNameInput.addEventListener('input', function() {
+            checkInputsAndSubmit();
+        });
+
+        // Tambahkan event listener untuk dropdown status
+        statusDropdown.addEventListener('change', function() {
+            checkInputsAndSubmit();
+        });
+
+        // Fungsi untuk memeriksa kedua input dan menyerahkan form jika sudah diisi
+        function checkInputsAndSubmit() {
+            var categoryName = categoryNameInput.value.trim();
+            var status = statusDropdown.value;
+
+            // Periksa apakah kedua input sudah diisi
+            if (categoryName == '' || status == '') {
+                // Jika sudah diisi, submit form
+                formAddCat.preventDefault();
+            }
+        }
+
 
         // Inisialisasi datepicker
         $('#usersearch-created_at').datepicker({

@@ -152,7 +152,7 @@
                                         <td><input type="text" class="form-control" name="search[username]" onkeypress="handleKeyPress(event)" value="{{(isset($searchData['username'])) ? $searchData['username'] : ''}}"></td>
                                         <td><input type="text" class="form-control" name="search[email]" onkeypress="handleKeyPress(event)" value="{{(isset($searchData['email'])) ? $searchData['email'] : ''}}"></td>
                                         <td>
-                                            <select id="search-status" class="form-control" name="search[status]" oninput="this.form.submit()">
+                                            <select id="search-status" class="form-control" name="search[status]" onchange="this.form.submit()">
                                                 <option value="" disabled {{(!isset($searchData['status']) ? 'selected' : '')}}></option>
                                                 <option value="active" {{(isset($searchData['status']) && $searchData['status'] == 'active') ? 'selected' : ''}}>Active</option>
                                                 <option value="inactive" {{(isset($searchData['status']) && $searchData['status'] == 'inactive') ? 'selected' : ''}}>InActive</option>
@@ -160,12 +160,12 @@
                                         </td>
                                         <td>
                                             <div id="search-created_at-kvdate" class="input-group date">
-                                                <input type="date" id="search-created_at" class="form-control" oninput="this.form.submit()" name="search[created_at]" max="<?php echo date('Y-m-d'); ?>" value="{{(isset($searchData['created_at'])) ? $searchData['created_at'] : ''}}">
+                                                <input type="date" id="search-created_at" class="form-control" onchange="this.form.submit()" name="search[created_at]" max="<?php echo date('Y-m-d'); ?>" value="{{(isset($searchData['created_at'])) ? $searchData['created_at'] : ''}}">
                                             </div>
                                         </td>
                                         <td>
                                             <div id="search-logged_at-kvdate" class="input-group date">
-                                                <input type="date" id="search-logged_at" class="form-control" oninput="this.form.submit()" name="search[last_login]" max="<?php echo date('Y-m-d'); ?>" value="{{(isset($searchData['last_login'])) ? $searchData['last_login'] : ''}}">
+                                                <input type="date" id="search-logged_at" class="form-control" onchange="this.form.submit()" name="search[last_login]" max="<?php echo date('Y-m-d'); ?>" value="{{(isset($searchData['last_login'])) ? $searchData['last_login'] : ''}}">
                                             </div>
                                         </td>
                                         <td>&nbsp;</td>

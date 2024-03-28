@@ -55,7 +55,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link {{isset($currentAdminSubMenu) && $currentAdminSubMenu == 'category_tutorial' ? 'active' : ''}}">
+                            <a href="{{route('category_tutorial.index')}}" class="nav-link {{isset($currentAdminSubMenu) && $currentAdminSubMenu == 'category_tutorial' ? 'active' : ''}}">
                                 <i class="nav-icon far fa-circle {{isset($currentAdminSubMenu) && $currentAdminSubMenu == 'category_tutorial' ? 'text-dark' : ''}}"></i>&nbsp;<p>Categories</p>
                             </a>
                         </li>

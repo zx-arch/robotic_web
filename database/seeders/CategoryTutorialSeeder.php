@@ -13,6 +13,11 @@ class CategoryTutorialSeeder extends Seeder
      */
     public function run(): void
     {
+        if (DB::table('category_tutorial')->count() > 0) {
+            // Jika sudah ada, hapus semua data dari tabel
+            DB::table('category_tutorial')->truncate();
+        }
+
         DB::table('category_tutorial')->insert([
             'category' => 'product video',
         ]);

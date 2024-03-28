@@ -93,6 +93,7 @@ class Tutorials extends Model
                 [
                     'video_name' => 'Pengenalan Komponen Perangkat Studuino #5',
                     'category' => 'software requirement',
+                    'tutorial_category_id' => 2,
                     'thumbnail' => url('/assets/youtube/software requirement/Pengenalan Komponen Perangkat Studuino 5.png'),
                     'path_video' => url('/assets/youtube/software requirement/Pengenalan Komponen Perangkat Studuino 5.mp4'),
                     'url' => 'https://youtu.be/qOFV7Nf8w4Y',
