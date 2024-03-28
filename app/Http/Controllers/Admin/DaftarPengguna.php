@@ -9,6 +9,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Activity;
+use Illuminate\Validation\ValidationException;
 
 class DaftarPengguna extends Controller
 {
@@ -194,6 +195,12 @@ class DaftarPengguna extends Controller
                 'role' => 'required|string',
                 'password' => ['required', 'string', 'min:8', 'regex:/^(?=.*[a-zA-Z])(?=.*\d).{8,}$/'],
             ]);
+
+            $existingUser = User::where('email', $request->email)->orWhere('username', $request->username)->first();
+
+            if ($existingUser) {
+                throw ValidationException::withMessages(['email' => 'User or email already exists.']);
+            }
             //dd($request->all());
             $newUser = User::create([
                 'username' => $request->username,
@@ -209,6 +216,10 @@ class DaftarPengguna extends Controller
             ]));
 
             return redirect()->route('daftar_pengguna.index')->with('success_submit_save', 'User Berhasil Dibuat!');
+
+        } catch (ValidationException $e) {
+            // Tangkap kesalahan validasi
+            return redirect()->back()->withErrors($e->errors())->withInput();
 
         } catch (\Throwable $e) {
             return redirect()->back()->with('error_submit_save', $e->getMessage());

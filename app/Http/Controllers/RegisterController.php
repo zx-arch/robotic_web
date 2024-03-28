@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\ValidationException;
 use App\Models\Activity;
 use App\Models\User;
 
@@ -24,7 +24,7 @@ class RegisterController extends Controller
     {
         try {
             $this->validate($request, [
-                'username' => 'required|string', // Tambahkan validasi untuk username
+                'username' => 'required|string|min:3', // Tambahkan validasi untuk username
                 'email' => [
                     'required',
                     'email',
@@ -40,6 +40,12 @@ class RegisterController extends Controller
                 'password' => ['required', 'string', 'min:8', 'regex:/^(?=.*[a-zA-Z])(?=.*\d).{8,}$/'],
             ]);
 
+            $existingUser = User::where('email', $request->email)->orWhere('username', $request->username)->first();
+
+            if ($existingUser) {
+                throw ValidationException::withMessages(['email' => 'User or email already exists.']);
+            }
+
             $newUser = User::create([
                 'username' => $request->username,
                 'password' => Hash::make($request->password),
@@ -53,7 +59,11 @@ class RegisterController extends Controller
                 'action' => 'User Create New Account ID ' . $newUser->id,
             ]));
 
-            return redirect()->back()->with('success_register', 'User Berhasil Dibuat.. Tunggu Konfirmasi Admin');
+            return redirect()->back()->with('success_register', 'User Berhasil Dibuat.. Tunggu Konfirmasi Email Admin');
+
+        } catch (ValidationException $e) {
+            // Tangkap kesalahan validasi
+            return redirect()->back()->withErrors($e->errors())->withInput();
 
         } catch (\Throwable $e) {
             return redirect()->back()->with('error_register', 'Gagal Buat User ' . $e->getMessage());

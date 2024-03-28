@@ -66,9 +66,9 @@
                                     <div class="mb-3">
                                         <label for="role" class="form-label">Role</label>
                                         <select name="role" id="role" class="form-control" required>
-                                            <option value="" selected disabled>Select Role ..</option>
-                                            <option value="pengurus">Pengurus</option>
-                                            <option value="user">User</option>
+                                            <option value="" disabled {{!old('role') ? 'selected' : ''}}>Select Role ..</option>
+                                            <option value="pengurus" {{ old('role') == 'pengurus' ? 'selected' : '' }}>Pengurus</option>
+                                            <option value="user" {{ old('role') == 'user' ? 'selected' : '' }}>User</option>
                                         </select>
                                     </div>
 
@@ -87,21 +87,19 @@
                             </div>
 
                             @if (session()->has('success_register'))
-                                <span role="alert">
-                                    <strong class="text-success">{{ session('success_register') }}</strong>
-                                </span>
+                                <div class="alert alert-success">{{ session('success_register') }}</div>
                             @endif
 
                             @if (session()->has('error_register'))
-                                <span role="alert">
-                                    <strong class="text-warning">{{ session('error_register') }}</strong>
-                                </span>
+                                <div class="alert alert-warning">{{ session('error_register') }}</div>
                             @endif
-                            
+
+                            @if ($errors->has('email'))
+                                <div class="alert alert-danger">{{ $errors->first('email') }}</div>
+                            @endif
+
                             @error('message')
-                                <span role="alert">
-                                    <strong class="text-warning">{{ $message }}</strong>
-                                </span>
+                                <div class="alert alert-warning">{{ $message }}</div>
                             @enderror
                         </div>
 

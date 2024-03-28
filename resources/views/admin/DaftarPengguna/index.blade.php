@@ -98,6 +98,13 @@
                         </div>
                     @endif
 
+                    @if ($errors->has('email'))
+                        <div id="w6" class="alert-danger alert alert-dismissible mt-3 w-75" role="alert">
+                            {{ $errors->first('email') }}
+                            <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span></button>
+                        </div>
+                    @endif
+
                     @if (session()->has('error_restore'))
                         <div id="w6" class="alert-danger alert alert-dismissible mt-3 w-75" role="alert">
                             {{session('error_restore')}}
