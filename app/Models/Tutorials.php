@@ -18,7 +18,8 @@ class Tutorials extends Model
         'thumbnail',
         'path_video',
         'url',
-        'status_id'
+        'status_id',
+        'tutorial_category_id',
     ];
 
     protected static function boot()
@@ -47,6 +48,7 @@ class Tutorials extends Model
                 [
                     'video_name' => 'Robo Link Basic',
                     'category' => 'product video',
+                    'tutorial_category_id' => 1,
                     'thumbnail' => url('/assets/youtube/product video/robo-link-thumb.png'),
                     'path_video' => url('/assets/youtube/product video/Robo Links Basic.mp4'),
                     'url' => 'https://youtu.be/ExJNoBxY23M?si=1H-s3o2SGKRM0BWI',
@@ -55,6 +57,7 @@ class Tutorials extends Model
                 [
                     'video_name' => 'Instalasi Studuino Software #1',
                     'category' => 'software requirement',
+                    'tutorial_category_id' => 2,
                     'thumbnail' => url('/assets/youtube/software requirement/Instalasi Studuino Software 1.png'),
                     'path_video' => url('/assets/youtube/software requirement/Instalasi Studuino Software 1.mp4'),
                     'url' => 'https://youtu.be/fddwkD2b7FE',
@@ -63,6 +66,7 @@ class Tutorials extends Model
                 [
                     'video_name' => 'Instalasi USB Driver For Windows #2',
                     'category' => 'software requirement',
+                    'tutorial_category_id' => 2,
                     'thumbnail' => url('/assets/youtube/software requirement/Instalasi USB Driver For Windows 2.png'),
                     'path_video' => url('/assets/youtube/software requirement/Installing USB Device Driver _ Windows.mp4'),
                     'url' => 'https://youtu.be/Re_kEa4Mm6c',
@@ -71,6 +75,7 @@ class Tutorials extends Model
                 [
                     'video_name' => 'Pengenalan Komponen Sensors, LEDs & Buzzers Studuino #3',
                     'category' => 'software requirement',
+                    'tutorial_category_id' => 2,
                     'thumbnail' => url('/assets/youtube/software requirement/Pengenalan Komponen Perangkat Studuino 3.png'),
                     'path_video' => url('/assets/youtube/software requirement/Pengenalan Komponen Perangkat Studuino 3.mp4'),
                     'url' => 'https://youtu.be/4E3y13Wwvr8',
@@ -79,6 +84,7 @@ class Tutorials extends Model
                 [
                     'video_name' => 'Pengenalan Komponen DCMotors & ServoMotors Studuino #4',
                     'category' => 'software requirement',
+                    'tutorial_category_id' => 2,
                     'thumbnail' => url('/assets/youtube/software requirement/Pengenalan Komponen Perangkat Studuino 4.png'),
                     'path_video' => url('/assets/youtube/software requirement/Pengenalan Komponen Perangkat Studuino 4.mp4'),
                     'url' => 'https://youtu.be/Ek7VpSqRi3E',
@@ -95,6 +101,7 @@ class Tutorials extends Model
                 [
                     'video_name' => 'Pengenalan Komponen Perangkat Studuino #6',
                     'category' => 'software requirement',
+                    'tutorial_category_id' => 2,
                     'thumbnail' => url('/assets/youtube/software requirement/Pengenalan Komponen Perangkat LED Studuino 6.png'),
                     'path_video' => url('/assets/youtube/software requirement/Pengenalan Komponen Perangkat LED Studuino 6.mp4'),
                     'url' => 'https://youtu.be/qECp7LMA4LU',
@@ -103,6 +110,7 @@ class Tutorials extends Model
                 [
                     'video_name' => 'Mengatur Komponen ON OFF LED #7',
                     'category' => 'software requirement',
+                    'tutorial_category_id' => 2,
                     'thumbnail' => url('/assets/youtube/software requirement/Mengatur Komponen ON OFF LED 7.png'),
                     'path_video' => url('/assets/youtube/software requirement/Mengatur Komponen ON OFF LED 7.mp4'),
                     'url' => 'https://youtu.be/_JsCFu5hpBw',
@@ -111,6 +119,7 @@ class Tutorials extends Model
                 [
                     'video_name' => 'Mengatur Waktu ON-OFF LED #8',
                     'category' => 'software requirement',
+                    'tutorial_category_id' => 2,
                     'thumbnail' => url('/assets/youtube/software requirement/Mengatur Waktu ON-OFF LED 8.png'),
                     'path_video' => url('/assets/youtube/software requirement/Mengatur Waktu ON-OFF LED 8.mp4'),
                     'url' => 'https://youtu.be/whuyI3eIz14',
@@ -131,6 +140,7 @@ class Tutorials extends Model
                 [
                     'video_name' => 'Robo Link Basic',
                     'category' => 'product video',
+                    'tutorial_category_id' => 1,
                     'thumbnail' => url('/assets/youtube/product video/robo-link-thumb.png'),
                     'path_video' => url('/assets/youtube/product video/Robo Links Basic.mp4'),
                     'url' => 'https://youtu.be/ExJNoBxY23M?si=1H-s3o2SGKRM0BWI',
@@ -139,6 +149,7 @@ class Tutorials extends Model
                 [
                     'video_name' => 'Instalasi Studuino Software #1',
                     'category' => 'software requirement',
+                    'tutorial_category_id' => 2,
                     'thumbnail' => url('/assets/youtube/software requirement/Instalasi Studuino Software 1.png'),
                     'path_video' => url('/assets/youtube/software requirement/Instalasi Studuino Software 1.mp4'),
                     'url' => 'https://youtu.be/fddwkD2b7FE',
@@ -147,6 +158,7 @@ class Tutorials extends Model
                 [
                     'video_name' => 'Instalasi USB Driver For Windows #2',
                     'category' => 'software requirement',
+                    'tutorial_category_id' => 2,
                     'thumbnail' => url('/assets/youtube/software requirement/Instalasi USB Driver For Windows 2.png'),
                     'path_video' => url('/assets/youtube/software requirement/Installing USB Device Driver _ Windows.mp4'),
                     'url' => 'https://youtu.be/Re_kEa4Mm6c',
@@ -155,6 +167,7 @@ class Tutorials extends Model
                 [
                     'video_name' => 'Pengenalan Komponen Sensors, LEDs & Buzzers Studuino #3',
                     'category' => 'software requirement',
+                    'tutorial_category_id' => 2,
                     'thumbnail' => url('/assets/youtube/software requirement/Pengenalan Komponen Perangkat Studuino 3.png'),
                     'path_video' => url('/assets/youtube/software requirement/Pengenalan Komponen Perangkat Studuino 3.mp4'),
                     'url' => 'https://youtu.be/4E3y13Wwvr8',
@@ -163,6 +176,7 @@ class Tutorials extends Model
                 [
                     'video_name' => 'Pengenalan Komponen DCMotors & ServoMotors Studuino #4',
                     'category' => 'software requirement',
+                    'tutorial_category_id' => 2,
                     'thumbnail' => url('/assets/youtube/software requirement/Pengenalan Komponen Perangkat Studuino 4.png'),
                     'path_video' => url('/assets/youtube/software requirement/Pengenalan Komponen Perangkat Studuino 4.mp4'),
                     'url' => 'https://youtu.be/Ek7VpSqRi3E',
@@ -171,6 +185,7 @@ class Tutorials extends Model
                 [
                     'video_name' => 'Pengenalan Komponen Perangkat Studuino #5',
                     'category' => 'software requirement',
+                    'tutorial_category_id' => 2,
                     'thumbnail' => url('/assets/youtube/software requirement/Pengenalan Komponen Perangkat Studuino 5.png'),
                     'path_video' => url('/assets/youtube/software requirement/Pengenalan Komponen Perangkat Studuino 5.mp4'),
                     'url' => 'https://youtu.be/qOFV7Nf8w4Y',
@@ -179,6 +194,7 @@ class Tutorials extends Model
                 [
                     'video_name' => 'Pengenalan Komponen Perangkat Studuino #6',
                     'category' => 'software requirement',
+                    'tutorial_category_id' => 2,
                     'thumbnail' => url('/assets/youtube/software requirement/Pengenalan Komponen Perangkat LED Studuino 6.png'),
                     'path_video' => url('/assets/youtube/software requirement/Pengenalan Komponen Perangkat LED Studuino 6.mp4'),
                     'url' => 'https://youtu.be/qECp7LMA4LU',
@@ -187,6 +203,7 @@ class Tutorials extends Model
                 [
                     'video_name' => 'Mengatur Komponen ON OFF LED #7',
                     'category' => 'software requirement',
+                    'tutorial_category_id' => 2,
                     'thumbnail' => url('/assets/youtube/software requirement/Mengatur Komponen ON OFF LED 7.png'),
                     'path_video' => url('/assets/youtube/software requirement/Mengatur Komponen ON OFF LED 7.mp4'),
                     'url' => 'https://youtu.be/_JsCFu5hpBw',
@@ -195,6 +212,7 @@ class Tutorials extends Model
                 [
                     'video_name' => 'Mengatur Waktu ON-OFF LED #8',
                     'category' => 'software requirement',
+                    'tutorial_category_id' => 2,
                     'thumbnail' => url('/assets/youtube/software requirement/Mengatur Waktu ON-OFF LED 8.png'),
                     'path_video' => url('/assets/youtube/software requirement/Mengatur Waktu ON-OFF LED 8.mp4'),
                     'url' => 'https://youtu.be/whuyI3eIz14',
@@ -217,5 +235,9 @@ class Tutorials extends Model
     public function masterStatus()
     {
         return $this->belongsTo(MasterStatus::class, 'id');
+    }
+    public function categoryTutorial()
+    {
+        return $this->belongsTo(CategoryTutorial::class, 'id');
     }
 }

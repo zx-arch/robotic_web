@@ -55,8 +55,8 @@
                                                     <label for="category">Category <span class="text-danger">*</span></label>
                                                     <select name="category" id="category" class="form-control w-50" required>
                                                         <option value="" disabled selected>Choose Category ..</option>
-                                                        @foreach ($getCategory as $category)
-                                                            <option value="{{$category}}">{{$category}}</option>
+                                                        @foreach ($getCategory as $tutorial_cat)
+                                                            <option value="{{$tutorial_cat->id}}">{{$tutorial_cat->category}}</option>
                                                         @endforeach
                                                     </select>
                                                     <div class="invalid-feedback"></div>

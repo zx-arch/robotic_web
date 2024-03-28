@@ -10,6 +10,7 @@ use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Activity;
+use App\Models\CategoryTutorial;
 
 class TutorialsAdminController extends Controller
 {
@@ -23,7 +24,7 @@ class TutorialsAdminController extends Controller
     public function index()
     {
         $tutorials = Tutorials::with('masterStatus')->withTrashed()->latest();
-        $getCategory = Tutorials::select('category')->groupBy('category')->get()->pluck('category');
+        $getCategory = CategoryTutorial::all();
         //dd($getCategory);
         $totalTutorials = $tutorials->count();
 
@@ -58,8 +59,8 @@ class TutorialsAdminController extends Controller
         $status_id = $searchData['status_id'] ?? null;
         $created_at = $searchData['created_at'] ?? null;
         $updated_at = $searchData['updated_at'] ?? null;
-        $getCategory = Tutorials::select('category')->groupBy('category')->get()->pluck('category');
-
+        $getCategory = CategoryTutorial::all();
+        //dd($request->all());
         // Misalnya, Anda ingin mencari data user berdasarkan video_name, category, status_id, created_at, atau updated_at
         $tutorials = Tutorials::query()->withTrashed();
 
@@ -73,7 +74,7 @@ class TutorialsAdminController extends Controller
             }
 
             if ($category !== null) {
-                $query->where('category', $category);
+                $query->where('tutorial_category_id', $category);
             }
 
             if ($created_at !== null) {
@@ -116,7 +117,7 @@ class TutorialsAdminController extends Controller
     }
     public function add()
     {
-        $getCategory = Tutorials::select('category')->groupBy('category')->get()->pluck('category');
+        $getCategory = CategoryTutorial::all();
 
         return view('admin.tutorials.add', $this->data, compact('getCategory'));
     }
@@ -141,7 +142,8 @@ class TutorialsAdminController extends Controller
 
             $tutorial = Tutorials::create([
                 'video_name' => $request->video_name,
-                'category' => $request->category,
+                'category' => CategoryTutorial::where('id', $request->category)->first()->category,
+                'tutorial_category_id' => $request->category,
                 'thumbnail' => url('assets/youtube/' . $request->category . '/' . $uniqueImageName),
                 'url' => $request->url_link,
                 'path_video' => '-',
@@ -211,7 +213,7 @@ class TutorialsAdminController extends Controller
     {
         try {
             $tutorial = Tutorials::where('id', decrypt($video_id))->first();
-            $getCategory = Tutorials::select('category')->groupBy('category')->get()->pluck('category');
+            $getCategory = CategoryTutorial::all();
 
             return view('Admin.Tutorials.update', $this->data, compact('tutorial', 'getCategory'));
 
@@ -265,7 +267,8 @@ class TutorialsAdminController extends Controller
 
                             $tutorial = Tutorials::where('id', $video->id)->update([
                                 'video_name' => $request->video_name,
-                                'category' => $request->category,
+                                'category' => CategoryTutorial::where('id', $request->category)->first()->category,
+                                'tutorial_category_id' => $request->category,
                                 'status_id' => ($request->status === 'enable') ? 4 : (($request->status === 'disable') ? 5 : 6),
                                 'url' => $request->url_link,
                                 'path_video' => '-',
@@ -288,7 +291,8 @@ class TutorialsAdminController extends Controller
 
                         Tutorials::where('id', $video->id)->update([
                             'video_name' => $request->video_name,
-                            'category' => $request->category,
+                            'category' => CategoryTutorial::where('id', $request->category)->first()->category,
+                            'tutorial_category_id' => $request->category,
                             'path_video' => '-',
                             'status_id' => ($request->status === 'enable') ? 4 : (($request->status === 'disable') ? 5 : 6),
                             'url' => $request->url_link,

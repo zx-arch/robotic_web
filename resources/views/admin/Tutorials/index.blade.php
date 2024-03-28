@@ -92,8 +92,8 @@
                                             <td>
                                                 <select name="search[category]" id="category" class="form-control" oninput="this.form.submit()">
                                                     <option value="" disabled {{(!isset($searchData['category'])) ? 'selected' : ''}}></option>
-                                                    @foreach ($getCategory as $category)
-                                                        <option value="{{$category}}" {{(isset($searchData['category']) && $searchData['category'] == $category) ? 'selected' : ''}}>{{$category}}</option>
+                                                    @foreach ($getCategory as $tutorial_cat)
+                                                        <option value="{{$tutorial_cat->id}}" {{(isset($searchData['category']) && $searchData['category'] == $tutorial_cat->id) ? 'selected' : ''}}>{{$tutorial_cat->category}}</option>
                                                     @endforeach
                                                 </select>
                                             </td>

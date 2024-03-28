@@ -58,8 +58,8 @@
                                                     <label for="category">Category <span class="text-danger">*</span></label>
                                                     <select name="category" id="category" class="form-control w-50" required>
                                                         <option value="" disabled {{(isset($tutorial) && $tutorial->category) ? '' : 'selected'}}>Choose Category ..</option>
-                                                        @foreach ($getCategory as $category)
-                                                            <option value="{{$category}}" {{(isset($tutorial) && $tutorial->video_name == $category) ? 'selected' : ''}}>{{$category}}</option>
+                                                        @foreach ($getCategory as $tutorial_cat)
+                                                            <option value="{{$tutorial_cat->id}}" {{(isset($tutorial) && $tutorial->tutorial_category_id == $tutorial_cat->id) ? 'selected' : ''}}>{{$tutorial_cat->category}}</option>
                                                         @endforeach
                                                     </select>
                                                     <div class="invalid-feedback"></div>
