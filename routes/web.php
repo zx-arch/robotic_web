@@ -28,6 +28,7 @@ use App\Http\Controllers\Pengurus\TutorialsPengurusController;
 
 Route::get('/', [DashboardController::class, 'index'])->name('home_dashboard');
 Route::get('/login', [LoginController::class, 'index'])->name('form.login');
+Route::post('/register/submit', [RegisterController::class, 'submit'])->name('register.submit');
 Route::get('/materials', [MaterialsController::class, 'index'])->name('materials');
 Route::post('/materials/find', [MaterialsController::class, 'find'])->name('materials.find');
 Route::get('/courses/{jenis_materi}', [CoursesController::class, 'index'])->name('courses');

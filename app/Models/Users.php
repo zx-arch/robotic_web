@@ -16,7 +16,8 @@ class Users extends Model
         'username',
         'email',
         'role',
-        'status'
+        'status',
+        'password',
     ];
 
     protected static function boot()
