@@ -48,12 +48,9 @@ class RegisterController extends Controller
                 'role' => $request->role
             ]);
 
-            // Periksa apakah pengguna terotentikasi sebelumnya sebelum menggunakan Auth::user()->username
-            $username = Auth::check() ? Auth::user()->username : 'Unknown';
-
             Activity::create(array_merge(session('myActivity'), [
                 'user_id' => $newUser->id,
-                'action' => $username . ' User Create New Account ID ' . $newUser->id,
+                'action' => 'User Create New Account ID ' . $newUser->id,
             ]));
 
             return redirect()->back()->with('success_register', 'User Berhasil Dibuat.. Tunggu Konfirmasi Admin');
