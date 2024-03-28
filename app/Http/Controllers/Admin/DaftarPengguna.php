@@ -253,8 +253,21 @@ class DaftarPengguna extends Controller
                     $hashedPassword = $request->password;
                 }
 
+                // masukkan tanggal email_verified_at saat posisi user inactive tetapi sudah diaktifkan dari admin
+                if ($user->status == 'inactive') {
+                    if ($request->status == 'active') {
+                        $user->update([
+                            'email_verified_at' => now(),
+                        ]);
+                    }
+                }
+
                 // Lakukan update dengan password yang sudah di-rehash jika perlu
                 $user->update([
+                    'username' => $request->username,
+                    'email' => $request->email,
+                    'role' => $request->role,
+                    'status' => $request->status,
                     'password' => $hashedPassword,
                 ]);
 

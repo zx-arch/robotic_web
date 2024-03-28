@@ -71,7 +71,7 @@
                     @endif
 
                     @if (session()->has('success_submit_save'))
-                        <div id="w6" class="alert-success alert alert-dismissible mt-3 w-75" role="alert">
+                        <div id="w6" class="alert-primary alert alert-dismissible mt-3 w-75" role="alert">
                             {{session('success_submit_save')}}
                             <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span></button>
                         </div>
