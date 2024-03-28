@@ -38,10 +38,33 @@
                         <i class="nav-icon fas fa-tachometer-alt {{isset($currentAdminMenu) && $currentAdminMenu == 'dashboard' ? 'text-white' : ''}}"></i>&nbsp;<p>Dashboard</p>
                     </a>
                 </li>
-                <li class="nav-item">
+                {{-- <li class="nav-item">
                     <a href="{{route('tutorials.index')}}" class="nav-link {{isset($currentAdminMenu) && $currentAdminMenu == 'tutorials' ? 'active' : ''}}">
                         <i class="nav-icon fa fa-play {{isset($currentAdminMenu) && $currentAdminMenu == 'tutorials' ? 'text-white' : ''}}"></i>&nbsp;<p>Tutorials</p>
                     </a>
+                </li> --}}
+                <li class="nav-item has-treeview {{isset($currentAdminMenu) && $currentAdminMenu == 'tutorials' ? 'menu-open' : ''}}">
+                    <div class="nav-link toggle-label {{isset($currentAdminMenu) && $currentAdminMenu == 'tutorials' ? 'active' : ''}}" onclick="toggleSubMenu(event)">
+                        <i class="nav-icon fa fa-play {{isset($currentAdminMenu) && $currentAdminMenu == 'tutorials' ? 'text-white' : ''}}"></i>&nbsp;
+                        <p class="menu-text {{isset($currentAdminMenu) && $currentAdminMenu == 'tutorials' ? 'text text-white' : ''}}">Tutorials<i class="fas fa-angle-left right"></i></p>
+                    </div>
+                    <ul class="nav nav-treeview submenu">
+                        <li class="nav-item">
+                            <a href="{{route('tutorials.index')}}" class="nav-link {{isset($currentAdminSubMenu) && $currentAdminSubMenu == 'preview' ? 'active' : ''}}">
+                                <i class="nav-icon far fa-circle {{isset($currentAdminSubMenu) && $currentAdminSubMenu == 'preview' ? 'text-dark' : ''}}"></i>&nbsp;<p>Preview</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link {{isset($currentAdminSubMenu) && $currentAdminSubMenu == 'category_tutorial' ? 'active' : ''}}">
+                                <i class="nav-icon far fa-circle {{isset($currentAdminSubMenu) && $currentAdminSubMenu == 'category_tutorial' ? 'text-dark' : ''}}"></i>&nbsp;<p>Categories</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link {{isset($currentAdminSubMenu) && $currentAdminSubMenu == 'anomali_tutorial' ? 'active' : ''}}">
+                                <i class="nav-icon far fa-circle {{isset($currentAdminSubMenu) &&$currentAdminSubMenu == 'anomali_tutorial' ? 'text-dark' : ''}}"></i>&nbsp;<p>Anomali Tutorial</p>
+                            </a>
+                        </li>
+                    </ul>
                 </li>
                 <li class="nav-item">
                     <a href="{{route('daftar_pengguna.index')}}" class="nav-link {{isset($currentAdminMenu) && $currentAdminMenu == 'daftar_pengguna' ? 'active' : ''}}">

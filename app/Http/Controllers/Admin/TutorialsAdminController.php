@@ -19,6 +19,7 @@ class TutorialsAdminController extends Controller
     public function __construct()
     {
         $this->data['currentAdminMenu'] = 'tutorials';
+        $this->data['currentAdminSubMenu'] = 'preview';
     }
 
     public function index()
