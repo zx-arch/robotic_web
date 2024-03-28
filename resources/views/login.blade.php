@@ -45,22 +45,24 @@
                                     @enderror
                                 </div>
 
-                                <button type="submit" name="login" class="btn btn-primary">Login</button>
+                                <button type="submit" name="login" id="buttonLogin" class="btn btn-primary">Login</button>
                                 <button type="button" id="buttonRegister" class="btn btn-success">Register</button>
                             </form>
 
-                            <div id="formRegis" style="display: none;">
+                            <div id="formRegister" style="display: none;">
                                 <form action="{{route('register.submit')}}" method="POST">
                                     @csrf
 
                                     <div class="mb-3">
                                         <label for="nama" class="form-label">Username</label>
                                         <input id="username" type="text" class="form-control" name="username" value="{{ old('username') }}" required autofocus>
+                                        <div class="invalid-feedback"></div>
                                     </div>
 
                                     <div class="mb-3">
                                         <label for="email" class="form-label">Email</label>
                                         <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required autofocus>
+                                        <div class="invalid-feedback"></div>
                                     </div>
 
                                     <div class="mb-3">
@@ -70,18 +72,21 @@
                                             <option value="pengurus" {{ old('role') == 'pengurus' ? 'selected' : '' }}>Pengurus</option>
                                             <option value="user" {{ old('role') == 'user' ? 'selected' : '' }}>User</option>
                                         </select>
+                                        <div class="invalid-feedback"></div>
                                     </div>
 
                                     <div class="mb-3">
                                         <label for="password" class="form-label">Password</label>
                                         <input type="password" name="password" class="form-control" placeholder="Password" required>
+                                        <div class="invalid-feedback"></div>
                                         @error('password')
                                             <span role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>
                                         @enderror
                                     </div>
-                                    <button type="submit" name="register" class="btn btn-primary">Register</button>
+
+                                    <button type="submit" name="register" id="buttonSubmitRegister" class="btn btn-primary">Register</button>
                                 
                                 </form>
                             </div>
@@ -118,9 +123,103 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', function () {
+
         document.getElementById('buttonRegister').addEventListener('click', function () {
-            document.getElementById('formRegis').style.display = 'block';
+            document.getElementById('formRegister').style.display = 'block';
             document.getElementById('formLogin').style.display = 'none';
         });
+
+        const formLogin = document.getElementById('formLogin');
+        const formRegister = document.getElementById('formRegister');
+        const buttonLogin = document.getElementById('buttonLogin');
+        const buttonSubmitRegister = document.getElementById('buttonSubmitRegister');
+
+        formRegister.addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent default formLogin submission
+
+            // Reset styles and error messages
+            const inputsRegister = formRegister.querySelectorAll('input, textarea');
+            inputsRegister.forEach(input => {
+                input.classList.remove('is-invalid');
+                input.classList.remove('is-valid');
+                input.nextElementSibling.textContent = '';
+            });
+
+            // Validate each input
+            let isValid = true;
+            inputsRegister.forEach(input => {
+                if (!input.checkValidity()) {
+                    isValid = false;
+                    input.classList.add('is-invalid');
+                    input.nextElementSibling.textContent = input.validationMessage;
+                } else {
+                    input.classList.add('is-valid');
+                }
+            });
+
+            if (isValid) {
+                buttonSubmitRegister.disabled = false;
+                buttonSubmitRegister.style.pointerEvents = 'auto';
+                buttonSubmitRegister.style.opacity = '1';
+                // If form is valid, you can submit it here
+                formRegister.submit();
+            }
+        });
+
+        // Add event listener to validate on input change
+        const inputFieldsRegister = formRegister.querySelectorAll('input, textarea');
+
+        inputFieldsRegister.forEach(input => {
+            input.addEventListener('keyup', function() {
+                if (!this.checkValidity()) {
+                    this.classList.add('is-invalid');
+                    this.classList.remove('is-valid');
+                    this.nextElementSibling.textContent = this.validationMessage;
+                
+                } else if (this.id === 'username' && !/^[a-zA-Z]+$/.test(this.value)) {
+                    this.classList.add('is-invalid');
+                    this.classList.remove('is-valid');
+                    this.nextElementSibling.textContent = 'Username should only contain letters';
+                
+                } else if (this.id === 'email' && !isValidEmail(this.value)) {
+                    this.classList.add('is-invalid');
+                    this.classList.remove('is-valid');
+                    this.nextElementSibling.textContent = 'Please enter a valid email address';
+                
+                } else if (this.id === 'role' && this.value.trim() != '') {
+                    this.classList.add('is-invalid');
+                    this.classList.remove('is-valid');
+                    this.nextElementSibling.textContent = 'Choose Role..';
+                
+                } else {
+                    if (this.id === 'username' && !/^[a-zA-Z]{3,}$/.test(input.value)) {
+                        isValid = false;
+                        input.classList.add('is-invalid');
+                        input.classList.remove('is-valid');
+                        input.nextElementSibling.textContent = 'Username should have at least 3 letters';
+                    } else {
+                        this.classList.add('is-valid');
+                        this.classList.remove('is-invalid');
+                        this.nextElementSibling.textContent = '';
+                    }
+                }
+
+                // Disable submit button if form is not valid
+                if (!formRegister.checkValidity()) {
+                    buttonSubmitRegister.disabled = true;
+                    buttonSubmitRegister.style.pointerEvents = 'none';
+                    buttonSubmitRegister.style.opacity = '0.5';
+                } else {
+                    buttonSubmitRegister.disabled = false;
+                    buttonSubmitRegister.style.pointerEvents = 'auto';
+                    buttonSubmitRegister.style.opacity = '1';
+                }
+            });
+        });
+
+        function isValidEmail(email) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(email);
+        }
     });
 </script>
