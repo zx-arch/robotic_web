@@ -90,10 +90,10 @@
                                             <td><input type="text" class="form-control" name="search[video_name]" onkeypress="handleKeyPress(event)" value="{{(isset($searchData['video_name'])) ? $searchData['video_name'] : ''}}"></td>
                                             <td></td>
                                             <td>
-                                                <select name="search[category]" id="category" class="form-control" oninput="this.form.submit()">
+                                                <select name="search[category]" id="category" class="form-control" onchange="this.form.submit()">
                                                     <option value="" disabled {{(!isset($searchData['category'])) ? 'selected' : ''}}></option>
-                                                    @foreach ($getCategory as $category)
-                                                        <option value="{{$category}}" {{(isset($searchData['category']) && $searchData['category'] == $category) ? 'selected' : ''}}>{{$category}}</option>
+                                                    @foreach ($getCategory as $tutorial_cat)
+                                                        <option value="{{$tutorial_cat->id}}" {{(isset($searchData['category']) && $searchData['category'] == $tutorial_cat->id) ? 'selected' : ''}}>{{$tutorial_cat->category}}</option>
                                                     @endforeach
                                                 </select>
                                             </td>
@@ -131,7 +131,7 @@
                                                 <a href="{{$tutorial->url ?? $tutorial->path_video }}" class="glightbox ml-2">{{$tutorial->video_name}}</a>
                                             </td>
                                             
-                                            <td>{{$tutorial->category}}</td>
+                                            <td>{{$tutorial->category_name}}</td>
                                             
                                             @if ($tutorial->deleted_at == null)
                                                 <td>{{App\Models\MasterStatus::where('id',$tutorial->status_id)->first()->name}}</td>

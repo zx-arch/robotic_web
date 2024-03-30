@@ -131,7 +131,7 @@
                                                 <a href="{{$tutorial->url ?? $tutorial->path_video }}" class="glightbox ml-2">{{$tutorial->video_name}}</a>
                                             </td>
                                             
-                                            <td>{{$tutorial->category}}</td>
+                                            <td>{{$tutorial->category_name}}</td>
                                             
                                             @if ($tutorial->deleted_at == null)
                                                 <td>{{App\Models\MasterStatus::where('id',$tutorial->status_id)->first()->name}}</td>
@@ -145,7 +145,9 @@
                                             @if ($tutorial->deleted_at == null)
                                                 <td>
                                                     <a class="btn btn-warning btn-sm" href="{{ route('tutorials.update', ['video_id' => encrypt($tutorial->id)]) }}" title="Update" aria-label="Update" data-pjax="0"><i class="fa-fw fas fa-edit" aria-hidden></i></a>
-                                                    <a class="btn btn-danger btn-sm" id="buttonDelete" href="{{ route('tutorials.delete', ['video_id' => encrypt($tutorial->id)]) }}" title="Delete" aria-label="Delete" data-pjax="0" onclick="confirmDelete(event)"><i class="fa-fw fas fa-trash" aria-hidden></i></a>
+                                                    <a class="btn btn-danger btn-sm btn-delete" href="{{ route('tutorials.delete', ['video_id' => encrypt($tutorial->id)]) }}">
+                                                        <i class="fa-fw fas fa-trash" aria-hidden="true"></i>
+                                                    </a>
                                                 </td>
                                             @else
                                                 <td>
@@ -252,6 +254,29 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', function () {
+    // Tambahkan event listener ke tombol delete
+        document.querySelectorAll('.btn-delete').forEach(button => {
+            button.addEventListener('click', function(event) {
+                event.preventDefault();
+                const url = this.getAttribute('href');
+                
+                // Tampilkan SweetAlert konfirmasi penghapusan
+                Swal.fire({
+                    title: 'Apakah Anda yakin?',
+                    text: "Tutorial yang dihapus tidak akan ditampilkan ke user!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Ya, hapus!'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // Jika pengguna menekan tombol "Ya, hapus", arahkan ke URL penghapusan
+                        window.location.href = url;
+                    }
+                });
+            });
+        });
 
         // Inisialisasi datepicker
         $('#usersearch-created_at').datepicker({
@@ -267,50 +292,10 @@
             $('#usersearch-created_at').val(selectedDate);
         });
 
-        document.getElementById('buttonDelete').addEventListener('click', function(e) {
-            e.preventDefault();
-            // Tampilkan SweetAlert konfirmasi
-            Swal.fire({
-                title: 'Apakah Anda yakin?',
-                text: 'Gambar akan dihapus permanen!',
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Ya, hapus!',
-                cancelButtonText: 'Batal'
-            }).then((result) => {
-                // Jika konfirmasi diterima, submit form
-                if (result.isConfirmed) {
-                    document.getElementById('deleteAll').submit();
-                }
-            });
-        });
     });
 </script>
 
 <script>
-    function confirmDelete(event) {
-        // Menghentikan tindakan default pengguna saat mengklik tautan
-        event.preventDefault();
-
-            // Menampilkan konfirmasi menggunakan SweetAlert
-        Swal.fire({
-            title: 'Apakah Anda yakin?',
-            text: 'Data akan dihapus permanen!',
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Ya, hapus!',
-            cancelButtonText: 'Batal'
-        }).then((result) => {
-            // Jika pengguna menekan "Ya, hapus", maka lanjutkan dengan mengarahkan ke tautan delete
-            if (result.isConfirmed) {
-                window.location.href = event.target.href;
-            }
-        });
-    }
 
     function handleKeyPress(event) {
         // Periksa apakah tombol yang ditekan adalah tombol "Enter" (kode 13)

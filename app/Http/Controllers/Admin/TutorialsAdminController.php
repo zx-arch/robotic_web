@@ -24,11 +24,13 @@ class TutorialsAdminController extends Controller
 
     public function index()
     {
-        $tutorials = Tutorials::with('masterStatus')->withTrashed()->latest();
+        $tutorials = Tutorials::select('tutorials.*', 'category_tutorial.category as category_name')->leftJoin('category_tutorial', 'category_tutorial.id', '=', 'tutorials.tutorial_category_id')
+            ->with('masterStatus')->withTrashed()->latest();
+        $deletedTutorialsCount = Tutorials::onlyTrashed()->count();
+        //dd($deletedTutorialsCount);
         $getCategory = CategoryTutorial::all();
         //dd($getCategory);
         $totalTutorials = $tutorials->count();
-
         // Menentukan jumlah item per halaman
         $itemsPerPage = 10;
         //print_r();
@@ -63,27 +65,29 @@ class TutorialsAdminController extends Controller
         $getCategory = CategoryTutorial::all();
         //dd($request->all());
         // Misalnya, Anda ingin mencari data user berdasarkan video_name, category, status_id, created_at, atau updated_at
-        $tutorials = Tutorials::query()->withTrashed();
+        $tutorials = Tutorials::select('tutorials.*', 'category_tutorial.category as category_name')
+            ->leftJoin('category_tutorial', 'category_tutorial.id', '=', 'tutorials.tutorial_category_id')
+            ->withTrashed();
 
         $tutorials->where(function ($query) use ($video_name, $status_id, $category, $created_at, $updated_at) {
             if ($video_name !== null) {
-                $query->where('video_name', 'like', "$video_name%");
+                $query->where('tutorials.video_name', 'like', "$video_name%");
             }
 
             if ($status_id !== null) {
-                $query->where('status_id', $status_id);
+                $query->where('tutorials.status_id', $status_id);
             }
 
             if ($category !== null) {
-                $query->where('tutorial_category_id', $category);
+                $query->where('tutorials.tutorial_category_id', $category);
             }
 
             if ($created_at !== null) {
-                $query->where('created_at', 'like', "$created_at%");
+                $query->where('tutorials.created_at', 'like', "$created_at%");
             }
 
             if ($updated_at !== null) {
-                $query->where('updated_at', 'like', "$updated_at%");
+                $query->where('tutorials.updated_at', 'like', "$updated_at%");
             }
         });
 
@@ -143,13 +147,13 @@ class TutorialsAdminController extends Controller
 
             $tutorial = Tutorials::create([
                 'video_name' => $request->video_name,
-                'category' => CategoryTutorial::where('id', $request->category)->first()->category,
                 'tutorial_category_id' => $request->category,
                 'thumbnail' => url('assets/youtube/' . $request->category . '/' . $uniqueImageName),
                 'url' => $request->url_link,
                 'path_video' => '-',
                 'status_id' => ($request->status === 'enable') ? 4 : (($request->status === 'disable') ? 5 : 6),
             ]);
+
 
             // Jika data tutorial berhasil disimpan, lanjutkan dengan menyimpan file lokal
             if ($tutorial) {
@@ -162,6 +166,11 @@ class TutorialsAdminController extends Controller
 
                 // Simpan data image ke dalam file di direktori yang diinginkan
                 file_put_contents(public_path('assets/youtube/' . $request->category . '/' . $uniqueImageName), $imageBinary);
+
+                CategoryTutorial::where('id', $request->category)->update([
+                    'valid_deleted' => false,
+                    'delete_html_code' => '',
+                ]);
 
                 Activity::create(array_merge(session('myActivity'), [
                     'user_id' => Auth::user()->id,
@@ -191,19 +200,41 @@ class TutorialsAdminController extends Controller
         //dd($user_id);
         try {
             $video = Tutorials::find(decrypt($video_id));
+            $deletedTutorialsCount = Tutorials::where('tutorial_category_id', $video->id)->onlyTrashed()->count();
+            //dd($deletedTutorialsCount);
+            if (isset($video)) {
 
-            Tutorials::where('id', $video->id)->update([
-                'status_id' => 5
-            ]);
+                DB::transaction(function () use ($video) {
 
-            Tutorials::where('id', $video->id)->delete();
+                    Tutorials::where('id', $video->id)->update([
+                        'status_id' => 5
+                    ]);
 
-            Activity::create(array_merge(session('myActivity'), [
-                'user_id' => Auth::user()->id,
-                'action' => Auth::user()->username . ' Delete Tutorial Video ID ' . $video->id,
-            ]));
+                    Tutorials::where('id', $video->id)->delete();
 
-            return redirect()->route('tutorials.index')->with('success_deleted', 'Data berhasil dihapus!');
+
+
+
+                    Activity::create(array_merge(session('myActivity'), [
+                        'user_id' => Auth::user()->id,
+                        'action' => Auth::user()->username . ' Delete Tutorial Video ID ' . $video->id,
+                    ]));
+                });
+                $deletedTutorialsCount = Tutorials::where('tutorial_category_id', $video->tutorial_category_id)->onlyTrashed()->count();
+                $totalTutorialsCount = Tutorials::where('tutorial_category_id', $video->tutorial_category_id)->withTrashed()->count();
+                //dd($deletedTutorialsCount, $totalTutorialsCount);
+                if ($deletedTutorialsCount == $totalTutorialsCount) {
+                    CategoryTutorial::where('id', $video->tutorial_category_id)->update([
+                        'valid_deleted' => true,
+                        'delete_html_code' => '<a class="btn btn-danger btn-sm btn-delete" title="Delete" aria-label="Delete" data-pjax="0" onclick="confirmDelete(event)"><i class="fa-fw fas fa-trash" aria-hidden></i></a>',
+                    ]);
+                }
+                return redirect()->route('tutorials.index')->with('success_deleted', 'Data berhasil dihapus!');
+
+            } else {
+                return redirect()->route('tutorials.index')->with('error_deleted', 'ID tutorial tidak ditemukan .. data gagal dihapus!');
+            }
+
 
         } catch (\Throwable $e) {
             return redirect()->back()->with('error_deleted', 'Data gagal dihapus. ' . $e->getMessage());
@@ -268,7 +299,6 @@ class TutorialsAdminController extends Controller
 
                             $tutorial = Tutorials::where('id', $video->id)->update([
                                 'video_name' => $request->video_name,
-                                'category' => CategoryTutorial::where('id', $request->category)->first()->category,
                                 'tutorial_category_id' => $request->category,
                                 'status_id' => ($request->status === 'enable') ? 4 : (($request->status === 'disable') ? 5 : 6),
                                 'url' => $request->url_link,

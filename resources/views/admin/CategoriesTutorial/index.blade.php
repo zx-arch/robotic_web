@@ -13,10 +13,9 @@
             <div class="col-lg-12">
                 <h5 class="p-2">Category Tutorial</h5>
                 <button id="addCategory" class="btn btn-success mb-3" style="width: 6%;"><i class="fa fa-plus mr-1" aria-hidden="true"></i> Add</button>
-
                 <div class="card card-default">
 
-                    <div class="card-header" id="formAddCat" style="{{ session('success_submit_save') ? '' : 'display: none;' }}">
+                    <div class="card-header" id="formAddCat" style="{{ session('success_submit_save') || session('error_submit_save') ? '' : 'display: none;' }}">
 
                         <form action="{{route('category_tutorial.addSubmit')}}" method="post" id="submitAddCat">
                             @csrf
@@ -43,6 +42,13 @@
                         @if (session()->has('success_deleted'))
                             <div id="w6" class="alert-warning alert alert-dismissible mt-3 w-75" role="alert">
                                 {{session('success_deleted')}}
+                                <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span></button>
+                            </div>
+                        @endif
+
+                        @if (session()->has('error_find_cat'))
+                            <div id="w6" class="alert-warning alert alert-dismissible mt-3 w-75" role="alert">
+                                {{session('error_find_cat')}}
                                 <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span></button>
                             </div>
                         @endif
@@ -147,8 +153,12 @@
                                             <td>{{$category->created_at}}</td>
                                             <td>{{$category->updated_at}}</td>
                                             <td>
-                                                <a class="btn btn-warning btn-sm" href="#" title="Update" aria-label="Update" data-pjax="0"><i class="fa-fw fas fa-edit" aria-hidden></i></a>
-                                                <a class="btn btn-danger btn-sm" id="buttonDelete" href="#" title="Delete" aria-label="Delete" data-pjax="0" onclick="confirmDelete(event)"><i class="fa-fw fas fa-trash" aria-hidden></i></a>
+                                                <a class="btn btn-warning btn-sm" href="{{route('category_tutorial.update', ['id_cat' =>$category->id])}}" title="Update" aria-label="Update" data-pjax="0"><i class="fa-fw fas fa-edit" aria-hidden></i></a>
+                                                
+                                                @if ($category->valid_deleted && isset($category->delete_html_code))
+                                                    {!! $category->delete_html_code !!}
+                                                @endif
+
                                             </td>
                                             
                                         </tr>
@@ -332,7 +342,7 @@
             // Menampilkan konfirmasi menggunakan SweetAlert
         Swal.fire({
             title: 'Apakah Anda yakin?',
-            text: 'Data akan dihapus permanen!',
+            text: 'Data akan dihapus beserta semua video dengan kategori terkait!',
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',

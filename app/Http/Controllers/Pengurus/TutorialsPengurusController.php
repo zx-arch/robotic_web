@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Pengurus;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Tutorials;
+use App\Models\CategoryTutorial;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Facades\DB;
@@ -22,8 +23,11 @@ class TutorialsPengurusController extends Controller
 
     public function index()
     {
-        $tutorials = Tutorials::with('masterStatus')->withTrashed()->latest();
-        $getCategory = Tutorials::select('category')->groupBy('category')->get()->pluck('category');
+        $tutorials = Tutorials::select('tutorials.*', 'category_tutorial.category as category_name')
+            ->leftJoin('category_tutorial', 'category_tutorial.id', '=', 'tutorials.tutorial_category_id')
+            ->with('masterStatus')->withTrashed()->latest();
+
+        $getCategory = CategoryTutorial::all();
         //dd($getCategory);
         $totalTutorials = $tutorials->count();
 
@@ -58,32 +62,35 @@ class TutorialsPengurusController extends Controller
         $status_id = $searchData['status_id'] ?? null;
         $created_at = $searchData['created_at'] ?? null;
         $updated_at = $searchData['updated_at'] ?? null;
-        $getCategory = Tutorials::select('category')->groupBy('category')->get()->pluck('category');
+        $getCategory = CategoryTutorial::all();
 
         // Misalnya, Anda ingin mencari data user berdasarkan video_name, category, status_id, created_at, atau updated_at
-        $tutorials = Tutorials::query()->withTrashed();
+        $tutorials = Tutorials::select('tutorials.*', 'category_tutorial.category as category_name')
+            ->leftJoin('category_tutorial', 'category_tutorial.id', '=', 'tutorials.tutorial_category_id')
+            ->withTrashed();
 
         $tutorials->where(function ($query) use ($video_name, $status_id, $category, $created_at, $updated_at) {
             if ($video_name !== null) {
-                $query->where('video_name', 'like', "$video_name%");
+                $query->where('tutorials.video_name', 'like', "$video_name%");
             }
 
             if ($status_id !== null) {
-                $query->where('status_id', $status_id);
+                $query->where('tutorials.status_id', $status_id);
             }
 
             if ($category !== null) {
-                $query->where('category', $category);
+                $query->where('tutorials.tutorial_category_id', $category);
             }
 
             if ($created_at !== null) {
-                $query->where('created_at', 'like', "$created_at%");
+                $query->where('tutorials.created_at', 'like', "$created_at%");
             }
 
             if ($updated_at !== null) {
-                $query->where('updated_at', 'like', "$updated_at%");
+                $query->where('tutorials.updated_at', 'like', "$updated_at%");
             }
         });
+
 
         $totaltutorials = $tutorials->count();
         //dd($searchData);

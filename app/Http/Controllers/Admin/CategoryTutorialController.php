@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\CategoryTutorial;
+use App\Models\Tutorials;
+use Illuminate\Support\Facades\Auth;
+use App\Models\Activity;
 
 class CategoryTutorialController extends Controller
 {
@@ -19,7 +22,6 @@ class CategoryTutorialController extends Controller
     public function index()
     {
         $categoryTutorial = CategoryTutorial::latest();
-
         $totalCatTutorials = $categoryTutorial->count();
 
         // Menentukan jumlah item per halaman
@@ -114,7 +116,15 @@ class CategoryTutorialController extends Controller
                 CategoryTutorial::create([
                     'category' => $request->category_name,
                     'status_id' => $request->status,
+                    'valid_deleted' => true,
+                    'delete_html_code' => '<a class="btn btn-danger btn-sm btn-delete" href="#" title="Delete" aria-label="Delete" data-pjax="0" onclick="confirmDelete(event)"><i class="fa-fw fas fa-trash" aria-hidden></i></a>',
                 ]);
+
+                Activity::create(array_merge(session('myActivity'), [
+                    'user_id' => Auth::user()->id,
+                    'action' => Auth::user()->username . ' Add Categories ' . $request->category_name,
+                ]));
+
                 return redirect()->route('category_tutorial.index')->with('success_submit_save', 'Category berhasil ditambah!');
 
             } else {
@@ -122,8 +132,67 @@ class CategoryTutorialController extends Controller
             }
 
         } catch (\Throwable $e) {
-            return redirect()->route('category_tutorial.index')->with('error_submit_save', 'Status ID tidak valid. ' . $e->getMessage());
+            return redirect()->route('category_tutorial.index')->with('error_submit_save', 'Data gagal ditambah. ' . $e->getMessage());
         }
 
+    }
+
+    public function update($id_cat)
+    {
+        try {
+            $categoryTutorial = CategoryTutorial::latest();
+            $getCategory = $categoryTutorial->get();
+            $findCat = CategoryTutorial::where('id', $id_cat)->first();
+
+            if (isset($findCat)) {
+                return view('Admin.CategoriesTutorial.update', $this->data, compact('findCat', 'getCategory'));
+
+            } else {
+                return redirect()->route('category_tutorial.index')->with('error_find_cat', 'Category not found.');
+            }
+
+        } catch (\Throwable $e) {
+            return redirect()->route('category_tutorial.index')->with('error_submit_save', 'Category not found. ' . $e->getMessage());
+        }
+    }
+
+    public function saveUpdate($id_cat, Request $request)
+    {
+        $findCat = CategoryTutorial::where('id', $id_cat)->first();
+
+        //dd($id_cat, $request->all(), $findCat);
+
+        if (isset($findCat)) {
+
+            $arryUpdate = [];
+
+            if ($findCat->category !== $request->category_name) {
+                $arryUpdate['category'] = $request->category_name;
+            }
+
+            if ($findCat->status_id != $request->status) {
+                $arryUpdate['status_id'] = $request->status;
+            }
+
+            //dd($arryUpdate);
+
+            if (isset($arryUpdate)) {
+
+                CategoryTutorial::where('id', $id_cat)->update($arryUpdate);
+
+                Activity::create(array_merge(session('myActivity'), [
+                    'user_id' => Auth::user()->id,
+                    'action' => Auth::user()->username . ' Update Categories ' . $findCat->category,
+                ]));
+
+                return redirect()->route('category_tutorial.index')->with('success_submit_save', 'Category berhasil diupdate!');
+
+            } else {
+                return redirect()->route('category_tutorial.index')->with('success_submit_save', 'Category berhasil diupdate!');
+            }
+
+        } else {
+            return redirect()->route('category_tutorial.index')->with('error_find_cat', 'Category not found.');
+        }
     }
 }
