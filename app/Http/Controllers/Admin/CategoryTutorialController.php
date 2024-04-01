@@ -210,6 +210,10 @@ class CategoryTutorialController extends Controller
                 $arryUpdate['status_id'] = $request->status;
             }
 
+            if ($findCat->is_shown != $request->is_shown) {
+                $arryUpdate['is_shown'] = $request->is_shown;
+            }
+            
             //dd($arryUpdate);
 
             if (isset($arryUpdate)) {

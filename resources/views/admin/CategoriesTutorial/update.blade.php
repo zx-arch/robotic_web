@@ -97,6 +97,15 @@
                                                     <div class="invalid-feedback"></div>
                                                 </div>
 
+                                                <div class="form-group highlight-addon has-success">
+                                                    <label for="is_shown">Ditampilkan User <span class="text-danger">*</span></label>
+                                                    <select name="is_shown" required class="form-control" id="is_shown">
+                                                        <option value="" disabled {{isset($findCat) ? '' : 'selected'}}>Choose One ..</option>
+                                                        <option value="1" {{isset($findCat->is_shown) && $findCat->is_shown == 1 ? 'selected' : ''}}>True</option>
+                                                        <option value="0" {{isset($findCat->is_shown) && $findCat->is_shown == 0 ? 'selected' : ''}}>False</option>
+                                                    </select>
+                                                    <div class="invalid-feedback"></div>
+                                                </div>
                                             </div>
 
                                         </div>
