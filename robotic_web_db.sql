@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 01, 2024 at 02:51 AM
+-- Generation Time: Apr 01, 2024 at 05:03 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -57,118 +57,6 @@ CREATE TABLE `activity` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `activity`
---
-
-INSERT INTO `activity` (`id`, `user_id`, `ip_address`, `user_agent`, `latitude`, `longitude`, `country`, `city`, `csrf_token`, `action`, `created_at`, `updated_at`) VALUES
-(1, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Access Login Role admin', '2024-03-27 08:04:05', '2024-03-27 08:04:05'),
-(2, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Access Login Role admin', '2024-03-27 08:11:31', '2024-03-27 08:11:31'),
-(3, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Access Login Role admin', '2024-03-27 08:12:16', '2024-03-27 08:12:16'),
-(4, NULL, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Update Tutorial, ID 1', '2024-03-27 08:28:01', '2024-03-27 08:28:01'),
-(5, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Update Tutorial Video ID 1', '2024-03-27 08:30:25', '2024-03-27 08:30:25'),
-(11, 1, '36.68.9.124', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.553300, 110.831000, 'Indonesia', 'Surakarta', NULL, 'AdminIP Access Login Role admin', '2024-03-27 12:08:20', '2024-03-27 12:08:20'),
-(12, 1, '36.68.9.124', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.553300, 110.831000, 'Indonesia', 'Surakarta', NULL, 'AdminIP Access Login Role admin', '2024-03-27 13:57:24', '2024-03-27 13:57:24'),
-(14, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Access Login Role admin', '2024-03-28 01:50:08', '2024-03-28 01:50:08'),
-(15, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Update Data Account ID 2', '2024-03-28 02:02:33', '2024-03-28 02:02:33'),
-(16, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Update User Account PengurusIP ID 2', '2024-03-28 02:05:44', '2024-03-28 02:05:44'),
-(17, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Access Login Role admin', '2024-03-28 03:35:52', '2024-03-28 03:35:52'),
-(18, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Update Tutorial Video ID 2', '2024-03-28 04:05:36', '2024-03-28 04:05:36'),
-(19, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Update Tutorial Video ID 2', '2024-03-28 04:09:09', '2024-03-28 04:09:09'),
-(20, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Update Tutorial Video ID 2', '2024-03-28 04:09:28', '2024-03-28 04:09:28'),
-(21, 1, '36.68.9.124', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.553300, 110.831000, 'Indonesia', 'Surakarta', NULL, 'AdminIP Access Login Role admin', '2024-03-29 07:55:12', '2024-03-29 07:55:12'),
-(22, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Access Login Role admin', '2024-03-30 00:48:51', '2024-03-30 00:48:51'),
-(23, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Update Categories software requirement', '2024-03-30 01:27:44', '2024-03-30 01:27:44'),
-(24, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Update Categories software requirement', '2024-03-30 01:27:58', '2024-03-30 01:27:58'),
-(25, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Update Categories software requirement', '2024-03-30 01:29:49', '2024-03-30 01:29:49'),
-(26, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Update Categories software requirement', '2024-03-30 01:30:05', '2024-03-30 01:30:05'),
-(27, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Update Categories software requirement', '2024-03-30 01:38:39', '2024-03-30 01:38:39'),
-(28, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Update Categories product video', '2024-03-30 02:04:48', '2024-03-30 02:04:48'),
-(29, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Add Categories Presentation', '2024-03-30 02:57:40', '2024-03-30 02:57:40'),
-(30, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Created Tutorial ID 10', '2024-03-30 03:11:57', '2024-03-30 03:11:57'),
-(31, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Delete Tutorial Video ID 10', '2024-03-30 03:22:09', '2024-03-30 03:22:09'),
-(32, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Delete Tutorial Video ID 10', '2024-03-30 03:25:07', '2024-03-30 03:25:07'),
-(33, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Delete Tutorial Video ID 10', '2024-03-30 03:30:24', '2024-03-30 03:30:24'),
-(34, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Restore Tutorial Video ID 10', '2024-03-30 03:31:00', '2024-03-30 03:31:00'),
-(35, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Delete Tutorial Video ID 10', '2024-03-30 03:34:38', '2024-03-30 03:34:38'),
-(36, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Restore Tutorial Video ID 10', '2024-03-30 03:35:58', '2024-03-30 03:35:58'),
-(37, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Delete Tutorial Video ID 10', '2024-03-30 03:38:17', '2024-03-30 03:38:17'),
-(38, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Delete Tutorial Video ID 1', '2024-03-30 03:40:51', '2024-03-30 03:40:51'),
-(39, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Restore Tutorial Video ID 1', '2024-03-30 03:42:04', '2024-03-30 03:42:04'),
-(40, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Restore Tutorial Video ID 10', '2024-03-30 03:45:31', '2024-03-30 03:45:31'),
-(41, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Delete Tutorial Video ID 10', '2024-03-30 03:47:53', '2024-03-30 03:47:53'),
-(42, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Restore Tutorial Video ID 10', '2024-03-30 03:50:01', '2024-03-30 03:50:01'),
-(43, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Delete Tutorial Video ID 10', '2024-03-30 03:50:36', '2024-03-30 03:50:36'),
-(44, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Restore Tutorial Video ID 10', '2024-03-30 03:50:41', '2024-03-30 03:50:41'),
-(45, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Delete Tutorial Video ID 10', '2024-03-30 03:53:17', '2024-03-30 03:53:17'),
-(46, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Restore Tutorial Video ID 10', '2024-03-30 03:53:23', '2024-03-30 03:53:23'),
-(47, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Delete Tutorial Video ID 10', '2024-03-30 03:54:03', '2024-03-30 03:54:03'),
-(48, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Restore Tutorial Video ID 10', '2024-03-30 03:54:10', '2024-03-30 03:54:10'),
-(49, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Delete Tutorial Video ID 10', '2024-03-30 03:55:52', '2024-03-30 03:55:52'),
-(50, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Restore Tutorial Video ID 10', '2024-03-30 03:55:58', '2024-03-30 03:55:58'),
-(51, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Delete Tutorial Video ID 10', '2024-03-30 03:58:43', '2024-03-30 03:58:43'),
-(52, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Restore Tutorial Video ID 10', '2024-03-30 03:58:50', '2024-03-30 03:58:50'),
-(53, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Delete Tutorial Video ID 10', '2024-03-30 04:00:16', '2024-03-30 04:00:16'),
-(54, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Restore Tutorial Video ID 10', '2024-03-30 04:00:22', '2024-03-30 04:00:22'),
-(55, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Delete Tutorial Video ID 1', '2024-03-30 04:00:30', '2024-03-30 04:00:30'),
-(56, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Restore Tutorial Video ID 1', '2024-03-30 04:00:48', '2024-03-30 04:00:48'),
-(57, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Delete Tutorial Video ID 10', '2024-03-30 04:04:54', '2024-03-30 04:04:54'),
-(58, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Restore Tutorial Video ID 10', '2024-03-30 04:05:02', '2024-03-30 04:05:02'),
-(59, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Delete Tutorial Video ID 10', '2024-03-30 04:05:09', '2024-03-30 04:05:09'),
-(60, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Restore Tutorial Video ID 10', '2024-03-30 04:05:15', '2024-03-30 04:05:15'),
-(61, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Delete Tutorial Video ID 10', '2024-03-30 04:07:47', '2024-03-30 04:07:47'),
-(62, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Restore Tutorial Video ID 10', '2024-03-30 04:08:16', '2024-03-30 04:08:16'),
-(63, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Delete Tutorial Video ID 10', '2024-03-30 04:11:20', '2024-03-30 04:11:20'),
-(64, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Restore Tutorial Video ID 10', '2024-03-30 04:12:21', '2024-03-30 04:12:21'),
-(65, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Delete Tutorial Video ID 10', '2024-03-30 04:12:26', '2024-03-30 04:12:26'),
-(66, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Restore Tutorial Video ID 10', '2024-03-30 04:13:30', '2024-03-30 04:13:30'),
-(67, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Delete Tutorial Video ID 10', '2024-03-30 04:13:36', '2024-03-30 04:13:36'),
-(68, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Restore Tutorial Video ID 10', '2024-03-30 04:16:00', '2024-03-30 04:16:00'),
-(69, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Delete Tutorial Video ID 10', '2024-03-30 04:16:06', '2024-03-30 04:16:06'),
-(70, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Restore Tutorial Video ID 10', '2024-03-30 04:17:50', '2024-03-30 04:17:50'),
-(71, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Delete Tutorial Video ID 10', '2024-03-30 04:17:55', '2024-03-30 04:17:55'),
-(72, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Restore Tutorial Video ID 10', '2024-03-30 04:18:00', '2024-03-30 04:18:00'),
-(73, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Delete Tutorial Video ID 10', '2024-03-30 04:19:56', '2024-03-30 04:19:56'),
-(74, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Restore Tutorial Video ID 10', '2024-03-30 04:20:02', '2024-03-30 04:20:02'),
-(75, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Delete Tutorial Video ID 10', '2024-03-30 04:22:12', '2024-03-30 04:22:12'),
-(76, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Restore Tutorial Video ID 10', '2024-03-30 04:23:12', '2024-03-30 04:23:12'),
-(77, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Delete Tutorial Video ID 10', '2024-03-30 04:23:18', '2024-03-30 04:23:18'),
-(78, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Restore Tutorial Video ID 10', '2024-03-30 04:24:01', '2024-03-30 04:24:01'),
-(79, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Delete Tutorial Video ID 10', '2024-03-30 04:24:06', '2024-03-30 04:24:06'),
-(80, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Restore Tutorial Video ID 10', '2024-03-30 04:25:35', '2024-03-30 04:25:35'),
-(81, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Delete Tutorial Video ID 10', '2024-03-30 04:25:41', '2024-03-30 04:25:41'),
-(82, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Restore Tutorial Video ID 10', '2024-03-30 04:27:38', '2024-03-30 04:27:38'),
-(83, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Delete Tutorial Video ID 10', '2024-03-30 04:27:44', '2024-03-30 04:27:44'),
-(84, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Restore Tutorial Video ID 10', '2024-03-30 04:28:07', '2024-03-30 04:28:07'),
-(85, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Delete Tutorial Video ID 10', '2024-03-30 04:28:11', '2024-03-30 04:28:11'),
-(86, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Restore Tutorial Video ID 10', '2024-03-30 04:28:57', '2024-03-30 04:28:57'),
-(87, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Delete Tutorial Video ID 10', '2024-03-30 04:29:03', '2024-03-30 04:29:03'),
-(88, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Created Tutorial ID 11', '2024-03-30 04:29:59', '2024-03-30 04:29:59'),
-(89, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Created Tutorial ID 12', '2024-03-30 04:33:21', '2024-03-30 04:33:21'),
-(90, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Restore Tutorial Video ID 10', '2024-03-30 04:34:29', '2024-03-30 04:34:29'),
-(91, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Delete Tutorial Video ID 12', '2024-03-30 04:34:36', '2024-03-30 04:34:36'),
-(92, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Delete Tutorial Video ID 10', '2024-03-30 04:34:51', '2024-03-30 04:34:51'),
-(93, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Add Categories Presentation', '2024-03-30 04:39:19', '2024-03-30 04:39:19'),
-(94, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Delete Tutorial Video ID 1', '2024-03-30 04:42:44', '2024-03-30 04:42:44'),
-(95, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Restore Tutorial Video ID 1', '2024-03-30 04:42:51', '2024-03-30 04:42:51'),
-(96, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Delete Tutorial Video ID 1', '2024-03-30 04:42:58', '2024-03-30 04:42:58'),
-(97, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Delete Tutorial Video ID 2', '2024-03-30 04:43:06', '2024-03-30 04:43:06'),
-(98, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Restore Tutorial Video ID 2', '2024-03-30 04:43:12', '2024-03-30 04:43:12'),
-(99, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Restore Tutorial Video ID 1', '2024-03-30 04:43:17', '2024-03-30 04:43:17'),
-(100, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Delete Tutorial Video ID 1', '2024-03-30 04:44:40', '2024-03-30 04:44:40'),
-(101, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Restore Tutorial Video ID 1', '2024-03-30 04:44:46', '2024-03-30 04:44:46'),
-(102, 2, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'PengurusIP Access Login Role pengurus', '2024-03-30 05:05:27', '2024-03-30 05:05:27'),
-(103, 1, '36.65.225.24', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.553300, 110.831000, 'Indonesia', 'Surakarta', NULL, 'AdminIP Access Login Role admin', '2024-03-31 07:02:39', '2024-03-31 07:02:39'),
-(104, 1, '36.65.225.24', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.553300, 110.831000, 'Indonesia', 'Surakarta', NULL, 'AdminIP Delete Tutorial Video ID 1', '2024-03-31 07:03:07', '2024-03-31 07:03:07'),
-(105, 1, '36.65.225.24', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.553300, 110.831000, 'Indonesia', 'Surakarta', NULL, 'AdminIP Restore Tutorial Video ID 1', '2024-03-31 07:03:25', '2024-03-31 07:03:25'),
-(106, 1, '36.65.225.24', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.553300, 110.831000, 'Indonesia', 'Surakarta', NULL, 'AdminIP Delete Tutorial Video ID 1', '2024-03-31 07:05:24', '2024-03-31 07:05:24'),
-(107, 1, '36.65.225.24', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.553300, 110.831000, 'Indonesia', 'Surakarta', NULL, 'AdminIP Restore Tutorial Video ID 1', '2024-03-31 07:05:36', '2024-03-31 07:05:36'),
-(108, 1, '36.65.225.24', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.553300, 110.831000, 'Indonesia', 'Surakarta', NULL, 'AdminIP Delete Tutorial Video ID 1', '2024-03-31 07:08:00', '2024-03-31 07:08:00'),
-(109, 1, '36.65.225.24', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.553300, 110.831000, 'Indonesia', 'Surakarta', NULL, 'AdminIP Restore Tutorial Video ID 1', '2024-03-31 07:08:06', '2024-03-31 07:08:06'),
-(110, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Access Login Role admin', '2024-04-01 00:39:17', '2024-04-01 00:39:17'),
-(111, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Add Categories Presentation', '2024-04-01 00:40:07', '2024-04-01 00:40:07'),
-(112, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Add Categories Presentation', '2024-04-01 00:44:40', '2024-04-01 00:44:40');
 
 -- --------------------------------------------------------
 
@@ -248,8 +136,8 @@ CREATE TABLE `category_tutorial` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `status_id` bigint(20) UNSIGNED DEFAULT NULL,
-  `valid_deleted` tinyint(1) NOT NULL DEFAULT 1,
-  `delete_html_code` text NOT NULL DEFAULT '<a class="btn btn-danger btn-sm btn-delete" href="#">'
+  `valid_deleted` tinyint(1) NOT NULL,
+  `delete_html_code` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -257,9 +145,8 @@ CREATE TABLE `category_tutorial` (
 --
 
 INSERT INTO `category_tutorial` (`id`, `category`, `created_at`, `updated_at`, `status_id`, `valid_deleted`, `delete_html_code`) VALUES
-(1, 'Product Video', '2024-03-28 07:20:09', '2024-03-31 07:08:06', 11, 1, '<a class=\"btn btn-danger btn-sm btn-delete\" href=\"#\">'),
-(2, 'Software Requirement', '2024-03-28 07:20:09', '2024-03-30 03:02:12', 11, 1, '<a class=\"btn btn-danger btn-sm btn-delete\" href=\"#\">'),
-(6, 'Presentation', '2024-04-01 00:44:40', '2024-04-01 00:44:40', 11, 1, '<a class=\"btn btn-danger btn-sm btn-delete\" href=\"#\">');
+(1, 'Product Video', '2024-03-28 07:20:09', '2024-04-01 02:48:15', 11, 0, ''),
+(2, 'Software Requirement', '2024-03-28 07:20:09', '2024-04-01 02:45:28', 11, 0, '');
 
 -- --------------------------------------------------------
 
@@ -806,7 +693,7 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (52, '2024_03_28_102808_add_foreign_key_tutorials_table', 39),
 (53, '2024_03_28_124531_add_column_category_tutorial_table', 39),
 (54, '2024_03_30_084836_drop_category_column_from_tutorials_table', 40),
-(58, '2024_03_30_093327_add_default_value_to_valid_deleted_in_category_tutorials_table', 41);
+(61, '2024_03_30_093327_add_default_value_to_valid_deleted_in_category_tutorials_table', 41);
 
 -- --------------------------------------------------------
 
@@ -1038,8 +925,8 @@ CREATE TABLE `tutorials` (
 --
 
 INSERT INTO `tutorials` (`id`, `video_name`, `tutorial_category_id`, `thumbnail`, `path_video`, `url`, `status_id`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 'Robo Link Basic', 1, 'http://localhost:8000/assets/youtube/product video/robo-link-thumb.png', 'http://localhost:8000/assets/youtube/product video/Robo Links Basic.mp4', 'https://youtu.be/ExJNoBxY23M?si=1H-s3o2SGKRM0BWI', 4, '2024-03-28 07:21:17', '2024-03-31 07:08:06', NULL),
-(2, 'Instalasi Studuino Software #1', 2, 'http://localhost:8000/assets/youtube/software requirement/Instalasi Studuino Software 1.png', 'http://localhost:8000/assets/youtube/software requirement/Instalasi Studuino Software 1.mp4', 'https://youtu.be/fddwkD2b7FE', 4, '2024-03-28 07:21:17', '2024-03-30 04:43:12', NULL),
+(1, 'Robo Link Basic', 1, 'http://localhost:8000/assets/youtube/product video/robo-link-thumb.png', 'http://localhost:8000/assets/youtube/product video/Robo Links Basic.mp4', 'https://youtu.be/ExJNoBxY23M?si=1H-s3o2SGKRM0BWI', 4, '2024-03-28 07:21:17', '2024-04-01 02:48:15', NULL),
+(2, 'Instalasi Studuino Software #1', 2, 'http://localhost:8000/assets/youtube/software requirement/Instalasi Studuino Software 1.png', 'http://localhost:8000/assets/youtube/software requirement/Instalasi Studuino Software 1.mp4', 'https://youtu.be/fddwkD2b7FE', 4, '2024-03-28 07:21:17', '2024-04-01 02:45:28', NULL),
 (3, 'Instalasi USB Driver For Windows #2', 2, 'http://localhost:8000/assets/youtube/software requirement/Instalasi USB Driver For Windows 2.png', 'http://localhost:8000/assets/youtube/software requirement/Installing USB Device Driver _ Windows.mp4', 'https://youtu.be/Re_kEa4Mm6c', 4, '2024-03-28 07:21:17', NULL, NULL),
 (4, 'Pengenalan Komponen Sensors, LEDs & Buzzers Studuino #3', 2, 'http://localhost:8000/assets/youtube/software requirement/Pengenalan Komponen Perangkat Studuino 3.png', 'http://localhost:8000/assets/youtube/software requirement/Pengenalan Komponen Perangkat Studuino 3.mp4', 'https://youtu.be/4E3y13Wwvr8', 4, '2024-03-28 07:21:17', NULL, NULL),
 (5, 'Pengenalan Komponen DCMotors & ServoMotors Studuino #4', 2, 'http://localhost:8000/assets/youtube/software requirement/Pengenalan Komponen Perangkat Studuino 4.png', 'http://localhost:8000/assets/youtube/software requirement/Pengenalan Komponen Perangkat Studuino 4.mp4', 'https://youtu.be/Ek7VpSqRi3E', 4, '2024-03-28 07:21:17', NULL, NULL),
@@ -1191,7 +1078,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `activity`
 --
 ALTER TABLE `activity`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=113;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `book_category`
@@ -1209,7 +1096,7 @@ ALTER TABLE `book_translation`
 -- AUTO_INCREMENT for table `category_tutorial`
 --
 ALTER TABLE `category_tutorial`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `chat_dashboard`
@@ -1251,7 +1138,7 @@ ALTER TABLE `master_status`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
