@@ -1,3 +1,5 @@
 Alternatif Access Code For Developer:
 
 clone to : https://github.com/zx-arch/robotic_web
+
+DB : robotic_web_db.sql [in github]

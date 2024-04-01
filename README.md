@@ -13,4 +13,6 @@
 - Clone the Laravel project repository.
 - Navigate to the project directory.
 - Run composer install to install project dependencies.
-- Export DB MySQL to Local, and run 'php artisan migrate'.
+- Export DB MySQL 'robotic_web_db.sql' to Local, and run 'php artisan migrate'.
+- Change the DB connection in the .env file, adjust the connection on your local.
+- Run project with command 'php artisan serve'.
