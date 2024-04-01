@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 20, 2024 at 12:43 PM
+-- Generation Time: Apr 01, 2024 at 02:51 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -40,6 +40,139 @@ DELIMITER ;
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `activity`
+--
+
+CREATE TABLE `activity` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `user_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `ip_address` varchar(255) DEFAULT NULL,
+  `user_agent` varchar(255) DEFAULT NULL,
+  `latitude` double(10,6) DEFAULT NULL,
+  `longitude` double(10,6) DEFAULT NULL,
+  `country` varchar(255) DEFAULT NULL,
+  `city` varchar(255) DEFAULT NULL,
+  `csrf_token` varchar(255) DEFAULT NULL,
+  `action` varchar(255) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `activity`
+--
+
+INSERT INTO `activity` (`id`, `user_id`, `ip_address`, `user_agent`, `latitude`, `longitude`, `country`, `city`, `csrf_token`, `action`, `created_at`, `updated_at`) VALUES
+(1, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Access Login Role admin', '2024-03-27 08:04:05', '2024-03-27 08:04:05'),
+(2, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Access Login Role admin', '2024-03-27 08:11:31', '2024-03-27 08:11:31'),
+(3, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Access Login Role admin', '2024-03-27 08:12:16', '2024-03-27 08:12:16'),
+(4, NULL, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Update Tutorial, ID 1', '2024-03-27 08:28:01', '2024-03-27 08:28:01'),
+(5, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Update Tutorial Video ID 1', '2024-03-27 08:30:25', '2024-03-27 08:30:25'),
+(11, 1, '36.68.9.124', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.553300, 110.831000, 'Indonesia', 'Surakarta', NULL, 'AdminIP Access Login Role admin', '2024-03-27 12:08:20', '2024-03-27 12:08:20'),
+(12, 1, '36.68.9.124', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.553300, 110.831000, 'Indonesia', 'Surakarta', NULL, 'AdminIP Access Login Role admin', '2024-03-27 13:57:24', '2024-03-27 13:57:24'),
+(14, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Access Login Role admin', '2024-03-28 01:50:08', '2024-03-28 01:50:08'),
+(15, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Update Data Account ID 2', '2024-03-28 02:02:33', '2024-03-28 02:02:33'),
+(16, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Update User Account PengurusIP ID 2', '2024-03-28 02:05:44', '2024-03-28 02:05:44'),
+(17, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Access Login Role admin', '2024-03-28 03:35:52', '2024-03-28 03:35:52'),
+(18, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Update Tutorial Video ID 2', '2024-03-28 04:05:36', '2024-03-28 04:05:36'),
+(19, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Update Tutorial Video ID 2', '2024-03-28 04:09:09', '2024-03-28 04:09:09'),
+(20, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Update Tutorial Video ID 2', '2024-03-28 04:09:28', '2024-03-28 04:09:28'),
+(21, 1, '36.68.9.124', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.553300, 110.831000, 'Indonesia', 'Surakarta', NULL, 'AdminIP Access Login Role admin', '2024-03-29 07:55:12', '2024-03-29 07:55:12'),
+(22, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Access Login Role admin', '2024-03-30 00:48:51', '2024-03-30 00:48:51'),
+(23, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Update Categories software requirement', '2024-03-30 01:27:44', '2024-03-30 01:27:44'),
+(24, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Update Categories software requirement', '2024-03-30 01:27:58', '2024-03-30 01:27:58'),
+(25, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Update Categories software requirement', '2024-03-30 01:29:49', '2024-03-30 01:29:49'),
+(26, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Update Categories software requirement', '2024-03-30 01:30:05', '2024-03-30 01:30:05'),
+(27, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Update Categories software requirement', '2024-03-30 01:38:39', '2024-03-30 01:38:39'),
+(28, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Update Categories product video', '2024-03-30 02:04:48', '2024-03-30 02:04:48'),
+(29, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Add Categories Presentation', '2024-03-30 02:57:40', '2024-03-30 02:57:40'),
+(30, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Created Tutorial ID 10', '2024-03-30 03:11:57', '2024-03-30 03:11:57'),
+(31, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Delete Tutorial Video ID 10', '2024-03-30 03:22:09', '2024-03-30 03:22:09'),
+(32, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Delete Tutorial Video ID 10', '2024-03-30 03:25:07', '2024-03-30 03:25:07'),
+(33, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Delete Tutorial Video ID 10', '2024-03-30 03:30:24', '2024-03-30 03:30:24'),
+(34, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Restore Tutorial Video ID 10', '2024-03-30 03:31:00', '2024-03-30 03:31:00'),
+(35, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Delete Tutorial Video ID 10', '2024-03-30 03:34:38', '2024-03-30 03:34:38'),
+(36, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Restore Tutorial Video ID 10', '2024-03-30 03:35:58', '2024-03-30 03:35:58'),
+(37, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Delete Tutorial Video ID 10', '2024-03-30 03:38:17', '2024-03-30 03:38:17'),
+(38, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Delete Tutorial Video ID 1', '2024-03-30 03:40:51', '2024-03-30 03:40:51'),
+(39, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Restore Tutorial Video ID 1', '2024-03-30 03:42:04', '2024-03-30 03:42:04'),
+(40, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Restore Tutorial Video ID 10', '2024-03-30 03:45:31', '2024-03-30 03:45:31'),
+(41, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Delete Tutorial Video ID 10', '2024-03-30 03:47:53', '2024-03-30 03:47:53'),
+(42, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Restore Tutorial Video ID 10', '2024-03-30 03:50:01', '2024-03-30 03:50:01'),
+(43, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Delete Tutorial Video ID 10', '2024-03-30 03:50:36', '2024-03-30 03:50:36'),
+(44, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Restore Tutorial Video ID 10', '2024-03-30 03:50:41', '2024-03-30 03:50:41'),
+(45, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Delete Tutorial Video ID 10', '2024-03-30 03:53:17', '2024-03-30 03:53:17'),
+(46, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Restore Tutorial Video ID 10', '2024-03-30 03:53:23', '2024-03-30 03:53:23'),
+(47, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Delete Tutorial Video ID 10', '2024-03-30 03:54:03', '2024-03-30 03:54:03'),
+(48, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Restore Tutorial Video ID 10', '2024-03-30 03:54:10', '2024-03-30 03:54:10'),
+(49, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Delete Tutorial Video ID 10', '2024-03-30 03:55:52', '2024-03-30 03:55:52'),
+(50, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Restore Tutorial Video ID 10', '2024-03-30 03:55:58', '2024-03-30 03:55:58'),
+(51, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Delete Tutorial Video ID 10', '2024-03-30 03:58:43', '2024-03-30 03:58:43'),
+(52, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Restore Tutorial Video ID 10', '2024-03-30 03:58:50', '2024-03-30 03:58:50'),
+(53, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Delete Tutorial Video ID 10', '2024-03-30 04:00:16', '2024-03-30 04:00:16'),
+(54, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Restore Tutorial Video ID 10', '2024-03-30 04:00:22', '2024-03-30 04:00:22'),
+(55, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Delete Tutorial Video ID 1', '2024-03-30 04:00:30', '2024-03-30 04:00:30'),
+(56, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Restore Tutorial Video ID 1', '2024-03-30 04:00:48', '2024-03-30 04:00:48'),
+(57, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Delete Tutorial Video ID 10', '2024-03-30 04:04:54', '2024-03-30 04:04:54'),
+(58, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Restore Tutorial Video ID 10', '2024-03-30 04:05:02', '2024-03-30 04:05:02'),
+(59, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Delete Tutorial Video ID 10', '2024-03-30 04:05:09', '2024-03-30 04:05:09'),
+(60, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Restore Tutorial Video ID 10', '2024-03-30 04:05:15', '2024-03-30 04:05:15'),
+(61, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Delete Tutorial Video ID 10', '2024-03-30 04:07:47', '2024-03-30 04:07:47'),
+(62, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Restore Tutorial Video ID 10', '2024-03-30 04:08:16', '2024-03-30 04:08:16'),
+(63, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Delete Tutorial Video ID 10', '2024-03-30 04:11:20', '2024-03-30 04:11:20'),
+(64, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Restore Tutorial Video ID 10', '2024-03-30 04:12:21', '2024-03-30 04:12:21'),
+(65, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Delete Tutorial Video ID 10', '2024-03-30 04:12:26', '2024-03-30 04:12:26'),
+(66, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Restore Tutorial Video ID 10', '2024-03-30 04:13:30', '2024-03-30 04:13:30'),
+(67, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Delete Tutorial Video ID 10', '2024-03-30 04:13:36', '2024-03-30 04:13:36'),
+(68, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Restore Tutorial Video ID 10', '2024-03-30 04:16:00', '2024-03-30 04:16:00'),
+(69, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Delete Tutorial Video ID 10', '2024-03-30 04:16:06', '2024-03-30 04:16:06'),
+(70, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Restore Tutorial Video ID 10', '2024-03-30 04:17:50', '2024-03-30 04:17:50'),
+(71, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Delete Tutorial Video ID 10', '2024-03-30 04:17:55', '2024-03-30 04:17:55'),
+(72, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Restore Tutorial Video ID 10', '2024-03-30 04:18:00', '2024-03-30 04:18:00'),
+(73, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Delete Tutorial Video ID 10', '2024-03-30 04:19:56', '2024-03-30 04:19:56'),
+(74, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Restore Tutorial Video ID 10', '2024-03-30 04:20:02', '2024-03-30 04:20:02'),
+(75, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Delete Tutorial Video ID 10', '2024-03-30 04:22:12', '2024-03-30 04:22:12'),
+(76, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Restore Tutorial Video ID 10', '2024-03-30 04:23:12', '2024-03-30 04:23:12'),
+(77, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Delete Tutorial Video ID 10', '2024-03-30 04:23:18', '2024-03-30 04:23:18'),
+(78, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Restore Tutorial Video ID 10', '2024-03-30 04:24:01', '2024-03-30 04:24:01'),
+(79, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Delete Tutorial Video ID 10', '2024-03-30 04:24:06', '2024-03-30 04:24:06'),
+(80, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Restore Tutorial Video ID 10', '2024-03-30 04:25:35', '2024-03-30 04:25:35'),
+(81, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Delete Tutorial Video ID 10', '2024-03-30 04:25:41', '2024-03-30 04:25:41'),
+(82, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Restore Tutorial Video ID 10', '2024-03-30 04:27:38', '2024-03-30 04:27:38'),
+(83, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Delete Tutorial Video ID 10', '2024-03-30 04:27:44', '2024-03-30 04:27:44'),
+(84, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Restore Tutorial Video ID 10', '2024-03-30 04:28:07', '2024-03-30 04:28:07'),
+(85, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Delete Tutorial Video ID 10', '2024-03-30 04:28:11', '2024-03-30 04:28:11'),
+(86, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Restore Tutorial Video ID 10', '2024-03-30 04:28:57', '2024-03-30 04:28:57'),
+(87, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Delete Tutorial Video ID 10', '2024-03-30 04:29:03', '2024-03-30 04:29:03'),
+(88, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Created Tutorial ID 11', '2024-03-30 04:29:59', '2024-03-30 04:29:59'),
+(89, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Created Tutorial ID 12', '2024-03-30 04:33:21', '2024-03-30 04:33:21'),
+(90, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Restore Tutorial Video ID 10', '2024-03-30 04:34:29', '2024-03-30 04:34:29'),
+(91, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Delete Tutorial Video ID 12', '2024-03-30 04:34:36', '2024-03-30 04:34:36'),
+(92, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Delete Tutorial Video ID 10', '2024-03-30 04:34:51', '2024-03-30 04:34:51'),
+(93, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Add Categories Presentation', '2024-03-30 04:39:19', '2024-03-30 04:39:19'),
+(94, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Delete Tutorial Video ID 1', '2024-03-30 04:42:44', '2024-03-30 04:42:44'),
+(95, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Restore Tutorial Video ID 1', '2024-03-30 04:42:51', '2024-03-30 04:42:51'),
+(96, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Delete Tutorial Video ID 1', '2024-03-30 04:42:58', '2024-03-30 04:42:58'),
+(97, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Delete Tutorial Video ID 2', '2024-03-30 04:43:06', '2024-03-30 04:43:06'),
+(98, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Restore Tutorial Video ID 2', '2024-03-30 04:43:12', '2024-03-30 04:43:12'),
+(99, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Restore Tutorial Video ID 1', '2024-03-30 04:43:17', '2024-03-30 04:43:17'),
+(100, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Delete Tutorial Video ID 1', '2024-03-30 04:44:40', '2024-03-30 04:44:40'),
+(101, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Restore Tutorial Video ID 1', '2024-03-30 04:44:46', '2024-03-30 04:44:46'),
+(102, 2, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'PengurusIP Access Login Role pengurus', '2024-03-30 05:05:27', '2024-03-30 05:05:27'),
+(103, 1, '36.65.225.24', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.553300, 110.831000, 'Indonesia', 'Surakarta', NULL, 'AdminIP Access Login Role admin', '2024-03-31 07:02:39', '2024-03-31 07:02:39'),
+(104, 1, '36.65.225.24', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.553300, 110.831000, 'Indonesia', 'Surakarta', NULL, 'AdminIP Delete Tutorial Video ID 1', '2024-03-31 07:03:07', '2024-03-31 07:03:07'),
+(105, 1, '36.65.225.24', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.553300, 110.831000, 'Indonesia', 'Surakarta', NULL, 'AdminIP Restore Tutorial Video ID 1', '2024-03-31 07:03:25', '2024-03-31 07:03:25'),
+(106, 1, '36.65.225.24', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.553300, 110.831000, 'Indonesia', 'Surakarta', NULL, 'AdminIP Delete Tutorial Video ID 1', '2024-03-31 07:05:24', '2024-03-31 07:05:24'),
+(107, 1, '36.65.225.24', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.553300, 110.831000, 'Indonesia', 'Surakarta', NULL, 'AdminIP Restore Tutorial Video ID 1', '2024-03-31 07:05:36', '2024-03-31 07:05:36'),
+(108, 1, '36.65.225.24', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.553300, 110.831000, 'Indonesia', 'Surakarta', NULL, 'AdminIP Delete Tutorial Video ID 1', '2024-03-31 07:08:00', '2024-03-31 07:08:00'),
+(109, 1, '36.65.225.24', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.553300, 110.831000, 'Indonesia', 'Surakarta', NULL, 'AdminIP Restore Tutorial Video ID 1', '2024-03-31 07:08:06', '2024-03-31 07:08:06'),
+(110, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Access Login Role admin', '2024-04-01 00:39:17', '2024-04-01 00:39:17'),
+(111, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Add Categories Presentation', '2024-04-01 00:40:07', '2024-04-01 00:40:07'),
+(112, 1, '103.169.39.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', -7.704900, 110.601900, 'Indonesia', 'Klaten', NULL, 'AdminIP Add Categories Presentation', '2024-04-01 00:44:40', '2024-04-01 00:44:40');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `book_category`
 --
 
@@ -60,6 +193,7 @@ CREATE TABLE `book_translation` (
   `book_title` varchar(255) NOT NULL,
   `language_id` bigint(20) UNSIGNED NOT NULL,
   `language_name` varchar(255) NOT NULL,
+  `pages` bigint(20) UNSIGNED NOT NULL,
   `status_id` bigint(20) UNSIGNED NOT NULL,
   `hierarchy_id` bigint(20) UNSIGNED NOT NULL,
   `file` varchar(255) NOT NULL,
@@ -72,28 +206,90 @@ CREATE TABLE `book_translation` (
 -- Dumping data for table `book_translation`
 --
 
-INSERT INTO `book_translation` (`id`, `book_title`, `language_id`, `language_name`, `status_id`, `hierarchy_id`, `file`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 'Stop and Go', 7, 'English', 1, 6, 'Basic 01_Stop and Go.pdf', '2024-02-20 01:25:24', '2024-02-20 01:25:24', NULL),
-(2, 'Making a Light Show', 7, 'English', 1, 7, 'Basic 02_Making a Light Show.pdf', '2024-02-20 01:25:24', '2024-02-20 01:25:24', NULL),
-(3, 'Making a Robot Car', 7, 'English', 1, 8, 'Basic 03_Making a Robot Car.pdf', '2024-02-20 01:25:24', '2024-02-20 01:25:24', NULL),
-(4, 'Automatic Doors', 7, 'English', 1, 9, 'Basic 04_Automatic Doors.pdf', '2024-02-20 01:25:24', '2024-02-20 01:25:24', NULL),
-(5, 'Controlling a Motor Cars', 7, 'English', 1, 10, 'Intermediate 01_Controlling Motor Cars.pdf', '2024-02-20 01:25:24', '2024-02-20 01:25:24', NULL),
-(6, 'Electronic Instrument', 7, 'English', 1, 11, 'Intermediate 02_Electronic Instruments.pdf', '2024-02-20 01:25:24', '2024-02-20 01:25:24', NULL),
-(7, 'Robots at Work', 7, 'English', 1, 12, 'Intermediate 03_Robots at Works.pdf', '2024-02-20 01:25:24', '2024-02-20 01:25:24', NULL),
-(8, 'Machines and Mechanisms', 7, 'English', 1, 13, 'Intermediate 04_Machines and Mechanismss.pdf', '2024-02-20 01:25:24', '2024-02-20 01:25:24', NULL),
-(9, 'The World of Games', 7, 'English', 1, 14, 'Intermediate 05_The World of Gamess.pdf', '2024-02-20 01:25:24', '2024-02-20 01:25:24', NULL),
-(10, 'Playing with Controllers', 7, 'English', 1, 15, 'Advanced 01_Playing with Controllerss.pdf', '2024-02-20 01:25:24', '2024-02-20 01:25:24', NULL),
-(11, 'All About Walkbots', 7, 'English', 1, 16, 'Advanced 02_All About Walkbotss.pdf', '2024-02-20 01:25:24', '2024-02-20 01:25:24', NULL),
-(12, 'The Factory Scanbot', 7, 'English', 1, 17, 'Advanced 03_The Factory Scanbots.pdf', '2024-02-20 01:25:24', '2024-02-20 01:25:24', NULL),
-(13, 'Advanced Game Making', 7, 'English', 1, 18, 'Advanced 04_Advanced Game Makings.pdf', '2024-02-20 01:25:24', '2024-02-20 01:25:24', NULL),
-(14, 'Introduction', 7, 'English', 1, 19, 'Introduction.pdf', '2024-02-20 01:25:24', '2024-02-20 01:25:24', NULL),
-(15, 'Programming Basic 1', 7, 'English', 1, 21, 'Programming Basics_Part 1.pdf', '2024-02-20 01:25:24', '2024-02-20 01:25:24', NULL),
-(16, 'Programming Basic 2', 7, 'English', 1, 22, 'Programming Basics_Part 2.pdf', '2024-02-20 01:25:24', '2024-02-20 01:25:24', NULL),
-(17, 'Programming Hands On part 1', 7, 'English', 1, 24, 'Hands-on Programming_Part 1.pdf', '2024-02-20 01:25:24', '2024-02-20 01:25:24', NULL),
-(18, 'Programming Hands On part 2', 7, 'English', 1, 25, '88381_Python_Programing_Hands-On Part 2.pdf', '2024-02-20 01:25:24', '2024-02-20 01:25:24', NULL),
-(19, 'Programming Advanced 3', 7, 'English', 1, 27, '88387_Python_Programing_Advanced_Programing 3_ETC.pdf', '2024-02-20 01:25:24', '2024-02-20 01:25:24', NULL),
-(20, 'Membuat Pertunjukan Cahaya', 67, 'Indonesian', 1, 33, 'Dasar 02_Membuat Pertunjukan Cahaya.pdf', '2024-02-20 09:16:11', '2024-02-20 09:16:11', NULL),
-(21, 'Membuat Mobil Robot', 67, 'Indonesian', 1, 34, 'Dasar 03_Membuat Mobil Robot.pdf', '2024-02-20 09:16:11', '2024-02-20 09:16:11', NULL);
+INSERT INTO `book_translation` (`id`, `book_title`, `language_id`, `language_name`, `pages`, `status_id`, `hierarchy_id`, `file`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 'Stop and Go', 7, 'English', 48, 1, 6, 'Basic 01_Stop and Go.pdf', '2024-03-22 07:03:07', '2024-03-22 07:03:07', NULL),
+(2, 'Making a Light Show', 7, 'English', 56, 1, 7, 'Basic 02_Making a Light Show.pdf', '2024-03-22 07:03:07', '2024-03-22 07:03:07', NULL),
+(3, 'Making a Robot Car', 7, 'English', 48, 1, 8, 'Basic 03_Making a Robot Car.pdf', '2024-03-22 07:03:07', '2024-03-22 07:03:07', NULL),
+(4, 'Automatic Doors', 7, 'English', 56, 1, 9, 'Basic 04_Automatic Doors.pdf', '2024-03-22 07:03:07', '2024-03-22 07:03:07', NULL),
+(5, 'Controlling a Motor Cars', 7, 'English', 40, 1, 10, 'Intermediate 01_Controlling Motor Cars.pdf', '2024-03-22 07:03:07', '2024-03-22 07:03:07', NULL),
+(6, 'Electronic Instrument', 7, 'English', 48, 1, 11, 'Intermediate 02_Electronic Instruments.pdf', '2024-03-22 07:03:07', '2024-03-22 07:03:07', NULL),
+(7, 'Robots at Work', 7, 'English', 48, 1, 12, 'Intermediate 03_Robots at Works.pdf', '2024-03-22 07:03:07', '2024-03-22 07:03:07', NULL),
+(8, 'Machines and Mechanisms', 7, 'English', 52, 1, 13, 'Intermediate 04_Machines and Mechanisms.pdf', '2024-03-22 07:03:07', '2024-03-22 07:03:07', NULL),
+(9, 'The World of Games', 7, 'English', 48, 1, 14, 'Intermediate 05_The World of Games.pdf', '2024-03-22 07:03:07', '2024-03-22 07:03:07', NULL),
+(10, 'Playing with Controllers', 7, 'English', 56, 1, 15, 'Advanced 01_Playing with Controllers.pdf', '2024-03-22 07:03:07', '2024-03-22 07:03:07', NULL),
+(11, 'All About Walkbots', 7, 'English', 40, 1, 16, 'Advanced 02_All About Walkbotss.pdf', '2024-03-22 07:03:07', '2024-03-22 07:03:07', NULL),
+(12, 'The Factory Scanbot', 7, 'English', 52, 1, 17, 'Advanced 03_The Factory Scanbots.pdf', '2024-03-22 07:03:07', '2024-03-22 07:03:07', NULL),
+(13, 'Advanced Game Making', 7, 'English', 60, 1, 18, 'Advanced 04_Advanced Game Makings.pdf', '2024-03-22 07:03:07', '2024-03-22 07:03:07', NULL),
+(14, 'Introduction', 7, 'English', 24, 1, 19, 'Introduction.pdf', '2024-03-22 07:03:07', '2024-03-22 07:03:07', NULL),
+(15, 'Programming Basic 1', 7, 'English', 20, 1, 21, 'Programming Basics_Part 1.pdf', '2024-03-22 07:03:07', '2024-03-22 07:03:07', NULL),
+(16, 'Programming Basic 2', 7, 'English', 40, 1, 22, 'Programming Basics_Part 2.pdf', '2024-03-22 07:03:07', '2024-03-22 07:03:07', NULL),
+(17, 'Programming Hands On part 1', 7, 'English', 28, 1, 24, 'Hands-on Programming_Part 1.pdf', '2024-03-22 07:03:07', '2024-03-22 07:03:07', NULL),
+(18, 'Programming Hands On part 2', 7, 'English', 12, 1, 25, '88381_Python_Programing_Hands-On Part 2.pdf', '2024-03-22 07:03:07', '2024-03-22 07:03:07', NULL),
+(19, 'Programming Advanced 3', 7, 'English', 12, 1, 27, '88387_Python_Programing_Advanced_Programing 3_ETC.pdf', '2024-03-22 07:03:07', '2024-03-22 07:03:07', NULL),
+(20, 'Getting Started With AI_JE', 7, 'English', 35, 1, 36, '01_Getting Started with AI_JE.pdf', '2024-03-22 07:03:07', '2024-03-22 07:03:07', NULL),
+(21, 'Talking to Robots_JE', 7, 'English', 37, 1, 37, '02_Talking to Robots_JE.pdf', '2024-03-22 07:03:07', '2024-03-22 07:03:07', NULL),
+(22, 'Seeing with AI', 7, 'English', 43, 1, 38, '03_Seeing with AI.pdf', '2024-03-22 07:03:07', '2024-03-22 07:03:07', NULL),
+(23, 'Sorting the Garbage', 7, 'English', 34, 1, 39, '04_Sorting the Garbage.pdf', '2024-03-22 07:03:07', '2024-03-22 07:03:07', NULL),
+(24, 'Smarter Cars', 7, 'English', 38, 1, 40, '05_Smarter Cars.pdf', '2024-03-22 07:03:07', '2024-03-22 07:03:07', NULL),
+(25, 'Rock, Paper, Scissors', 7, 'English', 36, 1, 41, '06_Rock, Paper, Scissors.pdf', '2024-03-22 07:03:07', '2024-03-22 07:03:07', NULL),
+(26, 'Robotic Companions', 7, 'English', 38, 1, 42, '07_Robotic Companions.pdf', '2024-03-22 07:03:07', '2024-03-22 07:03:07', NULL),
+(27, 'Membuat Pertunjukan Cahaya', 67, 'Indonesian', 57, 1, 33, 'Dasar 02_Membuat Pertunjukan Cahaya.pdf', '2024-03-22 07:03:07', '2024-03-22 07:03:07', NULL),
+(28, 'Membuat Mobil Robot', 67, 'Indonesian', 48, 1, 34, 'Dasar 03_Membuat Mobil Robot.pdf', '2024-03-22 07:03:07', '2024-03-22 07:03:07', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `category_tutorial`
+--
+
+CREATE TABLE `category_tutorial` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `category` varchar(255) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `status_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `valid_deleted` tinyint(1) NOT NULL DEFAULT 1,
+  `delete_html_code` text NOT NULL DEFAULT '<a class="btn btn-danger btn-sm btn-delete" href="#">'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `category_tutorial`
+--
+
+INSERT INTO `category_tutorial` (`id`, `category`, `created_at`, `updated_at`, `status_id`, `valid_deleted`, `delete_html_code`) VALUES
+(1, 'Product Video', '2024-03-28 07:20:09', '2024-03-31 07:08:06', 11, 1, '<a class=\"btn btn-danger btn-sm btn-delete\" href=\"#\">'),
+(2, 'Software Requirement', '2024-03-28 07:20:09', '2024-03-30 03:02:12', 11, 1, '<a class=\"btn btn-danger btn-sm btn-delete\" href=\"#\">'),
+(6, 'Presentation', '2024-04-01 00:44:40', '2024-04-01 00:44:40', 11, 1, '<a class=\"btn btn-danger btn-sm btn-delete\" href=\"#\">');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `chat_dashboard`
+--
+
+CREATE TABLE `chat_dashboard` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `subject` varchar(255) NOT NULL,
+  `message` text NOT NULL,
+  `csrf_token` varchar(255) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `chat_dashboard`
+--
+
+INSERT INTO `chat_dashboard` (`id`, `name`, `email`, `subject`, `message`, `csrf_token`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 'tes', 'tes@gmail.com', 'rere', 'hai selamat siang', 'ywY4w78VygkoisFeGMmrNQMYvkGaNOQmwbidwHSGDtHaNdBqaF0G7Qsna8l9', '2024-03-27 07:28:31', '2024-03-27 07:28:31', NULL),
+(2, 'tes', 'tes@gmail.com', 'erer', 'hai apa kabar', 'bQCE0THDkQoYGFSebYUKHafpR2MWHgUYdJs6fjSf811cOQiqdCclM5orVksp', '2024-03-27 08:44:03', '2024-03-27 08:44:03', NULL),
+(3, 'hai', 'halo@gmail.com', 'halohai', 'tes hallo apa kabar 1', 'bQCE0THDkQoYGFSebYUKHafpR2MWHgUYdJs6fjSf811cOQiqdCclM5orVksp', '2024-03-27 08:55:57', '2024-03-27 08:55:57', NULL),
+(4, 'haites', 'teshai1@gmail.com', 'tesapa', 'hallo apa kabss', 'bQCE0THDkQoYGFSebYUKHafpR2MWHgUYdJs6fjSf811cOQiqdCclM5orVksp', '2024-03-27 08:58:00', '2024-03-27 08:58:00', NULL),
+(5, 'tesabc', 'tesabc@gmail.com', 'tesabc12', 'hai apa kabr', 'bQCE0THDkQoYGFSebYUKHafpR2MWHgUYdJs6fjSf811cOQiqdCclM5orVksp', '2024-03-27 08:59:51', '2024-03-27 08:59:51', NULL),
+(6, 'tesbudi', 'tesbudi@gmail.com', 'tes ini budi', 'hallo ini saya dengan budi', 'bQCE0THDkQoYGFSebYUKHafpR2MWHgUYdJs6fjSf811cOQiqdCclM5orVksp', '2024-03-27 09:01:20', '2024-03-27 09:01:20', NULL);
 
 -- --------------------------------------------------------
 
@@ -438,40 +634,113 @@ CREATE TABLE `hierarchy_category_book` (
 --
 
 INSERT INTO `hierarchy_category_book` (`id`, `name`, `hierarchy_name`, `parent_id`, `language_id`, `created_at`, `updated_at`) VALUES
-(1, 'Block Programming', 'Block Programming', NULL, 7, '2024-02-20 04:40:31', '2024-02-20 04:40:31'),
-(2, 'Python Programming', 'Python Programming', NULL, 7, '2024-02-20 04:40:31', '2024-02-20 04:40:31'),
-(3, 'Basic', 'Block Programming > Basic', 1, 7, '2024-02-20 04:40:31', '2024-02-20 04:40:31'),
-(4, 'Intermediate', 'Block Programming > Intermediate', 1, 7, '2024-02-20 04:40:31', '2024-02-20 04:40:31'),
-(5, 'Advanced', 'Block Programming > Advanced', 1, 7, '2024-02-20 04:40:31', '2024-02-20 04:40:31'),
-(6, 'Stop and Go', 'Block Programming > Basic > Stop and Go', 3, 7, '2024-02-20 04:40:31', '2024-02-20 04:40:31'),
-(7, 'Making a Light Show', 'Block Programming > Basic > Making a Light Show', 3, 7, '2024-02-20 04:40:31', '2024-02-20 04:40:31'),
-(8, 'Making a Robot Car', 'Block Programming > Basic > Making a Robot Car', 3, 7, '2024-02-20 04:40:31', '2024-02-20 04:40:31'),
-(9, 'Automatic Doors', 'Block Programming > Basic > Automatic Doors', 3, 7, '2024-02-20 04:40:31', '2024-02-20 04:40:31'),
-(10, 'Controlling a Motor Cars', 'Block Programming > Intermediate > Controlling a Motor Cars', 4, 7, '2024-02-20 04:40:31', '2024-02-20 04:40:31'),
-(11, 'Electronic Instrument', 'Block Programming > Intermediate > Electronic Instrument', 4, 7, '2024-02-20 04:40:31', '2024-02-20 04:40:31'),
-(12, 'Robots at Work', 'Block Programming > Intermediate > Robots at Work', 4, 7, '2024-02-20 04:40:31', '2024-02-20 04:40:31'),
-(13, 'Machines and Mechanisms', 'Block Programming > Intermediate > Machines and Mechanisms', 4, 7, '2024-02-20 04:40:31', '2024-02-20 04:40:31'),
-(14, 'The World of Games', 'Block Programming > Intermediate > The World of Games', 4, 7, '2024-02-20 04:40:31', '2024-02-20 04:40:31'),
-(15, 'Playing with Controllers', 'Block Programming > Advanced > Playing with Controllers', 5, 7, '2024-02-20 04:40:31', '2024-02-20 04:40:31'),
-(16, 'All About Walkbots', 'Block Programming > Advanced > All About Walkbots', 5, 7, '2024-02-20 04:40:31', '2024-02-20 04:40:31'),
-(17, 'The Factory Scanbot', 'Block Programming > Advanced > The Factory Scanbot', 5, 7, '2024-02-20 04:40:31', '2024-02-20 04:40:31'),
-(18, 'Advanced Game Making', 'Block Programming > Advanced > Advanced Game Making', 5, 7, '2024-02-20 04:40:31', '2024-02-20 04:40:31'),
-(19, 'Introduction', 'Python Programming > Introduction', 2, 7, '2024-02-20 04:40:31', '2024-02-20 04:40:31'),
-(20, 'Programming Basic', 'Python Programming > Programming Basic', 2, 7, '2024-02-20 04:40:31', '2024-02-20 04:40:31'),
-(21, 'Programming Basic part 1', 'Python Programming > Programming Basic > Programming Basic part 1', 19, 7, '2024-02-20 04:40:31', '2024-02-20 04:40:31'),
-(22, 'Programming Basic part 2', 'Python Programming > Programming Basic > Programming Basic part 2', 19, 7, '2024-02-20 04:40:31', '2024-02-20 04:40:31'),
-(23, 'Programming Intermediate', 'Python Programming > Programming Intermediate', 2, 7, '2024-02-20 04:40:31', '2024-02-20 04:40:31'),
-(24, 'Programming Hands On part 1', 'Python Programming > Programming Advanced > Programming Hands On part 1', 25, 7, '2024-02-20 04:40:31', '2024-02-20 04:40:31'),
-(25, 'Programming Hands On part 2', 'Python Programming > Programming Advanced > Programming Hands On part 2', 25, 7, '2024-02-20 04:40:31', '2024-02-20 04:40:31'),
-(26, 'Programming Advanced', 'Python Programming > Programming Advanced', 2, 7, '2024-02-20 04:40:31', '2024-02-20 04:40:31'),
-(27, 'Programming Advanced 3', 'Python Programming > Programming Advanced > Programming Advanced 3', 25, 7, '2024-02-20 04:40:31', '2024-02-20 04:40:31'),
-(28, 'Pemrograman Berbasis Blok', 'Pemrograman Berbasis Blok', NULL, 67, '2024-02-20 04:40:31', '2024-02-20 04:40:31'),
-(29, 'Pemrograman Berbasis Python', 'Pemrograman Berbasis Python', NULL, 67, '2024-02-20 04:40:31', '2024-02-20 04:40:31'),
-(30, 'Dasar', 'Pemrograman Berbasis Blok > Dasar', 28, 7, '2024-02-20 04:40:31', '2024-02-20 04:40:31'),
-(31, 'Menengah', 'Pemrograman Berbasis Blok > Menengah', 28, 7, '2024-02-20 04:40:31', '2024-02-20 04:40:31'),
-(32, 'Lanjutan', 'Pemrograman Berbasis Blok > Lanjutan', 28, 7, '2024-02-20 04:40:31', '2024-02-20 04:40:31'),
-(33, 'Membuat Pertunjukan Cahaya', 'Pemrograman Berbasis Blok > Dasar > Membuat Pertunjukan Cahaya', 30, 67, '2024-02-20 04:40:31', '2024-02-20 04:40:31'),
-(34, 'Membuat Mobil Robot', 'Pemrograman Berbasis Blok > Dasar >Membuat Mobil Robot', 30, 67, '2024-02-20 04:40:31', '2024-02-20 04:40:31');
+(1, 'Block Programming', 'Block Programming', 0, 7, '2024-03-22 06:32:14', '2024-03-22 06:32:14'),
+(2, 'Python Programming', 'Python Programming', 0, 7, '2024-03-22 06:32:14', '2024-03-22 06:32:14'),
+(3, 'Basic', 'Block Programming > Basic', 1, 7, '2024-03-22 06:32:14', '2024-03-22 06:32:14'),
+(4, 'Intermediate', 'Block Programming > Intermediate', 1, 7, '2024-03-22 06:32:14', '2024-03-22 06:32:14'),
+(5, 'Advanced', 'Block Programming > Advanced', 1, 7, '2024-03-22 06:32:14', '2024-03-22 06:32:14'),
+(6, 'Stop and Go', 'Block Programming > Basic > Stop and Go', 3, 7, '2024-03-22 06:32:14', '2024-03-22 06:32:14'),
+(7, 'Making a Light Show', 'Block Programming > Basic > Making a Light Show', 3, 7, '2024-03-22 06:32:14', '2024-03-22 06:32:14'),
+(8, 'Making a Robot Car', 'Block Programming > Basic > Making a Robot Car', 3, 7, '2024-03-22 06:32:14', '2024-03-22 06:32:14'),
+(9, 'Automatic Doors', 'Block Programming > Basic > Automatic Doors', 3, 7, '2024-03-22 06:32:14', '2024-03-22 06:32:14'),
+(10, 'Controlling a Motor Cars', 'Block Programming > Intermediate > Controlling a Motor Cars', 4, 7, '2024-03-22 06:32:14', '2024-03-22 06:32:14'),
+(11, 'Electronic Instrument', 'Block Programming > Intermediate > Electronic Instrument', 4, 7, '2024-03-22 06:32:14', '2024-03-22 06:32:14'),
+(12, 'Robots at Work', 'Block Programming > Intermediate > Robots at Work', 4, 7, '2024-03-22 06:32:14', '2024-03-22 06:32:14'),
+(13, 'Machines and Mechanisms', 'Block Programming > Intermediate > Machines and Mechanisms', 4, 7, '2024-03-22 06:32:14', '2024-03-22 06:32:14'),
+(14, 'The World of Games', 'Block Programming > Intermediate > The World of Games', 4, 7, '2024-03-22 06:32:14', '2024-03-22 06:32:14'),
+(15, 'Playing with Controllers', 'Block Programming > Advanced > Playing with Controllers', 5, 7, '2024-03-22 06:32:14', '2024-03-22 06:32:14'),
+(16, 'All About Walkbots', 'Block Programming > Advanced > All About Walkbots', 5, 7, '2024-03-22 06:32:14', '2024-03-22 06:32:14'),
+(17, 'The Factory Scanbot', 'Block Programming > Advanced > The Factory Scanbot', 5, 7, '2024-03-22 06:32:14', '2024-03-22 06:32:14'),
+(18, 'Advanced Game Making', 'Block Programming > Advanced > Advanced Game Making', 5, 7, '2024-03-22 06:32:14', '2024-03-22 06:32:14'),
+(19, 'Introduction', 'Python Programming > Programming Basic > Introduction', 20, 7, '2024-03-22 06:32:14', '2024-03-22 06:32:14'),
+(20, 'Programming Basic', 'Python Programming > Programming Basic', 2, 7, '2024-03-22 06:32:14', '2024-03-22 06:32:14'),
+(21, 'Programming Basic part 1', 'Python Programming > Programming Basic > Programming Basic part 1', 20, 7, '2024-03-22 06:32:14', '2024-03-22 06:32:14'),
+(22, 'Programming Basic part 2', 'Python Programming > Programming Basic > Programming Basic part 2', 20, 7, '2024-03-22 06:32:14', '2024-03-22 06:32:14'),
+(23, 'Programming Intermediate', 'Python Programming > Programming Intermediate', 2, 7, '2024-03-22 06:32:14', '2024-03-22 06:32:14'),
+(24, 'Programming Hands On part 1', 'Python Programming > Programming Intermediate > Programming Hands On part 1', 23, 7, '2024-03-22 06:32:14', '2024-03-22 06:32:14'),
+(25, 'Programming Hands On part 2', 'Python Programming > Programming Intermediate > Programming Hands On part 2', 23, 7, '2024-03-22 06:32:14', '2024-03-22 06:32:14'),
+(26, 'Programming Advanced', 'Python Programming > Programming Advanced', 2, 7, '2024-03-22 06:32:14', '2024-03-22 06:32:14'),
+(27, 'Programming Advanced 3', 'Python Programming > Programming Advanced > Programming Advanced 3', 26, 7, '2024-03-22 06:32:14', '2024-03-22 06:32:14'),
+(28, 'Pemrograman Berbasis Blok', 'Pemrograman Berbasis Blok', 0, 67, '2024-03-22 06:32:14', '2024-03-22 06:32:14'),
+(29, 'Pemrograman Berbasis Python', 'Pemrograman Berbasis Python', 0, 67, '2024-03-22 06:32:14', '2024-03-22 06:32:14'),
+(30, 'Dasar', 'Block Programming > Dasar', 1, 67, '2024-03-22 06:32:14', '2024-03-22 06:32:14'),
+(33, 'Membuat Pertunjukan Cahaya', 'Pemrograman Berbasis Blok > Dasar > Membuat Pertunjukan Cahaya', 30, 67, '2024-03-22 06:32:14', '2024-03-22 06:32:14'),
+(34, 'Membuat Mobil Robot', 'Pemrograman Berbasis Blok > Dasar > Membuat Mobil Robot', 30, 67, '2024-03-22 06:32:14', '2024-03-22 06:32:14'),
+(35, 'AI Programming', 'AI Programming', 0, 7, '2024-03-22 06:32:14', '2024-03-22 06:32:14'),
+(36, 'Getting Started With AI_JE', 'AI Programming > Getting Started With AI_JE', 35, 7, '2024-03-22 06:32:14', '2024-03-22 06:32:14'),
+(37, 'Talking to Robots_JE', 'AI Programming > Talking to Robots_JE', 35, 7, '2024-03-22 06:32:14', '2024-03-22 06:32:14'),
+(38, 'Seeing with AI', 'AI Programming > Seeing with AI', 35, 7, '2024-03-22 06:32:14', '2024-03-22 06:32:14'),
+(39, 'Sorting the Garbage', 'AI Programming > Sorting the Garbage', 35, 7, '2024-03-22 06:32:14', '2024-03-22 06:32:14'),
+(40, 'Smarter Cars', 'AI Programming > Smarter Cars', 35, 7, '2024-03-22 06:32:14', '2024-03-22 06:32:14'),
+(41, 'Rock, Paper, Scissors', 'AI Programming > Rock, Paper, Scissors', 35, 7, '2024-03-22 06:32:14', '2024-03-22 06:32:14'),
+(42, 'Robotic Companions', 'AI Programming > Robotic Companions', 35, 7, '2024-03-22 06:32:14', '2024-03-22 06:32:14');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `levels`
+--
+
+CREATE TABLE `levels` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `level_name` varchar(50) NOT NULL,
+  `language_id` bigint(20) UNSIGNED NOT NULL,
+  `hierarchy_id` bigint(20) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `levels`
+--
+
+INSERT INTO `levels` (`id`, `level_name`, `language_id`, `hierarchy_id`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 'Basic', 7, 3, '2024-03-23 00:49:35', '2024-03-23 00:49:35', NULL),
+(2, 'Intermediate', 7, 4, '2024-03-23 00:49:35', '2024-03-23 00:49:35', NULL),
+(3, 'Advanced', 7, 5, '2024-03-23 00:49:35', '2024-03-23 00:49:35', NULL),
+(4, 'Dasar', 67, 30, '2024-03-23 00:49:35', '2024-03-23 00:49:35', NULL),
+(5, 'Menengah', 67, 31, '2024-03-23 00:49:35', '2024-03-23 00:49:35', NULL),
+(6, 'Lanjutan', 67, 32, '2024-03-23 00:49:35', '2024-03-23 00:49:35', NULL),
+(7, 'Chapter 1', 7, 36, '2024-03-23 00:49:35', '2024-03-23 00:49:35', NULL),
+(8, 'Chapter 2', 7, 37, '2024-03-23 00:49:35', '2024-03-23 00:49:35', NULL),
+(9, 'Chapter 3', 7, 38, '2024-03-23 00:49:35', '2024-03-23 00:49:35', NULL),
+(10, 'Chapter 4', 7, 39, '2024-03-23 00:49:35', '2024-03-23 00:49:35', NULL),
+(11, 'Chapter 5', 7, 40, '2024-03-23 00:49:35', '2024-03-23 00:49:35', NULL),
+(12, 'Chapter 6', 7, 41, '2024-03-23 00:49:35', '2024-03-23 00:49:35', NULL),
+(13, 'Chapter 7', 7, 42, '2024-03-23 00:49:35', '2024-03-23 00:49:35', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `master_status`
+--
+
+CREATE TABLE `master_status` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `description` longtext NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `master_status`
+--
+
+INSERT INTO `master_status` (`id`, `name`, `description`, `created_at`, `updated_at`) VALUES
+(1, 'Enable Materi', 'Status publikasi materi', '2024-03-28 08:09:59', '2024-03-28 08:09:59'),
+(2, 'Disable Materi', 'Menonaktifkan materi yang ditampilkan untuk user', '2024-03-28 08:09:59', '2024-03-28 08:09:59'),
+(3, 'Draft', 'Menyimpan sementara materi yang diupload', '2024-03-28 08:09:59', '2024-03-28 08:09:59'),
+(4, 'Enable', 'Enable publikasi video tutorial', '2024-03-28 08:09:59', '2024-03-28 08:09:59'),
+(5, 'Disable', 'Disabled tutorial', '2024-03-28 08:09:59', '2024-03-28 08:09:59'),
+(6, 'Draft', 'Draft', '2024-03-28 08:09:59', '2024-03-28 08:09:59'),
+(7, 'Enable Static Pages', 'Khusus memperbarui komponen web', '2024-03-28 08:09:59', '2024-03-28 08:09:59'),
+(8, 'Enable', 'Authentikasi Login active', '2024-03-28 08:09:59', '2024-03-28 08:09:59'),
+(9, 'Disable', 'Non-active Authentikasi User Login', '2024-03-28 08:09:59', '2024-03-28 08:09:59'),
+(10, 'Pending', 'Status user baru mendaftar', '2024-03-28 08:09:59', '2024-03-28 08:09:59'),
+(11, 'Enable', 'Enable category tutorial', '2024-03-28 08:09:59', '2024-03-28 08:09:59'),
+(12, 'Disable', 'Disable category tutorial', '2024-03-28 08:09:59', '2024-03-28 08:09:59');
 
 -- --------------------------------------------------------
 
@@ -508,7 +777,36 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (16, '2024_02_20_074100_create_hierarchy_category_book_table', 11),
 (17, '2024_02_20_074704_create_hierarchy_category_book_table', 12),
 (18, '2024_02_20_080625_create_book_translation_table', 13),
-(19, '2024_02_20_114015_create_hierarchy_category_book_table', 14);
+(19, '2024_02_20_114015_create_hierarchy_category_book_table', 14),
+(20, '2024_03_21_131215_create_chat_dashboard', 15),
+(21, '2024_03_21_134842_create_chat_dashboard', 16),
+(22, '2024_03_21_153414_create_chat_dashboard', 17),
+(23, '2024_03_21_154930_create_chat_dashboard', 18),
+(24, '2024_03_22_010544_levels', 19),
+(25, '2024_03_22_082120_create_levels', 20),
+(26, '2024_03_22_111204_create_levels', 21),
+(27, '2024_03_22_133050_create_hierarchy_category_book', 22),
+(28, '2024_03_22_135005_create_book_translation_table', 23),
+(29, '2024_03_22_140220_create_book_translation_table', 24),
+(30, '2024_03_22_154522_create_tutorials_table', 25),
+(31, '2024_03_22_155320_create_master_status_table', 26),
+(32, '2024_03_22_161448_create_master_status_table', 27),
+(33, '2024_03_23_074917_create_levels_table', 28),
+(34, '2024_03_23_130505_create_tutorials_table', 29),
+(35, '2024_03_23_130734_create_tutorials_table', 30),
+(36, '2024_03_23_132758_create_tutorials_table', 31),
+(37, '2024_03_24_080238_create_master_status_table', 32),
+(38, '2024_03_24_081912_create_users_table', 33),
+(39, '2024_03_25_142255_create_users_table', 34),
+(40, '2024_03_25_142556_create_users_table', 35),
+(41, '2024_03_26_112503_change_id_column_in_translations_table', 36),
+(43, '2024_03_27_133344_create_activity_table', 37),
+(50, '2024_03_28_101321_create_category_tutorial_table', 38),
+(51, '2024_03_28_102632_create_tutorials_table', 38),
+(52, '2024_03_28_102808_add_foreign_key_tutorials_table', 39),
+(53, '2024_03_28_124531_add_column_category_tutorial_table', 39),
+(54, '2024_03_30_084836_drop_category_column_from_tutorials_table', 40),
+(58, '2024_03_30_093327_add_default_value_to_valid_deleted_in_category_tutorials_table', 41);
 
 -- --------------------------------------------------------
 
@@ -637,7 +935,7 @@ INSERT INTO `translations` (`id`, `language_code`, `language_name`, `created_at`
 (75, 'isl', 'Icelandic', '2024-02-18 00:23:04', '2024-02-18 00:23:04'),
 (76, 'heb', 'Hebrew', '2024-02-18 00:23:04', '2024-02-18 00:23:04'),
 (77, 'jam', 'Jamaican Patois', '2024-02-18 00:23:04', '2024-02-18 00:23:04'),
-(78, 'nrf', 'Jèrriais', '2024-02-18 00:23:04', '2024-02-18 00:23:04'),
+(78, 'nrf', 'Jerriais', '2024-02-18 00:23:04', '2024-02-18 00:23:04'),
 (79, 'jpn', 'Japanese', '2024-02-18 00:23:04', '2024-02-18 00:23:04'),
 (80, 'kaz', 'Kazakh', '2024-02-18 00:23:04', '2024-02-18 00:23:04'),
 (81, 'kir', 'Kyrgyz', '2024-02-18 00:23:04', '2024-02-18 00:23:04'),
@@ -675,7 +973,7 @@ INSERT INTO `translations` (`id`, `language_code`, `language_name`, `created_at`
 (113, 'smi', 'Sami', '2024-02-18 00:23:06', '2024-02-18 00:23:06'),
 (114, 'nep', 'Nepali', '2024-02-18 00:23:06', '2024-02-18 00:23:06'),
 (115, 'nau', 'Nauru', '2024-02-18 00:23:06', '2024-02-18 00:23:06'),
-(116, 'mri', 'Māori', '2024-02-18 00:23:07', '2024-02-18 00:23:07'),
+(116, 'mri', 'Maori', '2024-02-18 00:23:07', '2024-02-18 00:23:07'),
 (117, 'nzs', 'New Zealand Sign Language', '2024-02-18 00:23:07', '2024-02-18 00:23:07'),
 (118, 'urd', 'Urdu', '2024-02-18 00:23:07', '2024-02-18 00:23:07'),
 (119, 'fil', 'Filipino', '2024-02-18 00:23:07', '2024-02-18 00:23:07'),
@@ -719,23 +1017,76 @@ INSERT INTO `translations` (`id`, `language_code`, `language_name`, `created_at`
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `tutorials`
+--
+
+CREATE TABLE `tutorials` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `video_name` varchar(255) NOT NULL,
+  `tutorial_category_id` bigint(20) UNSIGNED NOT NULL,
+  `thumbnail` text NOT NULL,
+  `path_video` text NOT NULL,
+  `url` varchar(255) NOT NULL,
+  `status_id` bigint(20) UNSIGNED NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `tutorials`
+--
+
+INSERT INTO `tutorials` (`id`, `video_name`, `tutorial_category_id`, `thumbnail`, `path_video`, `url`, `status_id`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 'Robo Link Basic', 1, 'http://localhost:8000/assets/youtube/product video/robo-link-thumb.png', 'http://localhost:8000/assets/youtube/product video/Robo Links Basic.mp4', 'https://youtu.be/ExJNoBxY23M?si=1H-s3o2SGKRM0BWI', 4, '2024-03-28 07:21:17', '2024-03-31 07:08:06', NULL),
+(2, 'Instalasi Studuino Software #1', 2, 'http://localhost:8000/assets/youtube/software requirement/Instalasi Studuino Software 1.png', 'http://localhost:8000/assets/youtube/software requirement/Instalasi Studuino Software 1.mp4', 'https://youtu.be/fddwkD2b7FE', 4, '2024-03-28 07:21:17', '2024-03-30 04:43:12', NULL),
+(3, 'Instalasi USB Driver For Windows #2', 2, 'http://localhost:8000/assets/youtube/software requirement/Instalasi USB Driver For Windows 2.png', 'http://localhost:8000/assets/youtube/software requirement/Installing USB Device Driver _ Windows.mp4', 'https://youtu.be/Re_kEa4Mm6c', 4, '2024-03-28 07:21:17', NULL, NULL),
+(4, 'Pengenalan Komponen Sensors, LEDs & Buzzers Studuino #3', 2, 'http://localhost:8000/assets/youtube/software requirement/Pengenalan Komponen Perangkat Studuino 3.png', 'http://localhost:8000/assets/youtube/software requirement/Pengenalan Komponen Perangkat Studuino 3.mp4', 'https://youtu.be/4E3y13Wwvr8', 4, '2024-03-28 07:21:17', NULL, NULL),
+(5, 'Pengenalan Komponen DCMotors & ServoMotors Studuino #4', 2, 'http://localhost:8000/assets/youtube/software requirement/Pengenalan Komponen Perangkat Studuino 4.png', 'http://localhost:8000/assets/youtube/software requirement/Pengenalan Komponen Perangkat Studuino 4.mp4', 'https://youtu.be/Ek7VpSqRi3E', 4, '2024-03-28 07:21:17', NULL, NULL),
+(6, 'Pengenalan Komponen Perangkat Studuino #5', 2, 'http://localhost:8000/assets/youtube/software requirement/Pengenalan Komponen Perangkat Studuino 5.png', 'http://localhost:8000/assets/youtube/software requirement/Pengenalan Komponen Perangkat Studuino 5.mp4', 'https://youtu.be/qOFV7Nf8w4Y', 4, '2024-03-28 07:21:17', NULL, NULL),
+(7, 'Pengenalan Komponen Perangkat Studuino #6', 2, 'http://localhost:8000/assets/youtube/software requirement/Pengenalan Komponen Perangkat LED Studuino 6.png', 'http://localhost:8000/assets/youtube/software requirement/Pengenalan Komponen Perangkat LED Studuino 6.mp4', 'https://youtu.be/qECp7LMA4LU', 4, '2024-03-28 07:21:17', NULL, NULL),
+(8, 'Mengatur Komponen ON OFF LED #7', 2, 'http://localhost:8000/assets/youtube/software requirement/Mengatur Komponen ON OFF LED 7.png', 'http://localhost:8000/assets/youtube/software requirement/Mengatur Komponen ON OFF LED 7.mp4', 'https://youtu.be/_JsCFu5hpBw', 4, '2024-03-28 07:21:17', NULL, NULL),
+(9, 'Mengatur Waktu ON-OFF LED #8', 2, 'http://localhost:8000/assets/youtube/software requirement/Mengatur Waktu ON-OFF LED 8.png', 'http://localhost:8000/assets/youtube/software requirement/Mengatur Waktu ON-OFF LED 8.mp4', 'https://youtu.be/whuyI3eIz14', 4, '2024-03-28 07:21:17', NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `users`
 --
 
 CREATE TABLE `users` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `name` varchar(255) NOT NULL,
+  `username` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `email_verified_at` timestamp NULL DEFAULT NULL,
   `password` varchar(255) NOT NULL,
+  `role` enum('pengurus','admin','user') DEFAULT 'user',
+  `status` enum('active','inactive','deleted') DEFAULT 'inactive',
   `remember_token` varchar(100) DEFAULT NULL,
+  `last_login` datetime DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `username`, `email`, `email_verified_at`, `password`, `role`, `status`, `remember_token`, `last_login`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 'AdminIP', 'admin@intanpariwara.com', NULL, '$argon2id$v=19$m=65536,t=4,p=1$UGhtMHZqc1RndGtFdnJzVg$4XbLVxF4YUl9Jvw6pRVxeQd8Ka9hpW3z6sUHPC4gbEA', 'admin', 'active', NULL, '2024-04-01 07:39:17', '2024-03-30 05:05:02', '2024-04-01 00:39:17', NULL),
+(2, 'PengurusIP', 'pengurus@intanpariwara.com', NULL, '$argon2id$v=19$m=65536,t=4,p=1$YVc5ai9pZVNDVDNoSWFuSg$BTO6LFSGEVk6ei1ocknJnysT0zyus1MkaenHnRRZX9s', 'pengurus', 'active', NULL, '2024-03-30 12:05:27', '2024-03-30 05:05:02', '2024-03-30 05:05:27', NULL),
+(3, 'TestUserIP', 'testinguser@gmail.com', NULL, '$argon2id$v=19$m=65536,t=4,p=1$TDJqV0piOUFucEFlNnVLVw$eHdCn6VgiOD5JOsHD4ELt4OVqbxS8rS6075DyrAmClQ', 'user', 'active', NULL, NULL, '2024-03-30 05:05:02', '2024-03-30 05:05:02', NULL);
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `activity`
+--
+ALTER TABLE `activity`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `book_category`
@@ -747,6 +1098,18 @@ ALTER TABLE `book_category`
 -- Indexes for table `book_translation`
 --
 ALTER TABLE `book_translation`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `category_tutorial`
+--
+ALTER TABLE `category_tutorial`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `chat_dashboard`
+--
+ALTER TABLE `chat_dashboard`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -766,6 +1129,18 @@ ALTER TABLE `failed_jobs`
 -- Indexes for table `hierarchy_category_book`
 --
 ALTER TABLE `hierarchy_category_book`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `levels`
+--
+ALTER TABLE `levels`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `master_status`
+--
+ALTER TABLE `master_status`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -789,6 +1164,19 @@ ALTER TABLE `personal_access_tokens`
   ADD KEY `personal_access_tokens_tokenable_type_tokenable_id_index` (`tokenable_type`,`tokenable_id`);
 
 --
+-- Indexes for table `translations`
+--
+ALTER TABLE `translations`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `tutorials`
+--
+ALTER TABLE `tutorials`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `tutorials_tutorial_category_id_foreign` (`tutorial_category_id`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -800,6 +1188,12 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT for table `activity`
+--
+ALTER TABLE `activity`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=113;
+
+--
 -- AUTO_INCREMENT for table `book_category`
 --
 ALTER TABLE `book_category`
@@ -809,7 +1203,19 @@ ALTER TABLE `book_category`
 -- AUTO_INCREMENT for table `book_translation`
 --
 ALTER TABLE `book_translation`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+
+--
+-- AUTO_INCREMENT for table `category_tutorial`
+--
+ALTER TABLE `category_tutorial`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `chat_dashboard`
+--
+ALTER TABLE `chat_dashboard`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `countries`
@@ -827,13 +1233,25 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `hierarchy_category_book`
 --
 ALTER TABLE `hierarchy_category_book`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+
+--
+-- AUTO_INCREMENT for table `levels`
+--
+ALTER TABLE `levels`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+
+--
+-- AUTO_INCREMENT for table `master_status`
+--
+ALTER TABLE `master_status`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
@@ -842,10 +1260,32 @@ ALTER TABLE `personal_access_tokens`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `translations`
+--
+ALTER TABLE `translations`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=158;
+
+--
+-- AUTO_INCREMENT for table `tutorials`
+--
+ALTER TABLE `tutorials`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `tutorials`
+--
+ALTER TABLE `tutorials`
+  ADD CONSTRAINT `tutorials_tutorial_category_id_foreign` FOREIGN KEY (`tutorial_category_id`) REFERENCES `category_tutorial` (`id`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

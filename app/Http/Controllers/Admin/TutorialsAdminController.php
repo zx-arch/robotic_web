@@ -212,9 +212,6 @@ class TutorialsAdminController extends Controller
 
                     Tutorials::where('id', $video->id)->delete();
 
-
-
-
                     Activity::create(array_merge(session('myActivity'), [
                         'user_id' => Auth::user()->id,
                         'action' => Auth::user()->username . ' Delete Tutorial Video ID ' . $video->id,
@@ -258,13 +255,21 @@ class TutorialsAdminController extends Controller
     {
         try {
             $data = Tutorials::withTrashed()->find(decrypt($video_id));
-            $data->restore();
-            $data->update(['status_id' => 4]);
 
-            Activity::create(array_merge(session('myActivity'), [
-                'user_id' => Auth::user()->id,
-                'action' => Auth::user()->username . ' Restore Tutorial Video ID ' . $data->id,
-            ]));
+            DB::transaction(function () use ($data) {
+                $data->restore();
+                $data->update(['status_id' => 4]);
+
+                Activity::create(array_merge(session('myActivity'), [
+                    'user_id' => Auth::user()->id,
+                    'action' => Auth::user()->username . ' Restore Tutorial Video ID ' . $data->id,
+                ]));
+
+                CategoryTutorial::where('id', Tutorials::where('tutorial_category_id', $data->tutorial_category_id)->first()->tutorial_category_id)->update([
+                    'valid_deleted' => false,
+                    'delete_html_code' => '',
+                ]);
+            });
 
             return redirect()->route('tutorials.index')->with('success_restore', 'Data berhasil direstore!');
 
