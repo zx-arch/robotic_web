@@ -14,6 +14,9 @@
 - Navigate to the project directory.
 - Run composer install to install project dependencies.
 - Export DB MySQL 'robotic_web_db.sql' to Local, and run 'php artisan migrate'.
+- Run Seeder User Tabel with 'php artisan db:seed --class=UserSeeder.
+- Run Seeder Master Status Tabel with 'php artisan db:seed --class=MasterStatusSeeder.
+- Run Seeder Category Tutorial Tabel with 'php artisan db:seed --class=CategoryTutorialSeeder.
 - Change the DB connection in the .env file, adjust the connection on your local.
 - Run project with command 'php artisan serve'.
 - Open your browser and search 'localhost:8000'.
