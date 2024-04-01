@@ -3,3 +3,7 @@ Alternatif Access Code For Developer:
 clone to : https://github.com/zx-arch/robotic_web
 
 DB : robotic_web_db.sql [in github]
+
+Informasi Login dapat cek pada direktori 'database/seeders/UserSeeder.php'
+
+Login dibagi menjadi 3 role yaitu admin, pengurus dan user.
