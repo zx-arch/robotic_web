@@ -117,7 +117,7 @@ class CategoryTutorialController extends Controller
                     'category' => $request->category_name,
                     'status_id' => $request->status,
                     'valid_deleted' => true,
-                    'delete_html_code' => '<a class="btn btn-danger btn-sm btn-delete" href="#">',
+                    'delete_html_code' => '<a class="btn btn-danger btn-sm btn-delete" href="#"><i class="fa-fw fas fa-trash" aria-hidden></i></a>',
                 ]);
 
                 Activity::create(array_merge(session('myActivity'), [

@@ -223,7 +223,7 @@ class TutorialsAdminController extends Controller
                 if ($deletedTutorialsCount == $totalTutorialsCount) {
                     CategoryTutorial::where('id', $video->tutorial_category_id)->update([
                         'valid_deleted' => true,
-                        'delete_html_code' => '<a class="btn btn-danger btn-sm btn-delete" title="Delete" aria-label="Delete" data-pjax="0" onclick="confirmDelete(event)"><i class="fa-fw fas fa-trash" aria-hidden></i></a>',
+                        'delete_html_code' => '<a class="btn btn-danger btn-sm btn-delete" title="Delete" aria-label="Delete" data-pjax="0"><i class="fa-fw fas fa-trash" aria-hidden></i></a>',
                     ]);
                 }
                 return redirect()->route('tutorials.index')->with('success_deleted', 'Data berhasil dihapus!');

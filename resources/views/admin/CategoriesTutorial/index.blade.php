@@ -261,6 +261,29 @@
 <script>
     document.addEventListener('DOMContentLoaded', function () {
 
+        document.querySelectorAll('.btn-delete').forEach(button => {
+            button.addEventListener('click', function(event) {
+                event.preventDefault();
+                const url = this.getAttribute('href');
+                
+                // Tampilkan SweetAlert konfirmasi penghapusan
+                Swal.fire({
+                    title: 'Apakah Anda yakin?',
+                    text: "Category tutorial yang dihapus juga akan menghapus semua tutorial!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Ya, hapus!'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // Jika pengguna menekan tombol "Ya, hapus", arahkan ke URL penghapusan
+                        window.location.href = url;
+                    }
+                });
+            });
+        });
+
         // Tambahkan event listener untuk tombol addCategory
         document.getElementById('addCategory').addEventListener('click', function () {
             // Tampilkan formAddCat
