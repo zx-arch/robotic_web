@@ -14,7 +14,6 @@ return new class extends Migration {
         Schema::create('category_tutorial', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('category');
-            $table->timestamps();
         });
 
         DB::table('category_tutorial')->insert([
@@ -25,10 +24,6 @@ return new class extends Migration {
             'category' => 'software requirement',
         ]);
 
-        DB::table('category_tutorial')->update([
-            'created_at' => now(),
-            'updated_at' => now(),
-        ]);
     }
 
     /**

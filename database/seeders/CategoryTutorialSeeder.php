@@ -20,10 +20,16 @@ class CategoryTutorialSeeder extends Seeder
 
         DB::table('category_tutorial')->insert([
             'category' => 'product video',
+            'status_id' => 11,
+            'valid_deleted' => false,
+            'delete_html_code' => '',
         ]);
 
         DB::table('category_tutorial')->insert([
             'category' => 'software requirement',
+            'status_id' => 11,
+            'valid_deleted' => false,
+            'delete_html_code' => '',
         ]);
 
         DB::table('category_tutorial')->update([

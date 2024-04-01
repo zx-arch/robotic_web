@@ -104,6 +104,7 @@
                                         <td>#</td>
                                         <td>Category</td>
                                         <td>Status</td>
+                                        <td style="width: 35px;">Ditampilkan User</td>
                                         <td>Created At</td>
                                         <td>Updated At</td>
                                         <td></td>
@@ -128,6 +129,7 @@
                                                     <option value="12" {{(isset($searchData['status']) && $searchData['status'] == '12') ? 'selected' : ''}}>Disable</option>
                                                 </select>
                                             </td>
+                                            <td></td>
                                             <td>
                                                 <div id="search-created_at-kvdate" class="input-group date">
                                                     <input type="date" id="search-created_at" class="form-control" onchange="this.form.submit()" name="search[created_at]" max="<?php echo date('Y-m-d'); ?>" value="{{(isset($searchData['created_at'])) ? $searchData['created_at'] : ''}}">
@@ -150,6 +152,7 @@
                                             <td>{{$loop->index += 1}}</td>
                                             <td>{{$category->category}}</td>
                                             <td>{{isset(\App\Models\MasterStatus::where('id', $category->status_id)->first()->name) ? \App\Models\MasterStatus::where('id', $category->status_id)->first()->name : "Not Valid"}}</td>
+                                            <td>True</td>
                                             <td>{{$category->created_at}}</td>
                                             <td>{{$category->updated_at}}</td>
                                             <td>

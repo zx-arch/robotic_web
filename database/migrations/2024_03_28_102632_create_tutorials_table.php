@@ -17,6 +17,7 @@ return new class extends Migration {
             $table->unsignedBigInteger('tutorial_category_id');
             $table->text('thumbnail');
             $table->text('path_video');
+            $table->boolean('is_shown')->default(true);
             $table->string('url');
             $table->unsignedBigInteger('status_id');
             $table->timestamp('created_at')->useCurrent();

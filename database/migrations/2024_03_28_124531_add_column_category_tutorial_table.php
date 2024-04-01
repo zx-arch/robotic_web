@@ -13,10 +13,17 @@ return new class extends Migration {
     {
         Schema::table('category_tutorial', function (Blueprint $table) {
             $table->unsignedBigInteger('status_id')->nullable();
+            $table->boolean('is_shown')->default(true);
+            $table->timestamps();
         });
 
         DB::table('category_tutorial')->update([
             'status_id' => 11,
+        ]);
+
+        DB::table('category_tutorial')->update([
+            'created_at' => now(),
+            'updated_at' => now(),
         ]);
     }
 
