@@ -12,9 +12,13 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::table('category_tutorial', function (Blueprint $table) {
-            $table->boolean('valid_deleted')->default(false);
-            $table->text('delete_html_code')->default('');
+            $table->boolean('valid_deleted');
+            $table->text('delete_html_code');
         });
+        DB::table('category_tutorial')->update([
+            'valid_deleted' => false,
+            'delete_html_code' => '',
+        ]);
     }
 
     /**

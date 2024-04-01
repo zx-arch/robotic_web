@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\CategoryTutorial;
 use App\Models\Tutorials;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use App\Models\Activity;
 
 class CategoryTutorialController extends Controller
@@ -113,17 +114,24 @@ class CategoryTutorialController extends Controller
         //dd($request->all());
         try {
             if ($request->status_id != '11' || $request->status_id != '12') {
-                CategoryTutorial::create([
-                    'category' => $request->category_name,
-                    'status_id' => $request->status,
-                    'valid_deleted' => true,
-                    'delete_html_code' => '<a class="btn btn-danger btn-sm btn-delete" href="#"><i class="fa-fw fas fa-trash" aria-hidden></i></a>',
-                ]);
 
-                Activity::create(array_merge(session('myActivity'), [
-                    'user_id' => Auth::user()->id,
-                    'action' => Auth::user()->username . ' Add Categories ' . $request->category_name,
-                ]));
+                DB::transaction(function () use ($request) {
+                    $catTutorial = CategoryTutorial::create([
+                        'category' => $request->category_name,
+                        'status_id' => $request->status,
+                        'valid_deleted' => true,
+                        'delete_html_code' => '',
+                    ]);
+
+                    $catTutorial::where('id', $catTutorial->id)->update([
+                        'delete_html_code' => '<a class="btn btn-danger btn-sm btn-delete" href="' . route("category_tutorial.delete", ["id_cat" => encrypt($catTutorial->id)]) . '"><i class="fa-fw fas fa-trash" aria-hidden></i></a>',
+                    ]);
+
+                    Activity::create(array_merge(session('myActivity'), [
+                        'user_id' => Auth::user()->id,
+                        'action' => Auth::user()->username . ' Add Categories ' . $request->category_name,
+                    ]));
+                });
 
                 return redirect()->route('category_tutorial.index')->with('success_submit_save', 'Category berhasil ditambah!');
 
@@ -154,6 +162,34 @@ class CategoryTutorialController extends Controller
         } catch (\Throwable $e) {
             return redirect()->route('category_tutorial.index')->with('error_submit_save', 'Category not found. ' . $e->getMessage());
         }
+    }
+
+    public function delete($id)
+    {
+        //dd(decrypt($id));
+        try {
+            $findTutorial = Tutorials::where('tutorial_category_id', decrypt($id))->withTrashed();
+            $getDeleteTutorial = Tutorials::where('tutorial_category_id', decrypt($id))->onlyTrashed();
+            //dd($findTutorial, $getDeleteTutorial);
+
+            if ($findTutorial->count() == $getDeleteTutorial->count()) {
+
+                if ($findTutorial->count() > 0) {
+                    $findTutorial::delete();
+                }
+
+                CategoryTutorial::where('id', decrypt($id))->delete();
+
+                return redirect()->route('category_tutorial.index')->with('success_deleted', 'Data berhasil dihapus!');
+
+            } else {
+                return redirect()->route('category_tutorial.index')->with('error_deleted', 'Data tidak diizinkan dihapus, pastikan telah delete semua tutorial');
+            }
+
+        } catch (\Throwable $e) {
+            return redirect()->route('category_tutorial.index')->with('error_deleted', 'Data gagal dihapus! ' . $e->getMessage());
+        }
+
     }
 
     public function saveUpdate($id_cat, Request $request)

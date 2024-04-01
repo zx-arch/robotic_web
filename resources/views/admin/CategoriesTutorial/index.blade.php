@@ -15,7 +15,7 @@
                 <button id="addCategory" class="btn btn-success mb-3" style="width: 6%;"><i class="fa fa-plus mr-1" aria-hidden="true"></i> Add</button>
                 <div class="card card-default">
 
-                    <div class="card-header" id="formAddCat" style="{{ session('success_submit_save') || session('error_submit_save') ? '' : 'display: none;' }}">
+                    <div class="card-header" id="formAddCat" style="{{ session('success_submit_save') || session('error_submit_save') || session('success_deleted') || session('error_deleted') ? '' : 'display: none;' }}">
 
                         <form action="{{route('category_tutorial.addSubmit')}}" method="post" id="submitAddCat">
                             @csrf
@@ -269,7 +269,7 @@
                 // Tampilkan SweetAlert konfirmasi penghapusan
                 Swal.fire({
                     title: 'Apakah Anda yakin?',
-                    text: "Category tutorial yang dihapus juga akan menghapus semua tutorial!",
+                    text: "Category tutorial yang dihapus juga akan menghapus permanen semua tutorial!",
                     icon: 'warning',
                     showCancelButton: true,
                     confirmButtonColor: '#3085d6',

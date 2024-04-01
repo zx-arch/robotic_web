@@ -9,6 +9,8 @@ class CategoryTutorial extends Model
     protected $table = 'category_tutorial';
     protected $fillable = [
         'category',
-        'status_id'
+        'status_id',
+        'valid_deleted',
+        'delete_html_code',
     ];
 }

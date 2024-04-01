@@ -43,13 +43,13 @@ Route::middleware(['auth.login', 'admin.auth'])->group(function () {
 
     Route::get('/admin', [DashboardAdmin::class, 'index'])->name('admin.dashboard');
     Route::get('/admin/tutorials', [TutorialsAdminController::class, 'index'])->name('tutorials.index');
-    Route::get('/delete/{video_id}', [TutorialsAdminController::class, 'delete'])->name('tutorials.delete');
-    Route::get('/restore/{video_id}', [TutorialsAdminController::class, 'restore'])->name('tutorials.restore');
 
     Route::prefix('/admin/tutorials')->group(function () {
         Route::get('/add', [TutorialsAdminController::class, 'add'])->name('tutorials.add');
         Route::get('/search', [TutorialsAdminController::class, 'search'])->name('tutorials.search');
         Route::post('/save-add-tutorial', [TutorialsAdminController::class, 'saveTutorial'])->name('tutorials.saveTutorial');
+        Route::get('/delete/{video_id}', [TutorialsAdminController::class, 'delete'])->name('tutorials.delete');
+        Route::get('/restore/{video_id}', [TutorialsAdminController::class, 'restore'])->name('tutorials.restore');
         Route::get('/update/{video_id}', [TutorialsAdminController::class, 'update'])->name('tutorials.update');
         Route::put('/save-update-tutorial/video_id/{video_id}', [TutorialsAdminController::class, 'saveUpdate'])->name('tutorials.save_update');
         Route::get('/update-password/video_id/{video_id}', [TutorialsAdminController::class, 'updatePassword'])->name('tutorials.update_password');
@@ -75,6 +75,7 @@ Route::middleware(['auth.login', 'admin.auth'])->group(function () {
     Route::prefix('/admin/category_tutorial')->group(function () {
         Route::post('/add-submit', [CategoryTutorialController::class, 'addSubmit'])->name('category_tutorial.addSubmit');
         Route::get('/search', [CategoryTutorialController::class, 'search'])->name('category_tutorial.search');
+        Route::get('/delete/{id_cat}', [CategoryTutorialController::class, 'delete'])->name('category_tutorial.delete');
         Route::get('/update/{id_cat}', [CategoryTutorialController::class, 'update'])->name('category_tutorial.update');
         Route::put('/save-update/{id_cat}', [CategoryTutorialController::class, 'saveUpdate'])->name('category_tutorial.saveUpdate');
     });
